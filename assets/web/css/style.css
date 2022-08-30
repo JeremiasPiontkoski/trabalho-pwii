@@ -1,0 +1,362 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* MAIN */
+:root{
+    --primary-color: #198557;
+    --secundary-color: #57a78f;
+    --hover-color: rgb(17, 156, 115);
+    --hover-color-text: rgb(141, 185, 166);
+    --text-color: #fff;
+    --text-color-black: #000;
+
+    font-size: 62.5%;
+    
+}
+
+body {
+    background-color: var(--secundary-color);
+} 
+
+/* NAVIGATION */
+.navbar {
+    background-color: var(--primary-color);
+    height: 6.5rem;
+    width: 100vw;
+ }
+
+  nav div ul.navbar-nav {
+    margin-top: 4rem;
+    gap: 4rem; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+ }
+
+ nav div ul li a.nav-link {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.6rem;
+    font-weight: 700;
+    color: var(--text-color);
+ }
+
+ nav ul li:last-child {
+    margin-block: 3.8rem;
+} 
+
+nav ul li:nth-child(1) {    
+    display: none;
+} 
+
+.icon-menu {
+    border: none;
+}
+
+.icon-menu svg {
+    height: 4.2rem;
+    width: 4.2rem;
+}
+
+.icon-menu svg.icon-close {
+    height: 3.5rem;
+    width: 3.5rem;
+    margin-left: .4rem;
+}
+
+.icon-menu > img {
+    width: 4.5rem;
+    height: 4.5rem;
+    padding-right: 1.5rem;
+}
+
+#offcanvasScrolling{
+    width: 100vw;
+    background-color: var(--secundary-color);
+    opacity: 1;
+    overflow: scroll;
+}
+
+.offcanvas-header {
+    min-height: 6.5rem;
+    background-color: var(--primary-color);
+}
+
+/* SECTION SLIDER */
+.content-text {
+    position: absolute;
+    right: 15%;
+    bottom: 5%;
+    left: 15%;
+    padding-top: 1.25rem;
+    padding-bottom: 1.25rem;
+    color: #fff;
+    text-align: center;
+}
+
+ .carousel-inner {
+    max-width: 100vw;
+    max-height: 100vh;   
+}
+
+.carousel-item img {
+    max-width: 100%;
+    max-height: 80vh;
+    background-size: cover;
+    background-position: center;
+} 
+
+.carousel-item h5 {
+    font-size: 5rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    padding-bottom: 1.5rem;
+}
+
+.carousel-item p {
+    font-size: 3rem;
+    padding-bottom: 1rem;
+}
+
+.carousel-item a {
+    text-decoration: none;
+    border: none;
+    outline: none;
+    font-size: 3.2rem;
+    margin-bottom: 2rem;
+    padding-inline: 1.5rem;
+    color: var(--text-color);
+    border-bottom:  1px solid var(--text-color);
+}
+
+.carousel-item a:hover {
+    transition: .4s;
+    border: none;
+    outline: none;
+    border-radius: 2rem;
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+}
+
+/* SECTION CARDS */
+section.cards {
+    max-width: 100vw;
+    height: auto;
+    margin-block: 8rem;
+}
+
+.main-cards{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+section.cards .card {
+    width: 35vw;
+    height: auto;
+}
+
+.card,
+.card img {
+    margin: 0;
+    padding: 0;
+    border: none;
+    outline: none;
+    border-radius: 1.2rem;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+}
+
+.card img {
+    height: 50vh;
+}
+
+.card-body {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card-title,
+.card-text {
+    padding-inline: 1.2rem;
+    padding-top: 1rem;
+}
+
+.card-title{
+    font-size: 2.5rem;
+    font-weight: 600;
+        font-family: 'Montserrat', sans-serif;
+}
+
+.card-text {
+    padding-bottom: 1rem;
+    font-size: 1.8rem;
+    font-weight: 400;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.card a.btn {
+    font-size: 2rem;
+    font-family: 'Montserrat', sans-serif;
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    border: none;
+    outline: none;
+    border-radius: 2rem;
+    padding-block: 1rem;
+    padding-inline: 2rem;
+}
+
+.card a.btn:hover {
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+/* FOOTER */
+footer {
+    background-color: var(--primary-color);
+}
+
+footer h5{
+    font-size: 2.5rem;
+    font-weight: 600;
+}
+
+footer #whoWeAre p,
+footer ul li a {
+    font-size: 1.8rem;
+}
+
+footer .text-center {
+    font-size: 2rem;
+}
+
+/* MENU DESKTOP */
+@media (min-width: 992px){
+    .navbar{
+        height: initial;
+        width: initial;
+    }
+
+    nav div ul.navbar-nav,
+    nav div ul li,
+    nav div ul li a    
+    {
+        height: initial;
+        width: initial;
+        font-size: initial;
+        font-weight: initial;
+        margin: initial;
+        padding: initial;
+        overflow: initial;
+        gap: initial;
+    } 
+
+     #offcanvasScrolling{
+        overflow: initial;
+    } 
+
+    /* NAVIGATION */
+
+    .navbar {
+        max-width: 100vw;
+        height: 9rem;
+    }
+
+    nav div ul.navbar-nav {
+        max-height: 9rem;
+        gap: 9rem;
+        padding-inline: 4.7rem;
+    }
+
+    nav div ul li:not(:first-child) {
+        width: 15rem;
+        height: 3.8rem; 
+        border-radius: 2rem;
+        text-align: center;
+    }
+
+    nav ul li:nth-child(1) {
+        display: block;
+    }
+
+    nav ul li a img {
+        width: 5rem;
+        height: 5rem;
+     } 
+
+    nav div ul li a.nav-link {
+        font-size: 2rem;
+        font-weight: 400;
+        border-radius: 2rem;
+    }
+
+    /* NAVIGATION HOVER */
+    nav div ul li:not(:first-child) a.nav-link:hover{
+        transition: .5s;
+        border-radius: 2rem;
+        background-color: var(--hover-color);
+        color: var(--hover-color-text);
+        font-weight: 600;        
+        text-align: center;
+        transition: .4s;
+    }  
+}
+
+@media (max-width: 992px){
+    /* MOBILE SLIDER */
+    .carousel-item h5{
+        font-size: 3.5rem;
+    } 
+
+    .carousel-item p{
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 600px){
+    /* MOBILE SLIDER */
+    .carousel-item p {
+        display: none;
+    }
+
+    .carousel-item h5{
+        font-size: 2rem;
+    } 
+
+    .carousel-item a {
+        font-size: 2.5rem;
+    }
+
+    /* MOBILE CARDS */
+    .main-cards {
+        flex-direction: column;
+    }
+
+    .card:first-child {
+        margin-bottom: 2.5rem;
+    }
+
+    section.cards .card {
+        margin-left: 5vw;
+        width: 90vw;
+        height: auto;
+    }
+
+    section.cards .card > img {
+        height: 50%;
+    }
+
+    .card-mobile {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .card-body p {
+        display: none;
+    }
+}
