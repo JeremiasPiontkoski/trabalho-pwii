@@ -1,19 +1,21 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="<?= url("assets/web/css/style.css") ?>">
+    <title>.:: APP do Usuário ::.</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <!-- <link rel='stylesheet' type='text/css' media='screen' href='assets/app/css/styles.css'> -->
+    <link rel="stylesheet" href="../../assets/app/css/style.css">
+    <link rel="stylesheet" href="../../assets/app/css/style-repositories.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&family=Montserrat&display=swap');
     </style>
-    <title>To Solve</title>
 </head>
 
 <body>
+    
 <nav class="navbar navbar-expand-lg" id="navigation">
         <div class="container-fluid">
             <span class="navbar-toggler text-color main-text icon-menu" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling" aria-label="Toggle navigation">
@@ -21,9 +23,7 @@
                 <path d="M3.5 22.5H24.5V20H3.5V22.5ZM3.5 16.25H24.5V13.75H3.5V16.25ZM3.5 7.5V10H24.5V7.5H3.5Z" fill="white"/>
                 </svg>                            
             </span>
-            <span class="icon-menu navbar-toggler" href="#">
-                <img src=<?= url("assets/web/images/toSolveLogo/logo1.png") ?> alt="Logo To Solve">                  
-            </span>
+
 
             <div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop=" " tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
                 <div class="offcanvas-header">
@@ -36,9 +36,9 @@
                 <div>
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <span data-bs-dismiss="offcanvas"><a class="nav-link" href="#"></span>                                
-                            <img src=<?= url("assets/web/images/toSolveLogo/logo1.png") ?> alt="Logo To Solve" class="img-logo">                            
-                        </a>
+                            <span data-bs-dismiss="offcanvas">
+                                <a class="nav-link" href="#"></a>
+                            </span>                                                                                                      
                         </li>
 
                         <li class="nav-item">
@@ -52,7 +52,7 @@
                             <span data-bs-dismiss="offcanvas"><a class="nav-link" href="#contact">Contato</a></span>
                         </li>
                         <li class="nav-item">
-                            <span data-bs-dismiss="offcanvas"><a class="nav-link" href="<?= url("login") ?>">Login</a></span>
+                            <span data-bs-dismiss="offcanvas"><a class="nav-link" href="#">Logout</a></span>
                         </li>
                     </ul>
                 </div>
@@ -60,63 +60,62 @@
         </div>
     </nav>
 
-
-    <!-- Section content -->
-<?php echo $this->section("content"); ?>
-
-
-<footer class="text-white text-center text-lg-start">
-    <div class="container p-4">
-        <div class="row">
-            <div class="col-lg-6 col-md-12 mb-4 mb-md-0" id="whoWeAre">
-                <h5 class="text-uppercase">Quem Somos</h5>
-
-                <p>Somos empresa que visa o reconhecimento dos estudantes de ensino técnico na área da      informática, com objetivo das empresas terem fácil acesso ao meterial produzidos pelos mesmos, facilitando a chegada no mercado de trabalho.</p>
+    <section class="box-container">
+        <div class="content">
+            <div class="container-head">
+                <div class="container-title">
+                    <p>Nome</p>
+                </div>
+                <div class="container-title">
+                    <p>Tecnologia/s</p>
+                </div>
             </div>
-
-            <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-                <h5 class="text-uppercase">Navegação</h5>
-
-                <ul class="list-unstyled mb-0">
-                    <li>
-                        <a href="#navigation" class="text-white">Início</a>
-                    </li>
-                    <li>
-                        <a href="#whoWeAre" class="text-white">Quem Somos</a>
-                    </li>
-                    <li>
-                        <a href="#repositories" class="text-white">Repositórios</a>
-                    </li>
-                    <li>
-                        <a href="<?= url("login") ?>" class="text-white">Login</a>
-                    </li>
-                </ul>
+            <div class="container-content">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae quaerat dolor laborum placeat minus nihil, ad nemo accusamus ut saepe!</p>              
             </div>
-
-            <div class="col-lg-3 col-md-6 mb-4 mb-md-0" id="contact">
-                <h5 class="text-uppercase mb-0">Contato</h5>
-                <ul class="list-unstyled">
-                    <li>
-                        <a href="#!" class="text-white">Facebook</a>
-                    </li>
-                    <li>
-                        <a href="#!" class="text-white">Instagram</a>
-                    </li>
-                    <li>
-                        <a href="#!" class="text-white">tosolv@gmail.com</a>
-                    </li>
-                    <li>
-                        <a href="#!" class="text-white">(51)987654321</a>
-                    </li>
-                </ul>
+            <div class="container-bottom">
+                <span>000</span>
+                <span>000</span>
             </div>
-        </div>
-    </div>
-    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-        © 2022 To Solve Corporation
-    </div>
-</footer>
-<!-- JavaScript Bundle with Popper -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+        </div> 
+        
+        <div class="content">
+            <div class="container-head">
+                <div class="container-title">
+                    <p>Nome</p>
+                </div>
+                <div class="container-title">
+                    <p>Tecnologia/s</p>
+                </div>
+            </div>
+            <div class="container-content">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae quaerat dolor laborum placeat minus nihil, ad nemo accusamus ut saepe!</p>              
+            </div>
+            <div class="container-bottom">
+                <span>000</span>
+                <span>000</span>
+            </div>
+        </div> 
+
+        <div class="content">
+            <div class="container-head">
+                <div class="container-title">
+                    <p>Nome</p>
+                </div>
+                <div class="container-title">
+                    <p>Tecnologia/s</p>
+                </div>
+            </div>
+            <div class="container-content">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae quaerat dolor laborum placeat minus nihil, ad nemo accusamus ut saepe!</p>              
+            </div>
+            <div class="container-bottom">
+                <span>000</span>
+                <span>000</span>
+            </div>
+        </div> 
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
 </body>
 </html>

@@ -1,0 +1,473 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* MAIN */
+:root{
+    --primary-color: #198557;
+    --secundary-color: #57a78f;
+    --terciary-color: #259c69;
+    --hover-color: rgb(17, 156, 115);
+    --text-color: #fff;
+    --text-color-black: #000;
+    font-size: 62.5%; 
+}
+
+body {
+    background-color: var(--secundary-color);
+} 
+
+/* NAVIGATION */
+.navbar {
+    background-color: var(--primary-color);
+    height: 6.5rem;
+    width: 100vw;
+ }
+
+  nav div ul.navbar-nav {
+    margin-top: 4rem;
+    gap: 4rem; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+ }
+
+ nav div ul li a.nav-link {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.6rem;
+    font-weight: 700;
+    color: var(--text-color);
+ }
+
+ nav ul li:last-child {
+    margin-block: 3.8rem;
+} 
+
+nav ul li:nth-child(1) {    
+    display: none;
+} 
+
+.icon-menu {
+    border: none;
+}
+
+.icon-menu svg {
+    height: 4.2rem;
+    width: 4.2rem;
+}
+
+.icon-menu svg.icon-close {
+    height: 3.5rem;
+    width: 3.5rem;
+    margin-left: .4rem;
+}
+
+.icon-menu > img {
+    width: 4.5rem;
+    height: 4.5rem;
+    padding-right: 1.5rem;
+}
+
+#offcanvasScrolling{
+    width: 100vw;
+    background-color: var(--secundary-color);
+    opacity: 1;
+    overflow: scroll;
+}
+
+.offcanvas-header {
+    min-height: 6.5rem;
+    background-color: var(--primary-color);
+}
+
+/* ALL CONFIGS */
+section.box-user,
+section.box-repositories {
+    margin: 2rem;
+}
+
+section.box-user .box-left .box-top,
+div.box-repositories .box-head{
+    border-radius: 2rem 2rem 0rem 0rem;
+}
+
+section.box-user .box-left .box-bottom,
+div.box-repositories .box-bottom,
+div.box-repositories .box-content:last-child {
+    border-radius: 0rem 0rem 2rem 2rem;
+}
+
+/* USER PAGE */
+section.box-user {
+    max-width: 100vw;
+    height: auto;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+section.box-user .box-left {
+    width: 100%;
+    height: 40%;
+}
+
+section.box-user .box-left .box-top{
+    width: 100%;
+    height: 40%;
+    background-color: var(--primary-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+section.box-user .box-left .box-top .radius {
+    width: 6.5rem;
+    height: 6.5rem;
+    background-color: white;
+    border-radius: 3rem;
+    margin: 1rem;
+}
+
+section.box-user .box-left .box-bottom {
+    width: 100%;
+    height: 60%;
+    background-color: var(--terciary-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+} 
+
+section.box-user .box-left .box-bottom .content,
+section.box-repositories .box-content > p  {
+    padding: 1rem;
+}
+
+section.box-user .box-left .box-bottom .content > p {
+    font-size: 1.4rem;
+    color: var(--text-color);
+}
+
+section.box-user .box-left .box-bottom .btn-edit {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-block: 1rem;
+}
+
+section.box-user .box-left .box-bottom .btn-edit button {
+    width: 50%;
+    height: 50%;
+    background-color: var(--text-color);
+    color: var(--secundary-color);
+    border: none;
+    outline: none;
+    border-radius: 2rem;
+    font-size: 1.6rem;
+    padding-inline: .3rem;
+    padding-block: .5rem;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+section.box-user .box-right {
+    width: 100%;
+    height: 60%;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+div.box-repositories {
+    max-width: 100vw;
+    height: auto;
+}
+
+div.box-repositories .box-head {
+    width: 100%;
+    height: 6rem;
+    background-color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+div.box-repositories .box-head > h1{
+    font-size: 2.5rem;
+    padding-inline: .5rem;
+    text-transform: uppercase;
+    color: var(--text-color);
+}
+
+div.box-repositories .box-content {
+    width: 100%;
+    height: 4rem;
+    background-color: var(--terciary-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+div.box-repositories .box-content > svg {
+    padding-right: 1rem;
+    font-size: 1.6rem;
+}
+
+div.box-repositories .box-content > p {
+    font-size: 1.6rem;
+    padding-left: .5rem;
+    color: var(--text-color);
+}
+
+div.box-repositories .box-bottom {
+    width: 100%;
+    height: 5rem;
+    background-color: var(--terciary-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+div.box-repositories .box-bottom > a {
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 2rem;
+    color: var(--text-color);
+}
+
+/* MENU DESKTOP */
+@media (min-width: 992px){
+    .navbar{
+        height: initial;
+        width: initial;
+    }
+
+    nav div ul.navbar-nav,
+    nav div ul li,
+    nav div ul li a    
+    {
+        height: initial;
+        width: initial;
+        font-size: initial;
+        font-weight: initial;
+        margin: initial;
+        padding: initial;
+        overflow: initial;
+        gap: initial;
+    } 
+
+     #offcanvasScrolling{
+        overflow: initial;
+    } 
+
+    /* NAVIGATION */
+
+    .navbar {
+        max-width: 100vw;
+        height: 9rem;
+    }
+
+    nav div ul.navbar-nav {
+        max-height: 9rem;
+        gap: 9rem;
+        padding-inline: 4.7rem;
+    }
+
+    nav div ul li:not(:first-child) {
+        width: 15rem;
+        height: 3.8rem; 
+        border-radius: 2rem;
+        text-align: center;
+    }
+
+    nav ul li:nth-child(1) {
+        display: block;
+    }
+
+    nav ul li a img {
+        width: 5rem;
+        height: 5rem;
+     } 
+
+    nav div ul li a.nav-link {
+        font-size: 2rem;
+        font-weight: 400;
+        border-radius: 2rem;
+    }
+
+    /* NAVIGATION HOVER */
+    nav div ul li:not(:first-child) a.nav-link:hover{
+        transition: .5s;
+        border-radius: 2rem;
+        background-color: var(--hover-color);
+        color: var(--primary-color);
+        font-weight: 600;        
+        text-align: center;
+        transition: .4s;
+    }  
+}
+
+@media (min-width: 992px) {
+    section.box-user {
+        width: initial;
+        height: initial;
+        overflow: initial;
+        display: initial;
+        justify-content: initial;
+        align-items: initial;
+        margin: initial;
+    }
+
+    section.box-user .box-left,
+    section.box-user .box-left .box-top,
+    section.box-user .box-left .box-botttom,
+    section.box-user .box-left .box-bottom .btn-edit,
+    section.box-user .box-left .box-bottom .btn-edit button,
+    section.box-user .box-left .box-bottom .content,
+    section.box-user .box-right,
+    section.box-user .box-repositories,
+    section.box-user .box-repositories .box-head,
+    div.box-repositories .box-content,
+    div.box-repositories .box-bottom {
+        width: initial;
+        height: initial;
+        display: initial;
+        justify-content: initial;
+        align-items: initial;
+        margin: initial;
+        padding: initial;
+        gap: initial;
+    }    
+
+    section.box-user {
+        max-width: 100vw;
+        height: auto;
+        display: flex;
+        flex-direction: row;
+        margin: 2.5rem;
+    }
+
+    section.box-user .box-left {
+        width: 40%;
+        max-height: 50vh;
+    }
+
+    section.box-user .box-left .box-top {
+        width: 100%;
+        height: 40%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    section.box-user .box-left .box-top .radius {
+        width: 10rem;
+        height: 10rem;
+        border-radius: 100%;
+    }
+
+    section.box-user .box-left .box-bottom {
+        width: 100%;
+        height: auto;
+    }
+
+    section.box-user .box-left .box-bottom .content {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        gap: 1rem;
+        margin-top: 1rem;
+    }
+
+    section.box-user .box-left .box-bottom .content > p {
+        padding-left: 1rem;
+        font-size: 1.8rem;
+    }
+
+    div.box-repositories .box-content > svg:hover {
+        cursor: pointer;
+    }
+
+    section.box-user .box-left .box-bottom .btn-edit {
+        width: 100%;
+        height: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-block: 1rem;
+    }
+    
+    section.box-user .box-left .box-bottom .btn-edit button {
+        width: 25%;
+        padding-inline: 1.2rem;
+        padding-block: .2rem;
+    }
+
+    section.box-user .box-left .box-bottom .btn-edit button:hover {
+        transition: .5s ease;
+        color: var(--primary-color);
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    }
+
+    section.box-user .box-right {
+        width: 60%;
+        height: auto;
+        display: flex;
+        gap: 3rem;
+    }
+
+    section.box-user .box-right .box-repositories .box-head {
+        height: 6.5rem;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    div.box-repositories .box-content {
+        width: 100%;
+        height: auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    section.box-user .box-right .box-repositories .box-content > p {
+        font-size: 1.8rem;
+        padding-block: .5rem;
+        padding-inline: 1rem;
+    }
+
+    section.box-user .box-right .box-repositorie .box-bottom {
+        width: 100%;
+        height: 5rem;
+    }
+
+    div.box-repositories .box-bottom {
+        width: 100%;
+        height: 5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    div.box-repositories .box-bottom > a {
+        text-decoration: none;
+        text-transform: uppercase;
+        font-size: 2rem;
+        color: var(--text-color);
+    }
+
+    div.box-repositories .box-bottom > a:hover {
+        color: var(--primary-color);
+        font-weight: 600;
+        transition: .5s;
+    }
+}
