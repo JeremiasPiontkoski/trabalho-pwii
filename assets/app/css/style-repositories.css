@@ -90,6 +90,7 @@ section.box-container .content .container-bottom > span {
 }
 
 @media (min-width: 992px) {
+    
     section.box-container .content,
     section.box-container .content .container-head,
     section.box-container .content .container-head .container-title,
