@@ -52,7 +52,7 @@
                                 console.log(user);
                                 if(user) {
                                     if(user.type === "success"){
-                                        window.location.href = "themes/app/home.php";
+                                        window.location.href = "home";
                                         console.log(`${user.idUser}`)
                                     } else {
                                         message.innerHTML = user.message;

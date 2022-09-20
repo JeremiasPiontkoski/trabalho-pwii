@@ -57,7 +57,7 @@
                             <span data-bs-dismiss="offcanvas"><a class="nav-link" href="#contact">Contato</a></span>
                         </li>
                         <li class="nav-item">
-                            <span data-bs-dismiss="offcanvas"><a class="nav-link" href="#">Logout</a></span>
+                            <span data-bs-dismiss="offcanvas"><a class="nav-link" href="login">Logout</a></span>
                         </li>
                     </ul>
                 </div>

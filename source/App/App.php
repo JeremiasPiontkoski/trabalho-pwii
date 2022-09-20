@@ -82,8 +82,7 @@ echo json_encode($json);
 return;  */
 
 
-                $category = new Category();
-            
+            $category = new Category();
             $categories = $category->selectByLanguage($data["language"]);
 
                /*  $repository = new Repository(
@@ -103,10 +102,8 @@ return;  */
 
                 if($repository->insert()) {
                     $json = [
-                      "name" => $repository->getName(),
-                      "language" => $repository->getLanguage(),
-                      "description" => $repository->getDescription(),
-                      "idCategory" => $repository->getIdCategory()
+                        "name" => $data["name"],                        
+                        "type" => "success"
                     ];
                     echo json_encode($json);
                     return;
