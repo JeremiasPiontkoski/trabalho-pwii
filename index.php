@@ -18,12 +18,24 @@ $route->get("/sobre","Web:about");
 
 $route->post("/login", "Web:login");
 $route->get("/login", "Web:login");
+
 $route->post("/cadastro", "Web:register");
 $route->get("/cadastro", "Web:register");
+
+$route->post("/home", "App:home");
+$route->get("/home", "App:home");
+
+$route->post("/cadastroRepositorio", "App:registerRepository");
+$route->get("/cadastroRepositorio", "App:registerRepository");
+
 
 
 $route->get("/contato","Web:contact");
 $route->post("/contato","Web:contact");
+
+
+$route->get("/repositorios/{idCategory}", "App:repositories");
+$route->get("/repositorios", "App:showRepositories");
 
 /**
  * App Routs

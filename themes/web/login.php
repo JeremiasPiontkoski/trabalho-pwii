@@ -52,7 +52,8 @@
                                 console.log(user);
                                 if(user) {
                                     if(user.type === "success"){
-                                        message.innerHTML = ` Olá, ${user.name}!`;
+                                        window.location.href = "themes/app/home.php";
+                                        console.log(`${user.idUser}`)
                                     } else {
                                         message.innerHTML = user.message;
                                     }

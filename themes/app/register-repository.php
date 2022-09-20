@@ -9,39 +9,24 @@
     </style>
     <link rel="stylesheet" href="<?= url("assets/web/css/style-cadastro.css") ?>">
     <link rel="stylesheet" href="<?= url("assets/web/css/style-message.css") ?>">
-    <!-- <link rel="stylesheet" href="../../assets/web/css/style-cadastro.css">
-    <link rel="stylesheet" href="../../assets/web/css/style-message.css"> -->
     <title>To Solve - Cadastro</title>
 </head>
 <body>
     <section>
             <div class="card-register">
                 <form id="form-register" novalidate>
-                    <h1>Cadastro</h1>
+                    <h1>CADASTRO REPOSITÓRIO</h1>
                     <div class="container-inputs">
                         <label for="name">Nome:</label>
                         <input type="text" placeholder="Nome:" name="name" id="name" required>
                     </div>
                     <div class="container-inputs">
-                        <label for="email">Email:</label>
-                        <input type="email" placeholder="Email:" name="email" id="email" required>
-                    </div>
-                    <div class="container-inputs">
-                        <label for="password">Senha:</label>
-                        <input type="password" placeholder="Senha:" name="password" id="password" required>
-                    </div>
-                    <div class="container-inputs">
-                        <label for="confirmPassoword">Confirme:</label>
-                        <input type="password" placeholder="Confirme a Senha:" name="confirmPassword" id="confirmPassword" required>
-                    </div>
-                    <div class="container-inputs">
                         <select name="language" id="selectUser">
                             <option value="">Escolha...</option>
-                            <option value="javaScript">JavaScript</option>
-                            <option value="java">Java</option>
-                            <option value="htmlCss">HTML E CSS</option>
-                            <option value="php">Php</option>
-                            <option value="python">Python</option>
+                            <option value="JavaScript">JavaScript</option>
+                            <option value="Java">Java</option>
+                            <option value="Php">Php</option>
+                            <option value="Python">Python</option>
                         </select>
                     </div>
                     <div class="container-inputs">
@@ -50,14 +35,11 @@
                     </div>
                     <button type="submit" class="btn-register">Cadastrar</button>
 
-                    <div class="data-error"> 
-                        <p id="message"></p>                               
+                    <div class="data-error">
+                        <p id="message"></p>
                     </div>
 
-                    <div class="not-acount">
-                            <p>Possui uma conta?
-                            <a href="<?= url("login") ?>">Faça o login!</a></p>
-                        </div>
+
                 </form>
 
                 <script type="text/javascript" async>
@@ -67,7 +49,7 @@
                                 e.preventDefault();
                                 const dataUser = new FormData(form);
                                 // enviar para a rota já definida
-                                const data = await fetch("<?= url("cadastro"); ?>",{
+                                const data = await fetch("<?= url("cadastroRepositorio"); ?>",{
                                     method: "POST",
                                     body: dataUser,
                                 });
@@ -76,12 +58,15 @@
                                 // tratamento da mensagem
                                 if(user) {
                                     if(user.type == "success") {
-                                        window.location.href = "login";
-                                    }else {
+                                        console.log(`${user.name}`)
+                                        /* window.location.href = "themes/app/home.php"; */
                                         message.innerHTML = user.message;
+                                    }else {
+                                        message.innerHTML = user.message; 
                                         message.classList.remove("warning", "error");
                                         message.classList.add("message");
-                                        console.log(`${user.type}`);
+                                        /* console.log(`${user.type}`); */
+                                        console.log(user);
                                         message.classList.add(`${user.type}`);
                                     }
                                 }

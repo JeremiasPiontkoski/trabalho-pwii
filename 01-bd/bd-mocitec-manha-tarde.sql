@@ -132,21 +132,6 @@ CREATE TABLE `users` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 
-DROP TABLE IF EXISTS ` `;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `users` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(45) NOT NULL,
-  `email` varchar(45) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `create_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `update_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `email_UNIQUE` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
 
 --
 -- Table structure for table `write_project`
@@ -177,3 +162,18 @@ CREATE TABLE `write_project` (
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2022-08-10 11:15:04
+
+
+CREATE DATABASE IF NOT EXISTS "bd-ToSolve";
+USE "bd-toSolve";
+
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) NOT NULL,
+  `email` varchar(45) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `create_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `update_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `email_UNIQUE` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;

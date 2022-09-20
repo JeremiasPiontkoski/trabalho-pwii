@@ -4,19 +4,24 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>.:: APP do Usuário ::.</title>
+    <title>To Solve</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
     <!-- <link rel='stylesheet' type='text/css' media='screen' href='assets/app/css/styles.css'> -->
-    <link rel="stylesheet" href="../../assets/app/css/style.css">
-    <link rel="stylesheet" href="../../assets/app/css/style-specific-repository.css">
+    <link rel="stylesheet" href="assets/app/css/style.css">
+    <link rel="stylesheet" href="assets/app/css/style-repositories.css">
+    <link rel="stylesheet" href="assets/app/css/style-specific-repository.css">
+    <?php
+    if ($this->section("css")) {
+        echo $this->section("css");
+    }
+  ?>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&family=Montserrat&display=swap');
     </style>
 </head>
-
 <body>
     
-    <nav class="navbar navbar-expand-lg" id="navigation">
+<nav class="navbar navbar-expand-lg" id="navigation">
         <div class="container-fluid">
             <span class="navbar-toggler text-color main-text icon-menu" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling" aria-label="Toggle navigation">
               <svg class="icon-hamburger" width="28" height="30" viewBox="0 0 28 30" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -42,11 +47,11 @@
                         </li>
 
                         <li class="nav-item">
-                            <span data-bs-dismiss="offcanvas"><a class="nav-link" href="#navigation">Home</a></span>
+                            <span data-bs-dismiss="offcanvas"><a class="nav-link" href="home">Home</a></span>
                         </li>                       
                         
                         <li class="nav-item">
-                            <span data-bs-dismiss="offcanvas"><a class="nav-link" href="#repositories">Repositórios</a></span>
+                            <span data-bs-dismiss="offcanvas"><a class="nav-link" href="repositorios">Repositórios</a></span>
                         </li>
                         <li class="nav-item">
                             <span data-bs-dismiss="offcanvas"><a class="nav-link" href="#contact">Contato</a></span>
@@ -60,45 +65,10 @@
         </div>
     </nav>
 
-    <section class="box-repository">
-        <div class="box-inside">
-            <div class="box-left">
-                <div class="box-top">
-                    <div class="radius"></div>
-                </div>
-                <div class="box-bottom">
-                    <div class="content">
-                        <p>Name</p>
-                        <p>Email</p>
-                        <p>Linguagem</p>
-                    </div>                 
-                </div>
-            </div>
-
-            <div class="box-right">
-                <div class="box-repositories">
-                    <div class="box-head">
-                        <h1>Arquivos</h1>
-                    </div>
-                    <div class="box-content">
-                        <p>Name</p>
-                    </div>
-                    <div class="box-content">
-                        <p>Name</p>
-                    </div>
-                    <div class="box-content">
-                        <p>Name</p>
-                    </div>
-                    <div class="box-bottom">
-                        <a href="#">Favoritar</a>
-                    </div>
-                </div>            
-            </div>
-        </div>
-    </section>
-
+    <?php echo $this->section("content"); ?>
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+
 </body>
 </html>

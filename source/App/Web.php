@@ -4,6 +4,7 @@ namespace Source\App;
 
 use JsonException;
 use League\Plates\Engine;
+use Source\Models\Person;
 use Source\Models\User;
 
 class Web
@@ -45,13 +46,49 @@ class Web
         ]);
     }
 
+    public function insertUser($user, $data)
+    {
+        if(!$user->insertPerson()){
+            $json = [
+                "message" => $user->getMessage(),
+                "type" => "error"
+            ];
+            return $json;
+        }else {
+            $json = [
+                "name" => $data["name"],
+                "message" => $user->getMessage(),
+                "type" => "success"
+            ];
+            return $json;
+        }
+    }
+
+    public function insertCompany($user, $data)
+    {   
+        if(!$user->insertCompany()){
+            $json = [
+                "message" => $user->getMessage(),
+                "type" => "error"
+            ];
+            return $json;
+        }else {
+            $json = [
+                "name" => $data["name"],
+                "message" => $user->getMessage(),
+                "type" => "success"
+            ];
+            return $json;
+        }
+    }
+
     public function register(?array $data) : void
     {
         if(!empty($data)){
 
             if(in_array("", $data)) {
                 $json = [
-                    "message" => "Informe nome, e-mail e senha para cadastrar!",
+                    "message" => "Preencha todos os campos!",
                     "type" => "warning"
                 ];
 
@@ -97,6 +134,25 @@ class Web
                 return;
             }
 
+            if($data["language"] == ""){
+                $json = [
+                    "message" => "Escolha uma Linguagem!",
+                    "type" => "warning"
+                ];
+
+                echo json_encode($json);
+                return;
+            }
+
+            if($data["description"] == "") {
+                $json = [
+                    "message" => "Preencha a Descrição!",
+                    "type" => "warning"
+                ];
+                echo json_encode($json);
+                return;
+            }
+
             $user = new User(
                 null,
                 $data["name"],
@@ -104,7 +160,14 @@ class Web
                 $data["password"]
             );
 
-            if(!$user->insert()){
+            $person = new Person(
+                null,
+                $user->insert(),
+                $data["language"],
+                $data["description"]
+            );
+
+            if(!$person->insertPerson()){
                 $json = [
                     "message" => $user->getMessage(),
                     "type" => "error"
@@ -120,6 +183,16 @@ class Web
                 echo json_encode($json);
                 return;
             }
+
+        /*     if($data["user"] == "person") {
+                echo json_encode($this->insertUser($user, $data));
+                return;
+            }
+
+            if($data["user"] == "company") {
+                echo json_encode($this->insertCompany($user, $data));
+                return;
+            } */
 
             // Usuário salvo com sucesso
             return;
@@ -151,8 +224,16 @@ class Web
             }
 
             $user = new User();
+            $person = new Person();
 
             if(!$user->validate($data["email"],$data["password"])){
+                $json = [
+                    "message" => $user->getMessage(),
+                    "type" => "error"
+                ];
+                echo json_encode($json);
+                return;
+            }else if(!$person->getDataUser($user->getId())) {
                 $json = [
                     "message" => $user->getMessage(),
                     "type" => "error"
@@ -164,6 +245,7 @@ class Web
             $json = [
                 "name" => $user->getName(),
                 "email" => $user->getEmail(),
+                "idUser" => $person->getIdUser(),
                 "message" => $user->getMessage(),
                 "type" => "success"
             ];
@@ -173,7 +255,5 @@ class Web
         }
 
         echo $this->view->render("login",["eventName" => CONF_SITE_NAME]);
-
     }
-
 }

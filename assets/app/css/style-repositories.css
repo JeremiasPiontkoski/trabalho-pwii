@@ -16,148 +16,203 @@
     font-size: 62.5%; 
 }
 
-section.box-container {
+div.nav-links {
     max-width: 100vw;
-    height: auto;
+    max-height: 6rem;
+}
+
+div.nav-links div.nav-links-inside {
+    width: 100%;
+    height: 100%;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
 }
 
-section.box-container .content {
-    width: 90%;
-    height: 100%;
+div.nav-links div.nav-links-inside ul {
     display: flex;
-    flex-direction: column;
+    gap: 2rem;
 }
 
-section.box-container .content .container-head {
-    margin-top: 2rem;
-    width: 100%;
+div.nav-links div.nav-links-inside ul li {
+    text-decoration: none;
+    list-style: none;
+    padding-top: 1rem;
+}
+
+div.nav-links div.nav-links-inside ul li a {
+    text-decoration: none;
+    font-size: 2rem;
+    color: var(--primary-color);
+}
+
+section.box-repository {
+    max-width: 100vw;
+    height: auto;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+section.box-repository .box-inside {
+    width: 80%;
     height: auto;
     display: flex;
     flex-direction: column;
+    margin-block: 1.5rem;
 }
 
-section.box-container .content .container-head .container-title:first-child {
+section.box-repository .box-inside .box-left {
+    width: 100%;
+    height: 40%;
+}
+
+section.box-repository .box-inside .box-left .box-top{
+    width: 100%;
+    height: 40%;
+    background-color: var(--primary-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border-radius: 2rem 2rem 0rem 0rem;
 }
 
-section.box-container .content .container-head .container-title {
+section.box-repository .box-inside .box-left .box-top .radius {
+    width: 6.5rem;
+    height: 6.5rem;
+    background-color: white;
+    border-radius: 3rem;
+    margin: 1rem;
+}
+
+section.box-repository .box-inside .box-left .box-bottom {
+    width: 100%;
+    height: 60%;
+    background-color: var(--terciary-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+} 
+
+section.box-repository .box-inside .box-left .box-bottom .content,
+section.box-repositories .box-content > p  {
+    padding: 1rem;
+}
+
+section.box-repository .box-inside .box-left .box-bottom .content > p {
+    font-size: 1.4rem;
+    color: var(--text-color);
+}
+
+section.box-repository .box-inside .box-left .box-bottom .btn-edit {
     width: 100%;
     height: auto;
-    background-color: var(--primary-color);
-    display: flex;
-    align-items: center;
-}
-
-section.box-container .content .container-head .container-title > p {
-    padding: 1rem 0rem 0rem 1rem;
-    color: var(--text-color);
-    font-size: 1.8rem;
-}
-
-section.box-container .content .container-content {
-    width: 100%;
-    min-height: 5rem;
-    background-color: var(--terciary-color);
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-block: 1rem;
 }
 
-section.box-container .content .container-content > p {
-    padding: 1rem 0rem 0rem 1rem;
+section.box-repository .box-inside .box-left .box-bottom .btn-edit button {
+    width: 50%;
+    height: 50%;
+    background-color: var(--text-color);
+    color: var(--secundary-color);
+    border: none;
+    outline: none;
+    border-radius: 2rem;
     font-size: 1.6rem;
-    color: var(--text-color);
+    padding-inline: .3rem;
+    padding-block: .5rem;
+    text-transform: uppercase;
+    font-weight: 600;
 }
 
-section.box-container .content .container-bottom {
-    width: 100%;
-    height: auto;
-    background-color: var(--terciary-color);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 4rem;
-    border-radius: 0rem 0rem 2rem 2rem;
-}
-
-section.box-container .content .container-bottom > span {
-    padding-block: 1rem;
-    font-size: 2rem;
-    color: white;
+section.box-repository .box-inside .box-right .box-repositories .box-head {
+    border-radius: initial;
 }
 
 @media (min-width: 992px) {
-    
-    section.box-container .content,
-    section.box-container .content .container-head,
-    section.box-container .content .container-head .container-title,
-    section.box-container .content .container-content,
-    section.box-container .content .container-bottom {
+    section.box-repositoty,
+    section.box-repositoty .box-inside,
+    section.box-repositoty .box-inside .box-left,
+    section.box-repositoty .box-inside .box-left .box-top,
+    section.box-repositoty .box-inside .box-left .box-bottom,
+    section.box-repositoty .box-inside .box-left .box-bottom .content,
+    section.box-repositoty .box-inside .box-right,
+    section.box-repositoty .box-inside .box-right .box-repositories,
+    section.box-repositoty .box-inside .box-right .box-repositories .box-head,
+    section.box-repositoty .box-inside .box-right .box-repositories .box-content,
+    section.box-repositoty .box-inside .box-right .box-repositories .box-bottom {
         width: initial;
         height: initial;
         display: initial;
         justify-content: initial;
         align-items: initial;
-        gap: initial;
-        margin: initial;
         padding: initial;
-        border-radius: initial;
+        margin: initial;
+        gap: initial;
     }
 
-    section.box-container .content .container-head .container-title:first-child {
-        border-radius: initial;
-    }
-
-    section.box-container .content {
-        margin-block: 2rem;
-        width: 80%;
-        height: auto;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    section.box-container .content .container-head {
-        width: 100%;
+    section.box-repository .box-inside {
+        max-width: 100vw;
         height: auto;
         display: flex;
         flex-direction: row;
+        gap: .5rem;
     }
 
-    section.box-container .content .container-head .container-title {
-        width: 50%;
-        min-height: 40%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+    section.box-repository .box-inside:last-child{
+        margin-bottom: 5rem;
     }
 
-    section.box-container .content .container-head .container-title:first-child {
+    section.box-repository .box-inside .box-left {
+        width: 40%;
+        height: auto;
+    }
+
+    section.box-repository .box-inside .box-left .box-top {
+        width: 100%;
+        height: auto;
+    }
+
+    section.box-repository .box-inside .box-left .box-top .radius {
+        width: 10rem;
+        height: 10rem;
+        border-radius: 100%;
+    }
+
+    section.box-repository .box-inside .box-left .box-top,
+    section.box-repository .box-inside .box-right .box-repositories .box-bottom {
+        border-radius: initial;
+    }
+
+    section.box-repository .box-inside .box-right {
+        width: 60%;
+        height: auto;
+    }
+
+    section.box-repository .box-inside .box-left .box-top {
         border-radius: 2rem 0rem 0rem 0rem;
     }
 
-    section.box-container .content .container-head .container-title:last-child {
+    section.box-repository .box-inside .box-left .box-bottom {
+        border-radius: 0rem 0rem 2rem 2rem;
+    }
+
+    section.box-repository .box-inside .box-right .box-repositories .box-head {
         border-radius: 0rem 2rem 0rem 0rem;
     }
 
-    section.box-container .content .container-content {
-        width: 100%;
-        min-height: 60%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+    section.box-repository .box-inside .box-right .box-repositories .box-bottom {
+        border-radius: 0rem 0rem 2rem 2rem;
     }
 
-    section.box-container .content .container-bottom {
-        width: 100%;
-        min-height: 50%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 6rem;
-        border-radius: 0rem 0rem 2rem 2rem;
+    div.nav-links div.nav-links-inside ul li a:hover {
+       color: var(--text-color);
+       transition: .5s ease;
     }
 }

@@ -90,7 +90,7 @@ class User
         int $id = NULL,
         string $name = NULL,
         string $email = NULL,
-        string $password = NULL,
+        string $password = NULL
     )
     {
         $this->id = $id;
@@ -174,17 +174,17 @@ class User
             }
         }
 
+        $this->id = $user->id;
         $this->name = $user->name;
         $this->email = $user->email;
         $this->message = "Usuário Autorizado, redirect to APP!";
-
         return true;
     }
 
     /**
      * @return bool
      */
-    public function insert() : bool
+    public function insert()
     {
         $query = "INSERT INTO users (name, email, password) VALUES (:name, :email, :password)";
         $stmt = Connect::getInstance()->prepare($query);
@@ -193,7 +193,21 @@ class User
         $stmt->bindValue(":password", password_hash($this->password,PASSWORD_DEFAULT));
         $stmt->execute();
         $this->message = "Usuário cadastrado com sucesso!";
-        return true;
+
+        return Connect::getInstance()->lastInsertId();
     }
 
+   
+
+    public function insertCompany() : bool
+    {
+        $idInsert = $this->insert();
+        $query = "INSERT INTO company VALUES (NULL, :idUser)";
+        $stmt = Connect::getInstance()->prepare($query);
+        $stmt->bindParam(":idUser", $idInsert);
+        $stmt->execute();
+
+        $this->message = "Usuário cadastrado com sucesso!";
+        return true;
+    }
 }

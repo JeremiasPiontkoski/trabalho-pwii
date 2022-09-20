@@ -7,7 +7,7 @@
 define("CONF_DB_HOST", "localhost");
 define("CONF_DB_USER", "root");
 define("CONF_DB_PASS", "");
-define("CONF_DB_NAME", "bd-toSolve"); // aqui deve ser alterado para o nome do banco de dados
+define("CONF_DB_NAME", "bd-to-solve"); // aqui deve ser alterado para o nome do banco de dados
 
 // PROJECT URLs
 
