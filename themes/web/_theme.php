@@ -10,6 +10,11 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&family=Montserrat&display=swap');
     </style>
+    <?php
+    if ($this->section("css")) {
+        echo $this->section("css");
+    }
+  ?>
     <title>To Solve</title>
 </head>
 
@@ -85,7 +90,7 @@
                         <a href="#whoWeAre" class="text-white">Quem Somos</a>
                     </li>
                     <li>
-                        <a href="#repositories" class="text-white">Repositórios</a>
+                        <a href="login" class="text-white">Repositórios</a>
                     </li>
                     <li>
                         <a href="<?= url("login") ?>" class="text-white">Login</a>

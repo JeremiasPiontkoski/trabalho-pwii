@@ -2,9 +2,12 @@
   $this->layout("_theme");
 ?>
 
-<div>
-    <h2>Página não encontrada! Erro <?= $error; ?></h2>
-    <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
+<?php $this->start("css"); ?>
+    <link rel="stylesheet" href="<?= url("assets/web/") ?>css/style-error.css">
+<?php $this->end(); ?>
+
+<div class="error">
+    <h1>Opa, parece que ocorreu um erro, tente novamente!</h1>
 </div>
 
 <?php $this->start("sidebar"); ?>

@@ -53,7 +53,7 @@
                     <div class="card-mobile">
                         <h5 class="card-title">Crie o seu repositório</h5>
                         <p class="card-text">Crie um repositório online e 100% gratuito em nossa plataforma!</p>                       
-                            <a href="#" class="btn btn-primary">Vamo nessa!</a>                      
+                            <a href="login" class="btn btn-primary">Vamo nessa!</a>                      
                     </div>
                 </div>
             </div>
@@ -64,7 +64,7 @@
                     <div class="card-mobile">
                         <h5 class="card-title">Procure um repositório</h5>
                         <p class="card-text">Descubra projetos incríveis criados por nossos membros, ajudando a comunidade.</p>
-                        <a href="#" class="btn btn-primary">Vamo nessa!</a>
+                        <a href="login" class="btn btn-primary">Vamo nessa!</a>
                     </div>
                 </div>
             </div>
