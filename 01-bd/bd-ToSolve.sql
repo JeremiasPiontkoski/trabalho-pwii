@@ -15,6 +15,8 @@ CREATE TABLE IF NOT EXISTS `users` (
 CREATE TABLE IF NOT EXISTS `person` (
     `id` int(11) NOT NULL AUTO_INCREMENT,
     `idUser` int(11) NOT NULL,
+    `linguagem` VARCHAR(55) NOT NULL,
+    `descricao` VARCHAR(55),
     PRIMARY KEY(`id`),
     FOREIGN KEY(`idUser`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
@@ -41,3 +43,6 @@ CREATE TABLE IF NOT EXISTS `categories` (
     `language` varchar(50) NOT NULL,
     PRIMARY KEY(`id`)
 );
+
+
+INSERT INTO categories (language) VALUES ("JavaScript"), ("Java"), ("Php"), ("Python");

@@ -55,12 +55,12 @@
                                         window.location.href = "home";
                                         console.log(`${user.idUser}`)
                                     } else {
-                                        message.innerHTML = user.message;
+                                        console.log(`${user.type}`);
+                                        message.classList.add("message");
+                                        message.classList.remove("success", "warning", "error");
+                                        message.classList.add(`${user.type}`);
+                                            message.innerHTML = user.message;
                                     }
-                                    console.log(`${user.type}`);
-                                    message.classList.add("message");
-                                    message.classList.remove("success", "warning", "error");
-                                    message.classList.add(`${user.type}`);
                                 }
                             });
                         </script>
