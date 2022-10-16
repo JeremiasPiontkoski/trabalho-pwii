@@ -1,0 +1,125 @@
+/*section#whyShouldUse {
+    margin-top: $margin-section;
+
+    width: 100vw;
+    height: auto;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+   h1 {
+        font-size: map-get($font-sizes, large);
+        font-weight: map-get($font-weights, bold);
+
+        text-transform: uppercase;
+        text-align: center;
+
+        color: $text-color-medium;
+
+        padding: 0 1rem;
+    } 
+
+    .container-box {
+        width: 90%;
+        height: 100%;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr;
+    }
+
+    .box {
+        height: 20rem;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+
+         h3 {
+            font-size: map-get($font-sizes, normal);
+            font-weight: map-get($font-weights, bold);
+
+            text-align: center;
+            text-transform: uppercase;
+
+            
+            color: $text-color-strong-green;
+            padding: 0 1rem;
+        } 
+
+        .line {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            padding: .5rem 1rem;
+
+            svg {
+                width: 4rem;
+                height: 4rem;
+            }
+
+            path[stroke*="black"] {
+                stroke: $btn-color-medium-green;
+            }
+
+            span {
+                font-size: map-get($font-sizes, normal);
+                font-weight: map-get($font-weights, medium);
+
+                color: $btn-color-medium-green;
+            }
+        }
+    }
+}*/
+
+section#whyShouldUse{
+    width: 100vw;
+    height: auto;
+
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    .container-box {
+        width: 90%;
+        height: auto;
+
+
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr;
+        grid-template-areas: 
+        "box01"
+        "box02";
+
+        .box {
+            height: 50rem;
+            margin-top: $margin-containers-inside
+        }
+
+        .box01 {
+            grid-area: box01;
+            background-color: orange;
+        }
+
+        .box02{
+            grid-area: box02;
+            background-color: yellow;
+        }
+
+    }
+
+    @media (min-width: 750px) {
+        .container-box {
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr;
+            grid-template-areas: "box01 box02";
+        }
+
+        .box02 {
+            margin-left: $margin-containers-inside
+        }
+    }
+}
+

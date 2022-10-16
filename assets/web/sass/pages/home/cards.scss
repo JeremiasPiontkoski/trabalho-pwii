@@ -1,0 +1,165 @@
+section#ourProducts {
+    margin-top: $margin-section;
+    width: 100vw;
+    height: auto;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    h1 {
+        font-size: map-get($font-sizes , large);
+        font-weight: map-get($font-weights, bold);
+
+        text-transform: uppercase;
+
+        color: $text-color-medium;
+
+        padding: 0 1rem;
+
+        margin-bottom: $margin-section;
+    }
+
+    .products {
+        grid-template-columns: 1fr;
+        grid-template-rows: 5fr 4fr;
+        grid-template-areas: 
+            "box01"
+            "box02" 
+        ;
+    }
+
+    .resources {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 2fr;
+        grid-template-areas: 
+            "box01"
+            "box02"
+        ;
+    }
+
+   .container-box {
+        width: 95vw;
+        height: 80rem;
+        display: grid;
+
+        .box {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-direction: column;
+
+            .content {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+
+                h2 {
+                    font-size: map-get($font-sizes, large);
+                    font-weight: map-get($font-weights, bold);
+                    text-transform: uppercase;
+    
+                    color: $text-color-medium;
+    
+                    padding: .5rem;
+                }
+    
+                p {
+                    font-size: map-get($font-sizes, normal);
+                    font-weight: map-get($font-weights, regular);
+
+                    color: $text-color-strong;
+
+                    padding: 0 1rem;
+                }
+
+                a {
+                    display: none;
+                }
+            }        
+        }
+
+        .box01 {
+            grid-area: box01;
+
+            img {
+                width: 100%;
+                height: 100%;
+            }
+        }
+
+        .box02 {
+            grid-area: box02;
+        }
+    }
+
+    @media(min-width: 600px) {
+        .container-box {
+            height: 50rem;
+        }
+    }
+
+    @media(min-width: 750px) {
+        section#ourProducts {
+            h1 {
+                font-size: map-get($font-sizes , extra-large);
+            }
+        }
+
+        .products{
+            grid-template-columns: 2fr 3fr;
+            grid-template-rows: 1fr;
+            grid-template-areas: 
+            "box01 box02";
+        }
+
+        .resources {
+            grid-template-columns: 4fr 2fr;
+            grid-template-rows: 1fr;
+            grid-template-areas: 
+            "box02 box01";
+        }
+
+        .container-box {
+            width: 90vw;  
+            margin-bottom: $margin-containers-inside;         
+            .box {
+                .content {
+                    p {
+                        padding: 0rem 5rem;
+                    }
+
+                    a {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        padding: .5rem 1rem;
+
+                        width: 20rem;
+                        height: 4rem;
+
+                        font-size: map-get($font-sizes, $key: large);
+                        font-weight: map-get($font-weights, medium);
+                        text-decoration: none;
+
+                        border: none;
+                        outline: none;
+                        border-radius: 1rem;
+
+                        background-color: $btn-color-medium;
+                        color: $text-color-medium;
+
+                        transition: .5s ease;
+
+                        &:hover {
+                            background-color: transparent;
+                            border: 1px solid $btn-color-medium;
+                            font-weight: map-get($font-weights, bold);
+                            overflow: hidden;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

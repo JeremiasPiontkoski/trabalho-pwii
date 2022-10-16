@@ -28,6 +28,14 @@ CREATE TABLE IF NOT EXISTS `company` (
     FOREIGN KEY (`idUser`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
+CREATE TABLE IF NOT EXISTS `categories` (
+    `id` int(11) NOT NULL AUTO_INCREMENT,
+    `language` varchar(50) NOT NULL,
+    PRIMARY KEY(`id`)
+);
+
+INSERT INTO categories (language) VALUES ("JavaScript"), ("Java"), ("Php"), ("Python");
+
 CREATE TABLE IF NOT EXISTS `repositories` (
     `id` int(11) NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(50) NOT NULL,
@@ -37,12 +45,3 @@ CREATE TABLE IF NOT EXISTS `repositories` (
     PRIMARY KEY(`id`),
     FOREIGN KEY (`idCategory`) REFERENCES `categories` (`id`)
 );
-
-CREATE TABLE IF NOT EXISTS `categories` (
-    `id` int(11) NOT NULL AUTO_INCREMENT,
-    `language` varchar(50) NOT NULL,
-    PRIMARY KEY(`id`)
-);
-
-
-INSERT INTO categories (language) VALUES ("JavaScript"), ("Java"), ("Php"), ("Python");
