@@ -7,7 +7,7 @@ section#ourProducts {
     flex-direction: column;
 
     h1 {
-        font-size: map-get($font-sizes , large);
+        font-size: map-get($font-sizes , extra-large);
         font-weight: map-get($font-weights, bold);
 
         text-transform: uppercase;
