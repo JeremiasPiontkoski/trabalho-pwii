@@ -1,6 +1,14 @@
 CREATE DATABASE IF NOT EXISTS `bd-toSolve`;
 USE `bd-toSolve`;
 
+CREATE TABLE IF NOT EXISTS `typeUsers` (
+    `id` int(11) NOT NULL AUTO_INCREMENT,
+    `type` varchar(50) NOT NULL,
+    PRIMARY KEY(`id`)
+);
+
+INSERT INTO `typeUsers` VALUES(null, "person"), (null, "company");
+
 CREATE TABLE IF NOT EXISTS `users` (
     `id` int(11) NOT NULL AUTO_INCREMENT,
     `name` varchar(50) NOT NULL,

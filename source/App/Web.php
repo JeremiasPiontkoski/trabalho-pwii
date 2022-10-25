@@ -4,8 +4,11 @@ namespace Source\App;
 
 use JsonException;
 use League\Plates\Engine;
+use Source\Models\Company;
 use Source\Models\Language;
 use Source\Models\Person;
+use Source\Models\Type;
+use Source\Models\typeUser;
 use Source\Models\User;
 
 class Web
@@ -85,6 +88,11 @@ class Web
 
     public function registro(?array $data){
         if(!empty($data)){
+            if(in_array("", $data)) {
+                echo json_encode($data);
+                return;
+            }
+
             $user = new User(
                 null,
                 $data["name"],
@@ -93,22 +101,57 @@ class Web
                 $data["description"]
             );
 
-            $user->insert();
+            if($data["userType"] == "person") {
+                $person = new Person(
+                    null,
+                    $user->insert(),
+                    $data["cpf"],
+                    $data["language"]
+                );
+    
+                if($person->insert()) {
+                    $json = [
+                        "message" => "Cadastro",
+                        "type" => "warning"
+                    ];
+                    echo json_encode($json);
+                    return;
+                }
+            }else {
+                $company = new Company(
+                    null, 
+                    $user->insert(),
+                    $data["cnpj"],
+                    $data["typeDevelopment"]
+                );
 
-            $json = [
-                "name" => $user->getEmail()
-            ];
 
-            echo json_encode($json);
-            return;
+                if($company->insert()) {
+                    $json = [
+                        "message" => "Cadastro",
+                        "type" => "warning"
+                    ];
+                    echo json_encode($json);
+                    return;
+                }
+            }
         }
+ 
 
-
-       $language = new Language();
+        $language = new Language();
         $languages = $language->selectAll();
+
+        $type = new Type();
+        $types = $type->selectAll();
+
+        $typeUser = new typeUser();
+        $typeUsers = $typeUser->selectAll();
+
         echo $this->view->render("register",
     [
-        "languages" => $languages
+        "languages" => $languages,
+        "types" => $types,
+        "typeUsers" => $typeUsers
     ]);
     }
 

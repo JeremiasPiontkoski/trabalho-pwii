@@ -24,8 +24,13 @@
                     <h1>Cadastro</h1>
 
                     <select name="userType" id="userType">
-                        <option value="person">Pessoa</option>
-                        <option value="company">Empresa</option>
+                         <?php
+                            foreach($typeUsers as $type) {
+                                ?>
+                                <option value="<?= $type->type ?>"><?= $type->type ?></option>
+                                <?php
+                            }
+                            ?>
                     </select>
 
                     <div class="container-inputs">
@@ -76,14 +81,22 @@
 
                     <div class="container-inputs forCompany">
                         <label for="cnpj">CNPJ:</label>
-                        <input type="number" name="cnpj" id="cnpj" class="forCompany">
+                        <input type="text" name="cnpj" id="cnpj" class="forCompany">
                     </div>
 
                     <div class="container-inputs forCompany">
                         <select name="typeDevelopment" id="typeDevelopment" class="forCompany">
-                            <option value="web">Web</option>
-                            <option value="mobile">Mobile</option>
-                            <option value="software">Software</option>
+                            <!-- <option value="1">Web</option>
+                            <option value="2">Mobile</option>
+                            <option value="3">Software</option> -->
+                            <option value="">Escolha</option>
+                            <?php
+                            foreach($types as $type) {
+                                ?>
+                                <option value="<?= $type->id ?>"><?= $type->type ?></option>
+                                <?php
+                            }
+                            ?>
                         </select>
                     </div>
 
