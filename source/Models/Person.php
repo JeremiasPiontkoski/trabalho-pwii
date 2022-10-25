@@ -9,8 +9,8 @@ class Person
 
     private $id;
     private $idUser;
-    private $linguagem;
-    private $descricao;
+    private $cpf;
+    private $language;
     private $message;
 
     public function getId(): ?int
@@ -26,30 +26,25 @@ class Person
         $this->id = $id;
     }
 
-    public function getLinguagem(): ?string
+    public function getLanguage(): ?int
     {
-        return $this->linguagem;
+        return $this->language;
     }
 
     /**
      * @param int|null $id
      */
-    public function setLinguagem(?string $linguagem): void
+    public function setLanguage(?int $language): void
     {
-        $this->linguagem = $linguagem;
+        $this->language = $language;
     }
 
-    public function getDescricao(): ?string
-    {
-        return $this->descricao;
+    public function getCpf(){
+        return $this->cpf;
     }
 
-    /**
-     * @param int|null $id
-     */
-    public function setDescricao(?string $descricao): void
-    {
-        $this->descricao = $descricao;
+    public function setCpf($cpf) {
+        $this->cpf = $cpf;
     }
 
     public function getIdUser(): ?int
@@ -68,14 +63,14 @@ class Person
     public function __construct(
         int $id = NULL,
         int $idUser = NULL,
-        string $linguagem = NULL,
-        string $descricao = NULL
+        string $cpf = NULL,
+        string $language = NULL
     )
     {
         $this->id = $id;
         $this->idUser = $idUser;
-        $this->linguagem = $linguagem;
-        $this->descricao = $descricao;
+        $this->cpf = $cpf;
+        $this->language = $language;
     }
 
     public function getDataUser(int $idUser)
@@ -99,13 +94,14 @@ class Person
         
     }
 
-    public function insertPerson() : bool
+    public function insert() : bool
     {
-        $query = "INSERT INTO person VALUES (NULL, :idUser, :linguagem, :descricao)";
+        /* $query = "INSERT INTO person VALUES (NULL, :idUser, :cpf, :language)"; */
+        $query = "INSERT INTO person (idUser, cpf, language) VALUES (:idUser, :cpf, :language)";
         $stmt = Connect::getInstance()->prepare($query);
         $stmt->bindParam(":idUser", $this->idUser);
-        $stmt->bindParam(":linguagem", $this->linguagem);
-        $stmt->bindParam(":descricao", $this->descricao);
+        $stmt->bindParam(":cpf", $this->cpf);
+        $stmt->bindParam(":language", $this->language);
         $stmt->execute();
 
         $this->message = "Usuário cadastrado com sucesso!";

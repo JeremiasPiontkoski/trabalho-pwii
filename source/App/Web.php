@@ -4,6 +4,7 @@ namespace Source\App;
 
 use JsonException;
 use League\Plates\Engine;
+use Source\Models\Language;
 use Source\Models\Person;
 use Source\Models\User;
 
@@ -80,6 +81,35 @@ class Web
             ];
             return $json;
         }
+    }
+
+    public function registro(?array $data){
+        if(!empty($data)){
+            $user = new User(
+                null,
+                $data["name"],
+                $data["email"],
+                $data["password"],
+                $data["description"]
+            );
+
+            $user->insert();
+
+            $json = [
+                "name" => $user->getEmail()
+            ];
+
+            echo json_encode($json);
+            return;
+        }
+
+
+       $language = new Language();
+        $languages = $language->selectAll();
+        echo $this->view->render("register",
+    [
+        "languages" => $languages
+    ]);
     }
 
     public function register(?array $data) : void
@@ -167,7 +197,7 @@ class Web
                 $data["description"]
             );
 
-            if(!$person->insertPerson()){
+            if(!$person->insert()){
                 $json = [
                     "message" => $user->getMessage(),
                     "type" => "error"

@@ -1,0 +1,109 @@
+section#formFaq {
+    width: 90vw;
+    height: auto;
+
+    margin: 0 auto;
+
+    margin-top: $margin-section;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    background-color: $text-color-light;
+
+    border-radius: 1rem;
+
+    padding-block: 2rem;
+
+    
+    h1 {
+        font-size: map-get($font-sizes, extra-large);
+        font-weight: map-get($font-weights, bold);
+
+        color: $text-color-medium;
+
+        padding-top: 1rem;
+    }
+
+    form {
+        width: 80%;
+        height: auto;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+        .line {
+            width: 90%;
+            height: auto;
+
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+
+            padding: .5rem 1.2rem;
+
+            label {
+                font-size: map-get($font-sizes, normal);
+                font-weight: map-get($font-weights, bold);
+
+                padding-block: .5rem;
+
+            }
+
+            input {
+                width: 100%;
+                height: 2.4rem;
+
+                border: none;
+                border-bottom: 1px solid black;
+
+                font-size: map-get($font-sizes, normal);
+
+                color: $text-color-medium;
+                background-color: transparent;
+
+                &:focus {
+                    outline: none;
+                }
+            }
+        }
+        button {
+            width: 75%;
+            height: 4rem;
+
+            outline: none;
+            border: none;
+            border-radius: 1rem;
+
+            font-size: map-get($font-sizes, large);
+            font-weight: map-get($font-weights, bold);
+
+            margin-top: 2rem;
+
+            background-color: $btn-color-medium;
+            color: $text-color-medium;
+
+            transition: .5s ease;
+        }
+    }
+}
+
+@media(min-width: 992px) {
+    section#formFaq {
+        width: 75vw;
+
+        form {
+            button {
+                &:hover {
+                    background-color: transparent;
+                    border: 1px solid $text-color-medium;
+                    border-radius: 1rem;
+                }
+            }
+        }
+    }
+}

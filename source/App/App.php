@@ -6,7 +6,7 @@ use League\Plates\Engine;
 use JsonException;
 use League\Plates\Template\Func;
 use Source\Models\Person;
-use Source\Models\Category;
+use Source\Models\Language;
 use Source\Models\Project;
 use Source\Models\User;
 use Source\Models\Repository;
@@ -15,13 +15,16 @@ class App
 {
 
     private $view;
-    private $categories;
+    private $languages;
 
     public function __construct()
     {
 
-        $categories = new Category();
-        $this->categories = $categories->selectAll();
+        $languages = new Language();
+        $this->languages = $languages->selectAll();
+
+        $languages = new Language();
+
 
         $this->view = new Engine(CONF_VIEW_APP,'php');
         //$this->view = new Engine(__DIR__ . "/../../themes/web",'php');
@@ -82,8 +85,8 @@ echo json_encode($json);
 return;  */
 
 
-            $category = new Category();
-            $categories = $category->selectByLanguage($data["language"]);
+            $language = new Language();
+            $languages = $language->selectByLanguage($data["language"]);
 
                /*  $repository = new Repository(
                     null,
@@ -97,7 +100,7 @@ return;  */
                     $data["name"],
                     $data["language"],
                     $data["description"],
-                    $categories->id
+                    $languages->id
                 );
 
                 if($repository->insert()) {

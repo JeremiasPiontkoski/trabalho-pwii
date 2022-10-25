@@ -11,13 +11,23 @@
     <link rel="stylesheet" href="<?= url("assets/web/css/style-message.css") ?>">
     <!-- <link rel="stylesheet" href="../../assets/web/css/style-cadastro.css">
     <link rel="stylesheet" href="../../assets/web/css/style-message.css"> -->
+
+    <link rel="stylesheet" href="<?= url("assets/web/style/style.css") ?>">
+
     <title>To Solve - Cadastro</title>
 </head>
+
 <body>
     <section>
             <div class="card-register">
                 <form id="form-register" novalidate>
                     <h1>Cadastro</h1>
+
+                    <select name="userType" id="userType">
+                        <option value="person">Pessoa</option>
+                        <option value="company">Empresa</option>
+                    </select>
+
                     <div class="container-inputs">
                         <label for="name">Nome:</label>
                         <input type="text" placeholder="Nome:" name="name" id="name" required>
@@ -34,20 +44,49 @@
                         <label for="confirmPassoword">Confirme:</label>
                         <input type="password" placeholder="Confirme a Senha:" name="confirmPassword" id="confirmPassword" required>
                     </div>
-                    <div class="container-inputs">
-                        <select name="language" id="selectUser">
+
+                    <div class="container-inputs forPerson">
+                        <label for="cpf">CPF:</label>
+                        <input type="number" name="cpf" id="cpf" class="forPerson">
+                    </div>
+
+                    <!-- ADICIONAR FOREACH TABELA CATEGORIAS -->
+                    <div class="container-inputs forPerson">
+                        <select name="language" id="selectUser" class="forPerson">
                             <option value="">Escolha...</option>
-                            <option value="javaScript">JavaScript</option>
+                            <!-- <option value="javaScript">JavaScript</option>
                             <option value="java">Java</option>
                             <option value="htmlCss">HTML E CSS</option>
                             <option value="php">Php</option>
-                            <option value="python">Python</option>
+                            <option value="python">Python</option> -->
+                            <?php
+                            foreach($languages as $language) {
+                                ?>
+                                <option value="<?= $language->id ?>"><?= $language->language ?></option>
+                                <?php
+                            }
+                            ?>
                         </select>
                     </div>
+
                     <div class="container-inputs">
                         <label for="description">Descrição:</label>
                         <input type="text" placeholder="Descrição:" name="description" id="description" required>
                     </div>
+
+                    <div class="container-inputs forCompany">
+                        <label for="cnpj">CNPJ:</label>
+                        <input type="number" name="cnpj" id="cnpj" class="forCompany">
+                    </div>
+
+                    <div class="container-inputs forCompany">
+                        <select name="typeDevelopment" id="typeDevelopment" class="forCompany">
+                            <option value="web">Web</option>
+                            <option value="mobile">Mobile</option>
+                            <option value="software">Software</option>
+                        </select>
+                    </div>
+
                     <button type="submit" class="btn-register">Cadastrar</button>
 
                     <div class="data-error"> 
@@ -67,14 +106,15 @@
                                 e.preventDefault();
                                 const dataUser = new FormData(form);
                                 // enviar para a rota já definida
-                                const data = await fetch("<?= url("cadastro"); ?>",{
+                                const data = await fetch("<?= url("registro"); ?>",{
                                     method: "POST",
                                     body: dataUser,
                                 });
                                 const user = await data.json();
+
                                 console.log(user);
                                 // tratamento da mensagem
-                                if(user) {
+                                /* if(user) {
                                     if(user.type == "success") {
                                         window.location.href = "login";
                                     }else {
@@ -84,10 +124,13 @@
                                         console.log(`${user.type}`);
                                         message.classList.add(`${user.type}`);
                                     }
-                                }
+                                } */
                             });
                     </script>
             </div>
     </section>
+
+    <script src="<?= url("assets/web/scripts/register.js") ?>"></script>
+
 </body>
 </html>

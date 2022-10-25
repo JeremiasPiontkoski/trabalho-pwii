@@ -5,7 +5,7 @@ namespace Source\Models;
 use League\Plates\Template\Func;
 use Source\Core\Connect;
 
-class Category
+class Language
 {
     private $id;
     private $language;
@@ -50,7 +50,7 @@ class Category
 
     public function selectAll()
     {
-        $query = "SELECT * FROM categories";
+        $query = "SELECT * FROM languages";
         $stmt = Connect::getInstance()->prepare($query);
         $stmt->execute();
 
@@ -62,7 +62,7 @@ class Category
     }
 
     public function selectByLanguage(string $language) {
-        $query = "SELECT id FROM categories WHERE language = :language";
+        $query = "SELECT id FROM languages WHERE language = :language";
         $stmt = Connect::getInstance()->prepare($query);
         $stmt->bindParam(":language", $language);
         $stmt->execute();
@@ -72,12 +72,5 @@ class Category
         }else {
             return $stmt->fetch();
         }
-        
-            /* $category = $stmt->fetch();
-            $this->id = $category->id;
-            $this->language = $category->language;
-            return $stmt->fetchAll(); */
-        
-        
     }
 }

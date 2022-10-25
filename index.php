@@ -19,8 +19,11 @@ $route->get("/sobre","Web:about");
 $route->post("/login", "Web:login");
 $route->get("/login", "Web:login");
 
-$route->post("/cadastro", "Web:register");
-$route->get("/cadastro", "Web:register");
+/* $route->post("/cadastro", "Web:register");
+$route->get("/cadastro", "Web:register"); */
+
+$route->post("/registro", "Web:registro");
+$route->get("/registro", "Web:registro");
 
 $route->post("/home", "App:home");
 $route->get("/home", "App:home");

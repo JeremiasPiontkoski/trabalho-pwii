@@ -10,8 +10,17 @@ class User
     private $name;
     private $email;
     private $password;
+    private $description;
     private $message;
 
+
+    public function getDescription() {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description) {
+        $this->description = $description;
+    }
 
      /**
      * @return mixed
@@ -90,13 +99,15 @@ class User
         int $id = NULL,
         string $name = NULL,
         string $email = NULL,
-        string $password = NULL
+        string $password = NULL,
+        string $description = NULL
     )
     {
         $this->id = $id;
         $this->name = $name;
         $this->email = $email;
         $this->password = $password;
+        $this->description = $description;
     }
  /**
      * @return array|false
@@ -177,6 +188,7 @@ class User
         $this->id = $user->id;
         $this->name = $user->name;
         $this->email = $user->email;
+        $this->description = $user->description;
         $this->message = "Usuário Autorizado, redirect to APP!";
         return true;
     }
@@ -186,11 +198,12 @@ class User
      */
     public function insert()
     {
-        $query = "INSERT INTO users (name, email, password) VALUES (:name, :email, :password)";
+        $query = "INSERT INTO users (name, email, password, description) VALUES (:name, :email, :password, :description)";
         $stmt = Connect::getInstance()->prepare($query);
         $stmt->bindParam(":name", $this->name);
         $stmt->bindParam(":email", $this->email);
         $stmt->bindValue(":password", password_hash($this->password,PASSWORD_DEFAULT));
+        $stmt->bindParam(":description", $this->description);
         $stmt->execute();
         $this->message = "Usuário cadastrado com sucesso!";
 
