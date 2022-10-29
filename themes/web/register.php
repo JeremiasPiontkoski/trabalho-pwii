@@ -27,7 +27,7 @@
                          <?php
                             foreach($typeUsers as $type) {
                                 ?>
-                                <option value="<?= $type->type ?>"><?= $type->type ?></option>
+                                <option value="<?= $type->id ?>"><?= $type->type ?></option>
                                 <?php
                             }
                             ?>
@@ -74,11 +74,6 @@
                         </select>
                     </div>
 
-                    <div class="container-inputs">
-                        <label for="description">Descrição:</label>
-                        <input type="text" placeholder="Descrição:" name="description" id="description" required>
-                    </div>
-
                     <div class="container-inputs forCompany">
                         <label for="cnpj">CNPJ:</label>
                         <input type="text" name="cnpj" id="cnpj" class="forCompany">
@@ -99,6 +94,13 @@
                             ?>
                         </select>
                     </div>
+
+                    <div class="container-inputs">
+                        <label for="description">Descrição:</label>
+                        <input type="text" placeholder="Descrição:" name="description" id="description" required>
+                    </div>
+
+                   
 
                     <button type="submit" class="btn-register">Cadastrar</button>
 

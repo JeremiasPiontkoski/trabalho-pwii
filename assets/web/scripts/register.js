@@ -22,7 +22,7 @@ selectTypeUser.addEventListener("change", (e) => {
 
     let value = selectTypeUser.options[selectTypeUser.selectedIndex].value
 
-    if(value == "person") {
+    if(value == "1") {
         addPersonField()
     }else {
         addCompanyField()

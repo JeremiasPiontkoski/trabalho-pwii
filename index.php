@@ -16,14 +16,14 @@ $route->namespace("Source\App");
 $route->get("/","Web:home");
 $route->get("/sobre","Web:about");
 
-$route->post("/login", "Web:login");
-$route->get("/login", "Web:login");
+$route->post("/login", "Web:entrada");
+$route->get("/login", "Web:entrada");
 
 /* $route->post("/cadastro", "Web:register");
 $route->get("/cadastro", "Web:register"); */
 
-$route->post("/registro", "Web:registro");
-$route->get("/registro", "Web:registro");
+$route->post("/registro", "Web:register");
+$route->get("/registro", "Web:register");
 
 $route->post("/home", "App:home");
 $route->get("/home", "App:home");

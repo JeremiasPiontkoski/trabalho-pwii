@@ -20,20 +20,20 @@
                 </header>
                 <form id="form-login">
                     <div class="line">
-                        <label for="name">Email:</label>
-                        <input type="email" name="email" id="email" placeholder="Email">
+                        <label for="primaryData">Email:</label>
+                        <input type="text" name="primaryData" id="primaryData" placeholder="Email">
                     </div>
                     <div class="line">
                         <label for="password">Senha:</label>
                         <input type="password" name="password" id="password" placeholder="Senha">
                     </div>
-                    <button type="submit">Login</button>
+                    <button>Login</button>
                     <div class="data-error">
                         <p id="message"></p>
                     </div>
                     <div class="not-acount">
                         <p>Não possui conta ?
-                            <a href="<?= url("cadastro") ?>">Crie Uma!</a>
+                            <a href="<?= url("registro") ?>">Crie Uma!</a>
                         </p>
                     </div>
             </form>
@@ -43,14 +43,14 @@
                             const message = document.querySelector("#message");
                             form.addEventListener("submit", async (e) => {
                                 e.preventDefault();
-                               const dataUser = new FormData(form);
+                                const dataUser = new FormData(form);
                                 const data = await fetch("<?= url("login"); ?>",{
                                     method: "POST",
                                     body: dataUser,
                                 });
                                 const user = await data.json();
-                                console.log(user); 
-                                if(user) {
+                                console.log(user);  
+                                /* if(user) {
                                     if(user.type === "success"){
                                         window.location.href = "home";
                                         console.log(`${user.idUser}`)
@@ -61,8 +61,9 @@
                                         message.classList.add(`${user.type}`);
                                             message.innerHTML = user.message;
                                     }
-                                } 
-                            });
+                                }  */
+                            }
+                            );
                         </script>
             </div>
     </section>

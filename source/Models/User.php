@@ -11,6 +11,7 @@ class User
     private $email;
     private $password;
     private $description;
+    private $typeUser;
     private $message;
 
 
@@ -28,6 +29,14 @@ class User
     public function getMessage()
     {
         return $this->message;
+    }
+
+    public function getTypeUser() {
+        return $this->typeUser;
+    }
+
+    public function setTypeUser($type) {
+        $this->typeUser = $type;
     }
 
     /**
@@ -100,7 +109,8 @@ class User
         string $name = NULL,
         string $email = NULL,
         string $password = NULL,
-        string $description = NULL
+        string $description = NULL,
+        int $typeUser = NULL
     )
     {
         $this->id = $id;
@@ -108,6 +118,7 @@ class User
         $this->email = $email;
         $this->password = $password;
         $this->description = $description;
+        $this->typeUser = $typeUser;
     }
  /**
      * @return array|false
@@ -177,19 +188,21 @@ class User
         if($stmt->rowCount() == 0){
             $this->message = "Usuário e/ou Senha não cadastrados!";
             return false;
-        } else {
+        }else {
             $user = $stmt->fetch();
-            if(!password_verify($password, $user->password)){
+            return $user;
+            /* if(!password_verify($password, $user->password)){
                 $this->message = "Usuário e/ou Senha não cadastrados!";
                 return false;
-            }
-        }
+            } */
+        } 
+    
 
-        $this->id = $user->id;
+        /* $this->id = $user->id;
         $this->name = $user->name;
         $this->email = $user->email;
         $this->description = $user->description;
-        $this->message = "Usuário Autorizado, redirect to APP!";
+        $this->message = "Usuário Autorizado, redirect to APP!"; */
         return true;
     }
 
@@ -198,16 +211,18 @@ class User
      */
     public function insert()
     {
-        $query = "INSERT INTO users (name, email, password, description) VALUES (:name, :email, :password, :description)";
+        $query = "INSERT INTO users (name, email, password, description, typeUser) VALUES (:name, :email, :password, :description, :typeUser)";
         $stmt = Connect::getInstance()->prepare($query);
         $stmt->bindParam(":name", $this->name);
         $stmt->bindParam(":email", $this->email);
         $stmt->bindValue(":password", password_hash($this->password,PASSWORD_DEFAULT));
         $stmt->bindParam(":description", $this->description);
+        $stmt->bindParam(":typeUser", $this->typeUser);
         $stmt->execute();
         $this->message = "Usuário cadastrado com sucesso!";
 
         return Connect::getInstance()->lastInsertId();
+        
     }
 
    

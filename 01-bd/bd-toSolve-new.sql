@@ -15,9 +15,11 @@ CREATE TABLE IF NOT EXISTS `users` (
     `email` varchar(50) NOT NULL,
     `password` varchar(50) NOT NULL,
     `description` varchar(50) NOT NULL,
+    `typeUser` int(11) NOT NULL,
     `create_at` timestamp NOT NULL DEFAULT current_timestamp(),
     `update_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
     PRIMARY KEY (`id`),
+    FOREIGN KEY(`typeUser`) REFERENCES `typeUsers` (`id`)ON DELETE NO ACTION ON UPDATE NO ACTION,
     UNIQUE KEY `email_UNIQUE` (`email`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 

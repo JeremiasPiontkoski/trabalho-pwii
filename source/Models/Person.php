@@ -87,8 +87,8 @@ class Person
             $user = $stmt->fetch();
             $this->id = $user->id;
             $this->idUser = $user->idUser;
+            $this->cpf = $user->getCpf;
             $this->linguagem = $user->linguagem;
-            $this->descricao = $user->descricao;
             return true;
         }
         

@@ -3,6 +3,7 @@
 namespace Source\App;
 
 use JsonException;
+use LDAP\Result;
 use League\Plates\Engine;
 use Source\Models\Company;
 use Source\Models\Language;
@@ -86,78 +87,9 @@ class Web
         }
     }
 
-    public function registro(?array $data){
+    public function register(?array $data){
         if(!empty($data)){
-            if(in_array("", $data)) {
-                echo json_encode($data);
-                return;
-            }
 
-            $user = new User(
-                null,
-                $data["name"],
-                $data["email"],
-                $data["password"],
-                $data["description"]
-            );
-
-            if($data["userType"] == "person") {
-                $person = new Person(
-                    null,
-                    $user->insert(),
-                    $data["cpf"],
-                    $data["language"]
-                );
-    
-                if($person->insert()) {
-                    $json = [
-                        "message" => "Cadastro",
-                        "type" => "warning"
-                    ];
-                    echo json_encode($json);
-                    return;
-                }
-            }else {
-                $company = new Company(
-                    null, 
-                    $user->insert(),
-                    $data["cnpj"],
-                    $data["typeDevelopment"]
-                );
-
-
-                if($company->insert()) {
-                    $json = [
-                        "message" => "Cadastro",
-                        "type" => "warning"
-                    ];
-                    echo json_encode($json);
-                    return;
-                }
-            }
-        }
- 
-
-        $language = new Language();
-        $languages = $language->selectAll();
-
-        $type = new Type();
-        $types = $type->selectAll();
-
-        $typeUser = new typeUser();
-        $typeUsers = $typeUser->selectAll();
-
-        echo $this->view->render("register",
-    [
-        "languages" => $languages,
-        "types" => $types,
-        "typeUsers" => $typeUsers
-    ]);
-    }
-
-    public function register(?array $data) : void
-    {
-        if(!empty($data)){
 
             if(in_array("", $data)) {
                 $json = [
@@ -207,71 +139,144 @@ class Web
                 return;
             }
 
-            if($data["language"] == ""){
-                $json = [
-                    "message" => "Escolha uma Linguagem!",
-                    "type" => "warning"
-                ];
-
-                echo json_encode($json);
-                return;
-            }
-
-            if($data["description"] == "") {
-                $json = [
-                    "message" => "Preencha a Descrição!",
-                    "type" => "warning"
-                ];
-                echo json_encode($json);
-                return;
-            }
-
             $user = new User(
                 null,
                 $data["name"],
                 $data["email"],
-                $data["password"]
+                $data["password"],
+                $data["description"],
+                $data["userType"]
             );
 
-            $person = new Person(
-                null,
-                $user->insert(),
-                $data["language"],
-                $data["description"]
-            );
+            if($data["userType"] == '1') {
+                if(strlen($data["cpf"]) != 11) {
+                    $json = [
+                        "message" => "O cpf deve conter 11 dígitos",
+                        "type" => "warning"
+                    ];
+                    echo json_encode($json);
+                    return;
+                }
 
-            if(!$person->insert()){
+                $person = new Person(
+                    null,
+                    $user->insert(),
+                    $data["cpf"],
+                    $data["language"]
+                );
+    
+                if($person->insert()) {
+                    $json = [
+                        "message" => "Cadastro",
+                        "password" => $data['password'],
+                        "type" => "warning"
+                    ];
+                    echo json_encode($json);
+                    return;
+                }
+            }else {
+                
+            if(strlen($data["cnpj"]) != 14) {
                 $json = [
-                    "message" => $user->getMessage(),
-                    "type" => "error"
+                    "message" => "O cnpj deve conter 14 dígitos",
+                    "type" => "warning"
                 ];
                 echo json_encode($json);
                 return;
-            } else {
+            }
+            
+                $company = new Company(
+                    null, 
+                    $user->insert(),
+                    $data["cnpj"],
+                    $data["typeDevelopment"]
+                );
+
+                if($company->insert()) {
+                    $json = [
+                        "message" => "Cadastro",
+                        "type" => "warning"
+                    ];
+                    echo json_encode($json);
+                    return;
+                }
+            }
+        }
+ 
+
+        $language = new Language();
+        $languages = $language->selectAll();
+
+        $type = new Type();
+        $types = $type->selectAll();
+
+        $typeUser = new typeUser();
+        $typeUsers = $typeUser->selectAll();
+
+        echo $this->view->render("register",
+    [
+        "languages" => $languages,
+        "types" => $types,
+        "typeUsers" => $typeUsers
+    ]);
+    }
+
+    public function entrada(?array $data) : void 
+    {
+        if(!empty($data)){
+
+            if(in_array("",$data)){
                 $json = [
-                    "name" => $data["name"],
-                    "message" => $user->getMessage(),
-                    "type" => "success"
+                    "message" => "Informe e-mail e senha para entrar!",
+                    "type" => "warning"
                 ];
                 echo json_encode($json);
                 return;
             }
 
-        /*     if($data["user"] == "person") {
-                echo json_encode($this->insertUser($user, $data));
+        if(strlen($data["primaryData"]) != 14) {
+            if(!is_email($data["primaryData"])) {
+                $json = [
+                    "message" => "Dados inexistentes",
+                    "type" => "danger"
+                ];
+                echo json_encode($json);
                 return;
+
             }
-
-            if($data["user"] == "company") {
-                echo json_encode($this->insertCompany($user, $data));
-                return;
-            } */
-
-            // Usuário salvo com sucesso
-            return;
         }
 
-        echo $this->view->render("register",["eventName" => CONF_SITE_NAME]);
+        $user = new User();
+        $person = new Person();
+        $company = new Company();
+
+            if(is_email($data["primaryData"])) {
+                if(!$user->validate($data["primaryData"], $data["password"])) {
+                    $json = [
+                    "message" => "Usuário ou senha inválidos",
+                    "senha" => $data['password']
+                    ];
+                    echo json_encode($json);
+                    return;
+                }else {
+                    $json = [
+                        "message" => "certo"
+                    ];
+                    echo json_encode($json);
+                    return;
+                }
+            }
+
+            if(strlen($data["primaryData"]) == 14) {
+                $json = [
+                    "type" => "Company"
+                ];
+
+                echo json_encode($json);
+                return;
+            }
+        }
+        echo $this->view->render("login",["eventName" => CONF_SITE_NAME]);
     }
 
     public function login(?array $data) : void
@@ -287,11 +292,27 @@ class Web
                 return;
             }
 
-            if(!is_email($data["email"])){
+            if($data["email"] != 14 || !is_email($data["email"])) {
                 $json = [
-                    "message" => "Por favor, informe um e-mail válido!",
-                    "type" => "warning"
+                    "message" => "Este usuáiro não existe",
+                    "type" => "danger"
                 ];
+            }
+
+            if($data["email"] == 14) {
+                $json = [
+                    "type" => "Person"
+                ];
+
+                echo json_encode($json);
+                return;
+            }
+
+            if(is_email($data["email"])) {
+                $json = [
+                    "type" => "Company"
+                ];
+
                 echo json_encode($json);
                 return;
             }
