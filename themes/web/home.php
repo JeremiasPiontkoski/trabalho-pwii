@@ -16,7 +16,7 @@
 
     <nav id="navigation">
         <img src=<?= url("assets/web/imgs/toSolveLogo/light-row.svg")?> alt="...">
-        <a href="login">Login</a>
+        <a href="<?= url("login") ?>">Login</a>
     </nav>
 
 
