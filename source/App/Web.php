@@ -234,44 +234,24 @@ class Web
                 return;
             }
 
-        if(strlen($data["primaryData"]) != 14) {
-            if(!is_email($data["primaryData"])) {
+            $user = new User();
+            $person = new Person();
+            $company = new Company();
+
+            if(!$user->validate($data["email"], $data["password"])) {
                 $json = [
-                    "message" => "Dados inexistentes",
-                    "type" => "danger"
+                "message" => "Usuário ou senha inválidos",
+                "senha" => $data['password']
                 ];
                 echo json_encode($json);
                 return;
-
-            }
-        }
-
-        $user = new User();
-        $person = new Person();
-        $company = new Company();
-
-            if(is_email($data["primaryData"])) {
-                if(!$user->validate($data["primaryData"], $data["password"])) {
-                    $json = [
-                    "message" => "Usuário ou senha inválidos",
-                    "senha" => $data['password']
-                    ];
-                    echo json_encode($json);
-                    return;
-                }else {
-                    $json = [
-                        "message" => "certo"
-                    ];
-                    echo json_encode($json);
-                    return;
-                }
             }
 
-            if(strlen($data["primaryData"]) == 14) {
+            if($person->getDataUser($user->getId())) {
                 $json = [
-                    "type" => "Company"
+                    "id" => $person->getId(),
+                    "idUser" => $person->getIdUser()
                 ];
-
                 echo json_encode($json);
                 return;
             }

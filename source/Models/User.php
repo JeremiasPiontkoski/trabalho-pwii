@@ -190,19 +190,19 @@ class User
             return false;
         }else {
             $user = $stmt->fetch();
-            return $user;
-            /* if(!password_verify($password, $user->password)){
+            if(!password_verify($password, $user->password)){
                 $this->message = "Usuário e/ou Senha não cadastrados!";
                 return false;
-            } */
+            }
         } 
-    
 
-        /* $this->id = $user->id;
+        $this->id = $user->id;
         $this->name = $user->name;
         $this->email = $user->email;
+        $this->password = $user->password;
         $this->description = $user->description;
-        $this->message = "Usuário Autorizado, redirect to APP!"; */
+        $this->typeUser = $user->typeUser;
+
         return true;
     }
 

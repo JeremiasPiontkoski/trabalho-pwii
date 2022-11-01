@@ -20,12 +20,12 @@
                 </header>
                 <form id="form-login">
                     <div class="line">
-                        <label for="primaryData">Email:</label>
-                        <input type="text" name="primaryData" id="primaryData" placeholder="Email">
+                        <label for="email">Email:</label>
+                        <input type="text" name="email" id="email" placeholder="Email" value="teste3@gmail.com">
                     </div>
                     <div class="line">
                         <label for="password">Senha:</label>
-                        <input type="password" name="password" id="password" placeholder="Senha">
+                        <input type="password" name="password" id="password" placeholder="Senha" value="testando123">
                     </div>
                     <button>Login</button>
                     <div class="data-error">

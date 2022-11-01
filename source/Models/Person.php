@@ -73,7 +73,7 @@ class Person
         $this->language = $language;
     }
 
-    public function getDataUser(int $idUser)
+    public function getDataUser($idUser)
     {
         $query = "SELECT * FROM person WHERE idUser LIKE :idUser";
         $stmt = Connect::getInstance()->prepare($query);
@@ -83,15 +83,25 @@ class Person
 
         if ($stmt->rowCount() == 0) {
             return false;
-        }else {
-            $user = $stmt->fetch();
-            $this->id = $user->id;
-            $this->idUser = $user->idUser;
-            $this->cpf = $user->getCpf;
-            $this->linguagem = $user->linguagem;
-            return true;
         }
+
+        $person = $stmt->fetch();
+
+        $this->id = $person->id;
+        $this->idUser = $person->idUser;
+        $this->cpf = $person->cpf;
+        $this->language = $person->language;
         
+        return true;
+        
+    }
+
+    public function validateTeste($id) {
+        if($id == 25) {
+            return true;
+        }else {
+            return false;
+        }
     }
 
     public function insert() : bool
