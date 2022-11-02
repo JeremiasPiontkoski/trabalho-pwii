@@ -50,6 +50,9 @@
                                 });
                                 const user = await data.json();
                                 console.log(user);  
+                                
+                                user.type == "success" ? window.location.href = "home" : false
+
                                 /* if(user) {
                                     if(user.type === "success"){
                                         window.location.href = "home";

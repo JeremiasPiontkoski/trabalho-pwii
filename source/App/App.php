@@ -16,6 +16,7 @@ class App
 
     private $view;
     private $languages;
+    private $repositories;
 
     public function __construct()
     {
@@ -23,8 +24,8 @@ class App
         $languages = new Language();
         $this->languages = $languages->selectAll();
 
-        $languages = new Language();
-
+        $repositories = new Repository();
+        $this->repositories = $repositories->selectAll();
 
         $this->view = new Engine(CONF_VIEW_APP,'php');
         //$this->view = new Engine(__DIR__ . "/../../themes/web",'php');
@@ -58,43 +59,9 @@ class App
                 return;
             }
 
-           
-
-           /*  $category = new Category();
-            
-            $categories = $category->selectByLanguage($data["language"]);
-        
-            $json = [
-                "name" => $data["name"],
-                "message" => "true",
-                "language" => $data["language"],
-                "description" => $data["description"],
-                "return" => $categories->id
-            ];
-            echo json_encode($json);
-            return;  */
-
-            
-        
-/* $json = [
-    "name" => $repository->getDescricao(),
-    "message" => $repository->getIdCategory(),
-    "type" => "success"
-];
-echo json_encode($json);
-return;  */
-
-
             $language = new Language();
             $languages = $language->selectByLanguage($data["language"]);
-
-               /*  $repository = new Repository(
-                    null,
-                    $data["name"],
-                    $data["language"],
-                    $data["language"],
-                    $categories->id
-                ); */
+        
                 $repository = new Repository(
                     null,
                     $data["name"],
@@ -112,73 +79,44 @@ return;  */
                     return;
                 }
 
-    
-
-//                $json = [
-//                    "name" => $data["name"],
-//                    "language" => $data["language"],
-//                    "description" => $data["language"],
-//                    "idCategory" => $categories->id
-//                ];
-
                 echo json_encode($repository->getName());
                 return;
 
-             
-
-             /*     if(!$repository->insert()){
-                $json = [
-                    "message" => "Não foi possível cadastrar, tente novamente!",
-                    "type" => "error"
-                ];
-                echo json_encode($json);
-                return;
-            }
-            else {
-                $json = [
-                    "name" => $data["name"],
-                    "message" => $repository->getMessage(),
-                    "type" => "success"
-                ];
-                echo json_encode($json);
-                return;
-            }  */
+        
         }
-        echo $this->view->render("register-repository");
+        
+        echo $this->view->render("register-repository",[
+            "languages" => $this->languages
+        ]);
     }
 
     public function repositories(?array $data) : void
     {
         if(!empty($data)){
             $repository = new Repository();
-            $repositories = $repository->findByidCategory($data["idCategory"]);
+            $repositories = $repository->findByIdLanguage($data["idLanguage"]);
         }
         echo $this->view->render(
             "filterRepositories",[
-                "categories" => $this->categories,
+                "languages" => $this->languages,
                 "repositories" => $repositories
             ]
         );
     }
 
     public function showRepositories() : void
-    {
-            $repository = new Repository();
-            $repositories = $repository->selectAll();
-        
+    {        
         echo $this->view->render("repositories", 
         [
-            "categories" => $this->categories,
-            "repositories" => $repositories
+            "languages" => $this->languages,
+            "repositories" => $this->repositories
         ]);
     }
 
     public function home() {
-        $repository = new Repository();
-        $repositories = $repository->selectAll();
         echo $this->view->render("home", 
     [
-        "repositories" => $repositories
+        "repositories" => $this->repositories
     ]);
     }
 }

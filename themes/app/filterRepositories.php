@@ -13,11 +13,11 @@
             <ul>
             <?php
         
-            foreach($categories as $category) {
+            foreach($languages as $language) {
         ?>
                 <li>
                    
-        <a href="<?= url("repositorios/{$category->id}"); ?>"><?= $category->language; ?></a>
+        <a href="<?= url("repositorios/{$language->id}"); ?>"><?= $language->language; ?></a>
         <?php
         }
         ?> 
@@ -29,7 +29,9 @@
     <section class="box-container">
 
         <?php
-        foreach ($repositories as $repo) {        
+        if($repositories) {
+            foreach ($repositories as $repo) {        
+        }
         ?>
 
         <div class="content">
@@ -38,11 +40,11 @@
                     <p><?= $repo->name; ?></p>
                 </div>
                 <div class="container-title">
-                    <p><?= $repo->linguagem; ?></p>
+                    <p><?= $repo->language; ?></p>
                 </div>
             </div>
             <div class="container-content">
-                <p><?= $repo->descricao; ?></p>              
+                <p><?= $repo->description; ?></p>              
             </div>
             <div class="container-bottom">
                 <span>000</span>

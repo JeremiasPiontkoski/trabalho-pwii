@@ -55,6 +55,18 @@ CREATE TABLE IF NOT EXISTS `company` (
     FOREIGN KEY(`type`) REFERENCES `type` (`id`)ON DELETE NO ACTION ON UPDATE NO ACTION
 )ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
+CREATE TABLE IF NOT EXISTS `repositories` (
+    `id` int(11) NOT NULL AUTO_INCREMENT,
+    `name`  VARCHAR(100) NOT NULL,
+    `language` VARCHAR(100) NOT NULL,
+    `description` VARCHAR(250) NOT NULL,
+    `idLanguage` int(11) NOT NULL,
+    PRIMARY KEY(`id`),
+    FOREIGN KEY(`idLanguage`) REFERENCES `languages` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+)ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
 INSERT INTO languages (language) VALUES ("JavaScript"), ("Java"), ("Php"), ("Python");
 
 INSERT INTO type (type) VALUES ("Criação de software"), ("Programação Web"), ("Programação Mobile");
+
+INSERT INTO repositories (id, name, language, description, idLanguage) VALUES (null, "Repositorio teste", "Java", "Descricao teste", 2);

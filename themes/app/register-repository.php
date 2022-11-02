@@ -22,11 +22,14 @@
                     </div>
                     <div class="container-inputs">
                         <select name="language" id="selectUser">
-                            <option value="">Escolha...</option>
-                            <option value="JavaScript">JavaScript</option>
-                            <option value="Java">Java</option>
-                            <option value="Php">Php</option>
-                            <option value="Python">Python</option>
+                            <option value="">Escolha...</option>                    
+                            <?php
+                            foreach($languages as $language) {
+                                ?>
+                                <option value="<?= $language->language ?>"><?= $language->language ?></option>
+                                <?php
+                            }
+                            ?>
                         </select>
                     </div>
                     <div class="container-inputs">

@@ -7,11 +7,11 @@
             <ul>
             <?php
         
-            foreach($categories as $category) {
+            foreach($languages as $language) {
         ?>
                 <li>
                    
-        <a href="<?= url("repositorios/{$category->id}"); ?>"><?= $category->language; ?></a>
+        <a href="<?= url("repositorios/{$language->id}"); ?>"><?= $language->language; ?></a>
         <?php
         }
         ?> 
@@ -48,10 +48,10 @@
                         <p><?= $repository->name; ?></p>
                     </div>
                     <div class="box-content">
-                        <p><?= $repository->linguagem ?></p>
+                        <p><?= $repository->language ?></p>
                     </div>
                     <div class="box-content">
-                        <p><?=$repository->descricao ?></p>
+                        <p><?=$repository->description ?></p>
                     </div>
                     <div class="box-bottom">
                         <a href="#">Favoritar</a>

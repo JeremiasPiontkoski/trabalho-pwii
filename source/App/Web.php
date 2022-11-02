@@ -228,7 +228,7 @@ class Web
             if(in_array("",$data)){
                 $json = [
                     "message" => "Informe e-mail e senha para entrar!",
-                    "type" => "warning"
+                    "type" => "danger"
                 ];
                 echo json_encode($json);
                 return;
@@ -240,8 +240,8 @@ class Web
 
             if(!$user->validate($data["email"], $data["password"])) {
                 $json = [
-                "message" => "Usuário ou senha inválidos",
-                "senha" => $data['password']
+                "message" => "Usuário e/ou senha inválidos",
+                "type" => "danger"
                 ];
                 echo json_encode($json);
                 return;
@@ -249,8 +249,19 @@ class Web
 
             if($person->getDataUser($user->getId())) {
                 $json = [
-                    "id" => $person->getId(),
-                    "idUser" => $person->getIdUser()
+                    "message" => "Acesso disponível",
+                    "type" => "success",
+                    "typeUser" => "person"
+                ];
+                echo json_encode($json);
+                return;
+            }
+
+            if($company->getDataCompany($user->getId())) {
+                $json = [
+                    "message" => "Acesso disponível",
+                    "type" => "success",
+                    "typeUser" => "company"
                 ];
                 echo json_encode($json);
                 return;

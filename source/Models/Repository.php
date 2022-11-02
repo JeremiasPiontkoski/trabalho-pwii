@@ -11,7 +11,7 @@ class Repository
     private $name;
     private $language;
     private $description;
-    private $idCategory;
+    private $idLanguage;
     private $message;
 
     /**
@@ -30,17 +30,17 @@ class Repository
         $this->name = $name;
     }
 
-    public function getIdCategory()
+    public function getIdlanguage()
     {
-        return $this->idCategory;
+        return $this->idLanguage;
     }
 
     /**
      * @param mixed $name
      */
-    public function setIdCategory($idCategory): void
+    public function setIdLanguage($idLanguage): void
     {
-        $this->idCategory = $idCategory;
+        $this->idLanguage = $idLanguage;
     }
 
     /**
@@ -114,37 +114,34 @@ class Repository
         string $name = NULL,
         string $language = NULL,
         string $description = NULL,
-        int $idCategory = NULL
+        int $idLanguage = NULL
     )
     {
         $this->id = $id;
         $this->name = $name;
         $this->language = $language;
         $this->description = $description;
-        $this->idCategory = $idCategory;
+        $this->idLanguage = $idLanguage;
     }
 
     public function insert() : bool{
-//        $query = "INSERT INTO repositories VALUES (NULL, :name, :language, :description)";
-//        $query = "INSERT INTO repositories (name, linguagem, descricao) VALUES (:name, :linguagem, :descricao)";
-        $query = "INSERT INTO repositories (name, linguagem, descricao, idCategory) VALUES (:name, :language, :description, :idCategory)";
+        $query = "INSERT INTO repositories (name, language, description, idLanguage) VALUES (:name, :language, :description, :idLanguage)";
         $stmt = Connect::getInstance()->prepare($query);
         $stmt->bindParam(":name", $this->name);
         $stmt->bindParam(":language", $this->language);
         $stmt->bindParam(":description", $this->description);
-        $stmt->bindParam(":idCategory", $this->idCategory);
+        $stmt->bindParam(":idLanguage", $this->idLanguage);
         $stmt->execute();
 
         $this->message = "Repositório cadastrado com sucesso!";
-//        $this->message = "Repositório cadastrado com sucesso!";
         return true;
     }
 
-    public function findByidCategory(int $idCategory)
+    public function findByIdLanguage(int $idLanguage)
     {
-        $query = "SELECT * FROM repositories WHERE idCategory = :idCategory";
+        $query = "SELECT * FROM repositories WHERE idLanguage = :idLanguage";
         $stmt = Connect::getInstance()->prepare($query);
-        $stmt->bindParam(":idCategory",$idCategory);
+        $stmt->bindParam(":idLanguage",$idLanguage);
         $stmt->execute();
         if($stmt->rowCount() == 0){
             return false;

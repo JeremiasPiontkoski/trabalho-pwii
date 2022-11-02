@@ -37,7 +37,7 @@ $route->get("/contato","Web:contact");
 $route->post("/contato","Web:contact");
 
 
-$route->get("/repositorios/{idCategory}", "App:repositories");
+$route->get("/repositorios/{idLanguage}", "App:repositories");
 $route->get("/repositorios", "App:showRepositories");
 
 /**

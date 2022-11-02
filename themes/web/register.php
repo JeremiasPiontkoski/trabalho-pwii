@@ -81,9 +81,6 @@
 
                     <div class="container-inputs forCompany">
                         <select name="typeDevelopment" id="typeDevelopment" class="forCompany">
-                            <!-- <option value="1">Web</option>
-                            <option value="2">Mobile</option>
-                            <option value="3">Software</option> -->
                             <option value="">Escolha</option>
                             <?php
                             foreach($types as $type) {

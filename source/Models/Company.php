@@ -79,4 +79,27 @@ class Company
         $stmt->execute();
         return true;
     }
+
+    public function getDataCompany($idUser)
+    {
+        $query = "SELECT * FROM company WHERE idUser LIKE :idUser";
+        $stmt = Connect::getInstance()->prepare($query);
+
+        $stmt->bindParam(":idUser", $idUser);
+        $stmt->execute();
+
+        if ($stmt->rowCount() == 0) {
+            return false;
+        }
+
+        $company = $stmt->fetch();
+
+        $this->id = $company->id;
+        $this->idUser = $company->idUser;
+        $this->cnpj = $company->cnpj;
+        $this->type = $company->type;
+        
+        return true;
+        
+    }
 }
