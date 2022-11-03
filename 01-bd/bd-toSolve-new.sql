@@ -12,9 +12,9 @@ INSERT INTO `typeUsers` VALUES(null, "person"), (null, "company");
 CREATE TABLE IF NOT EXISTS `users` (
     `id` int(11) NOT NULL AUTO_INCREMENT,
     `name` varchar(50) NOT NULL,
-    `email` varchar(50) NOT NULL,
-    `password` varchar(50) NOT NULL,
-    `description` varchar(50) NOT NULL,
+    `email` varchar(100) NOT NULL,
+    `password` varchar(100) NOT NULL,
+    `description` varchar(100) NOT NULL,
     `typeUser` int(11) NOT NULL,
     `create_at` timestamp NOT NULL DEFAULT current_timestamp(),
     `update_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
