@@ -1,3 +1,10 @@
+
+<?php
+if(!$_COOKIE["user"]){
+    header("Location: login");
+}
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>

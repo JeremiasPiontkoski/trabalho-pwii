@@ -119,4 +119,8 @@ class App
         "repositories" => $this->repositories
     ]);
     }
+
+    public function logout() {
+        setcookie("user", "type", time() -60);
+    }
 }

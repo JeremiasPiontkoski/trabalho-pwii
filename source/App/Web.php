@@ -253,6 +253,11 @@ class Web
                     "type" => "success",
                     "typeUser" => "person"
                 ];
+
+                
+
+                setcookie("user", "person", time() + 30);
+
                 echo json_encode($json);
                 return;
             }

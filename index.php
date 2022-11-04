@@ -40,6 +40,9 @@ $route->post("/contato","Web:contact");
 $route->get("/repositorios/{idLanguage}", "App:repositories");
 $route->get("/repositorios", "App:showRepositories");
 
+$route->get("/sair", "App:logout");
+$route->post("/sair", "App:logout");
+
 /**
  * App Routs
  */
