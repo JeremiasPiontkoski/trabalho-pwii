@@ -12,7 +12,8 @@ class User
     private $password;
     private $description;
     private $typeUser;
-    private $message;
+
+    private $image;
 
 
     public function getDescription() {
@@ -23,13 +24,6 @@ class User
         $this->description = $description;
     }
 
-     /**
-     * @return mixed
-     */
-    public function getMessage()
-    {
-        return $this->message;
-    }
 
     public function getTypeUser() {
         return $this->typeUser;
@@ -37,6 +31,14 @@ class User
 
     public function setTypeUser($type) {
         $this->typeUser = $type;
+    }
+
+    public function getImage() {
+        return $this->image;
+    }
+
+    public function setImage($image) {
+        $this->image = $image;
     }
 
     /**
@@ -110,7 +112,8 @@ class User
         string $email = NULL,
         string $password = NULL,
         string $description = NULL,
-        int $typeUser = NULL
+        int $typeUser = NULL,
+        string $image = NULL
     )
     {
         $this->id = $id;
@@ -119,6 +122,7 @@ class User
         $this->password = $password;
         $this->description = $description;
         $this->typeUser = $typeUser;
+        $this->image = $image;
     }
  /**
      * @return array|false
@@ -186,12 +190,10 @@ class User
         $stmt->execute();
 
         if($stmt->rowCount() == 0){
-            $this->message = "Usuário e/ou Senha não cadastrados!";
             return false;
         }else {
             $user = $stmt->fetch();
             if(!password_verify($password, $user->password)){
-                $this->message = "Usuário e/ou Senha não cadastrados!";
                 return false;
             }
         } 
@@ -202,6 +204,7 @@ class User
         $this->password = $user->password;
         $this->description = $user->description;
         $this->typeUser = $user->typeUser;
+        $this->image = $user->profileImage;
 
         $arrayUser = [
             "id" => $this->id,
@@ -209,7 +212,8 @@ class User
             "email" => $this->email,
             "password" => $this->password,
             "description" => $this->description,
-            "typeUser" => $this->typeUser
+            "typeUser" => $this->typeUser,
+            "image" => $this->image
         ];
 
         session_start();
@@ -231,10 +235,32 @@ class User
         $stmt->bindParam(":description", $this->description);
         $stmt->bindParam(":typeUser", $this->typeUser);
         $stmt->execute();
-        $this->message = "Usuário cadastrado com sucesso!";
 
         return Connect::getInstance()->lastInsertId();
         
+    }
+
+    public function update() 
+    {
+        $query = "UPDATE users SET profilePicture = :profilePicture WHERE id = :id";
+        $stmt = Connect::getInstance()->prepare($query);
+        $stmt->bindParam(":profilePicture", $this->image);
+        $stmt->bindParam(":id", $this->id);
+        $stmt->execute();
+
+        $arrayUser = [
+            "id" => $this->id,
+            "name" => $this->name,
+            "email" => $this->email,
+            "password" => $this->password,
+            "description" => $this->description,
+            "typeUser" => $this->typeUser,
+            "image" => $this->image
+        ];
+
+        session_start();
+        $_SESSION["user"] = $arrayUser;
+
     }
 
    
@@ -247,7 +273,6 @@ class User
         $stmt->bindParam(":idUser", $idInsert);
         $stmt->execute();
 
-        $this->message = "Usuário cadastrado com sucesso!";
         return true;
     }
 }

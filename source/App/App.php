@@ -40,12 +40,48 @@ class App
         echo $this->view->render("repositories");
     } */
 
-    public function list () : void 
+    public function profile () : void 
     {
         echo $this->view->render("list",
     [
         "user" => $_SESSION["user"]
     ]);
+    }
+
+    public function editProfile(array $data) {
+        if(!empty($data)) {
+           /*  if(!empty($_FILES['image']['tmp_name'])) {
+                $upload = uploadImage($_FILES['image']);
+                unlink($_SESSION["user"]["image"]);
+            }else {
+                $upload = $_SESSION["user"]["image"];
+            } */
+
+            $json = [
+                "message" => "testando"
+            ];
+
+           /*  $user = new User(
+                $_SESSION["user"]["id"],
+                $_SESSION["user"]["name"],
+                $_SESSION["user"]["email"],
+                null,
+                $_SESSION["user"]["description"],
+                $_SESSION["user"]["typeUser"],
+                $upload
+            );
+
+            $user->update();
+
+            $json = [
+                "message" => "imagem trocada com sucesso",
+                "name" => $user->getName(),
+                "email" => $user->getEmail(),
+                "image" => url($user->getImage())
+            ]; */
+            echo json_encode($json);
+            return;
+        }
     }
 
     public function createPDF () : void

@@ -16,6 +16,7 @@ CREATE TABLE IF NOT EXISTS `users` (
     `password` varchar(100) NOT NULL,
     `description` varchar(100) NOT NULL,
     `typeUser` int(11) NOT NULL,
+    `profilePicture` varchar(255) DEFAULT NULL,
     `create_at` timestamp NOT NULL DEFAULT current_timestamp(),
     `update_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
     PRIMARY KEY (`id`),

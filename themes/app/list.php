@@ -9,8 +9,31 @@
 <body>
     <h1>Lista Clientes</h1>
 
-    <?=$user["name"];?>
+    <?php var_dump($_SESSION["user"]) ?>
+    <?=$user["name"];?><br>
+    <?= $user["email"];?><br>
 
-    <input type="file" name="avatar" id="avatar">
+    <form enctype="multipart/form-data" method="post" id="form">
+        <label for="image">Imagem:</label>
+        <input type="file" name="image" id="image">
+
+
+        <button type="submit">Enviar</button>
+    </form>
+
+    <script type="text/javascript" async>
+        const form = document.querySelector("#form");
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+        const dataUser = new FormData(form);
+        const data = await fetch("<?= url("app/profile"); ?>",{
+            method: "POST",
+            body: dataUser,
+        });
+        const user = await data.json();
+        console.log(user);
+        });
+    </script>
+
 </body>
 </html>

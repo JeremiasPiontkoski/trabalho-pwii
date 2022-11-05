@@ -46,7 +46,8 @@ $route->get("/repositorios", "App:showRepositories");
 /* LOGOUT */
 $route->get("/sair", "App:logout");
 
-$route->get("/listar","App:list");
+$route->get("/profile","App:profile");
+$route->post("/profile", "App:editProfile");
 /**
  * App Routs
  */
