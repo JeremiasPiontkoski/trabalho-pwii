@@ -204,7 +204,6 @@ class User
         $this->password = $user->password;
         $this->description = $user->description;
         $this->typeUser = $user->typeUser;
-        $this->image = $user->profileImage;
 
         $arrayUser = [
             "id" => $this->id,
@@ -212,8 +211,7 @@ class User
             "email" => $this->email,
             "password" => $this->password,
             "description" => $this->description,
-            "typeUser" => $this->typeUser,
-            "image" => $this->image
+            "typeUser" => $this->typeUser
         ];
 
         session_start();
@@ -258,8 +256,9 @@ class User
             "image" => $this->image
         ];
 
-        session_start();
         $_SESSION["user"] = $arrayUser;
+
+        return true;
 
     }
 

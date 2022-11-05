@@ -14,15 +14,26 @@
     <?= $user["email"];?><br>
 
     <form enctype="multipart/form-data" method="post" id="form">
-        <label for="image">Imagem:</label>
-        <input type="file" name="image" id="image">
 
+    <?php
+              if(!empty($user["image"])):
+            ?>
+            
+            <img src="<?= url($user["image"]); ?>" id="image">
+            
+            <?php
+              endif;
+            ?>
+
+        <input class="form-control" type="file" name="image" id="image">
+        <input type="text" name="identificador" id="">
 
         <button type="submit">Enviar</button>
     </form>
 
     <script type="text/javascript" async>
         const form = document.querySelector("#form");
+        const image = document.querySelector("#image");
         form.addEventListener("submit", async (e) => {
             e.preventDefault();
         const dataUser = new FormData(form);
@@ -31,7 +42,12 @@
             body: dataUser,
         });
         const user = await data.json();
-        console.log(user);
+        if(user) {
+            console.log(user);
+            image.setAttribute("src", user.image);
+            location.reload();
+        }
+    
         });
     </script>
 

@@ -50,18 +50,15 @@ class App
 
     public function editProfile(array $data) {
         if(!empty($data)) {
-           /*  if(!empty($_FILES['image']['tmp_name'])) {
+            if(!empty($_FILES['image']['tmp_name'])) {
                 $upload = uploadImage($_FILES['image']);
                 unlink($_SESSION["user"]["image"]);
             }else {
                 $upload = $_SESSION["user"]["image"];
-            } */
+            } 
 
-            $json = [
-                "message" => "testando"
-            ];
 
-           /*  $user = new User(
+           $user = new User(
                 $_SESSION["user"]["id"],
                 $_SESSION["user"]["name"],
                 $_SESSION["user"]["email"],
@@ -74,13 +71,9 @@ class App
             $user->update();
 
             $json = [
-                "message" => "imagem trocada com sucesso",
-                "name" => $user->getName(),
-                "email" => $user->getEmail(),
-                "image" => url($user->getImage())
-            ]; */
+                "message" => "Imagem alterada com sucesso"
+            ];
             echo json_encode($json);
-            return;
         }
     }
 
