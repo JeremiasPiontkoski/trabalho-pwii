@@ -1,8 +1,6 @@
 <?php
-if(!$_COOKIE["user"]){
-    header("Location: login");
-}
   $this->layout("_theme");
+
 ?>
     
     <div class="nav-links">
@@ -14,7 +12,7 @@ if(!$_COOKIE["user"]){
         ?>
                 <li>
                    
-        <a href="<?= url("repositorios/{$language->id}"); ?>"><?= $language->language; ?></a>
+        <a href="<?= url("app/repositorios/{$language->id}"); ?>"><?= $language->language; ?></a>
         <?php
         }
         ?> 

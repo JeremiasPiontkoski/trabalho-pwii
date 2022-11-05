@@ -1,9 +1,4 @@
 
-<?php
-if(!$_COOKIE["user"]){
-    header("Location: login");
-}
-?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -59,7 +54,7 @@ if(!$_COOKIE["user"]){
                                 e.preventDefault();
                                 const dataUser = new FormData(form);
                                 // enviar para a rota já definida
-                                const data = await fetch("<?= url("cadastroRepositorio"); ?>",{
+                                const data = await fetch("<?= url("app/cadastroRepositorio"); ?>",{
                                     method: "POST",
                                     body: dataUser,
                                 });
@@ -69,7 +64,7 @@ if(!$_COOKIE["user"]){
                                 if(user) {
                                     if(user.type == "success") {
                                         console.log(`${user.name}`)
-                                        window.location.href = "home";
+                                        window.location.href = "<?= url("app"); ?>";
                                     }else {
                                         message.innerHTML = user.message; 
                                         message.classList.remove("warning", "error");

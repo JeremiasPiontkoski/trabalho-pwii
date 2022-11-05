@@ -6,48 +6,52 @@ require __DIR__ . "/vendor/autoload.php";
 use CoffeeCode\Router\Router;
 
 $route = new Router(CONF_URL_BASE, ":");
-//$route = new Router('localhost/acme-tarde', ":"); // Route para localhost
 
-/**
- * Web Routes
- */
+/********************************
+*      Web Routes               *
+********************************/
 
+/* HOME */
 $route->namespace("Source\App");
 $route->get("/","Web:home");
 $route->get("/sobre","Web:about");
 
-$route->post("/login", "Web:entrada");
-$route->get("/login", "Web:entrada");
+/* LOGIN */
+$route->post("/login", "Web:login");
+$route->get("/login", "Web:login");
 
-/* $route->post("/cadastro", "Web:register");
-$route->get("/cadastro", "Web:register"); */
-
+/* REGISTER */
 $route->post("/registro", "Web:register");
 $route->get("/registro", "Web:register");
 
-$route->post("/home", "App:home");
-$route->get("/home", "App:home");
-
-$route->post("/cadastroRepositorio", "App:registerRepository");
-$route->get("/cadastroRepositorio", "App:registerRepository");
-
-
-
+/* RANDOM */
 $route->get("/contato","Web:contact");
 $route->post("/contato","Web:contact");
 
+/********************************
+ * App Routes                   *
+ *******************************/
 
+$route->group("/app");
+$route->get("/", "App:home");
+
+/* REGISTER REPOSITORY */
+$route->post("/cadastroRepositorio", "App:registerRepository");
+$route->get("/cadastroRepositorio", "App:registerRepository");
+
+/* SHOW REPOSITORIES */
 $route->get("/repositorios/{idLanguage}", "App:repositories");
 $route->get("/repositorios", "App:showRepositories");
 
+/* LOGOUT */
 $route->get("/sair", "App:logout");
-$route->post("/sair", "App:logout");
 
+$route->get("/listar","App:list");
 /**
  * App Routs
  */
 
-$route->group("/app"); // agrupa em /app
+/* $route->group("/app"); // agrupa em /app
 $route->get("/","App:home");
 $route->get("/listar","App:list");
 $route->get("/pdf","App:createPDF");
@@ -55,7 +59,7 @@ $route->group(null); // desagrupo do /app
 
 $route->group("/admin"); // agrupa em /admin
 $route->get("/","Adm:home");
-$route->group(null); // desagrupo do /admin
+$route->group(null); // desagrupo do /admin */
 
 /*
  * Erros Routes

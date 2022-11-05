@@ -20,6 +20,10 @@ class App
 
     public function __construct()
     {
+        session_start();
+        if(empty($_SESSION["user"])) {
+            header("Location:http://www.localhost/trabalho-pwii/login");
+        }
 
         $languages = new Language();
         $this->languages = $languages->selectAll();
@@ -38,7 +42,10 @@ class App
 
     public function list () : void 
     {
-        require __DIR__ . "/../../themes/app/list.php";
+        echo $this->view->render("list",
+    [
+        "user" => $_SESSION["user"]
+    ]);
     }
 
     public function createPDF () : void
@@ -116,11 +123,14 @@ class App
     public function home() {
         echo $this->view->render("home", 
     [
+        "user" => $_SESSION["user"],
         "repositories" => $this->repositories
     ]);
     }
 
     public function logout() {
-        setcookie("user", "type", time() -60);
+        session_destroy();
+        setcookie("user", "Logout", time() -3600, "/");
+        header("Location:http://www.localhost/trabalho-pwii/login");
     }
 }

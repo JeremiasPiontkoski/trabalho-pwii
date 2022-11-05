@@ -221,7 +221,7 @@ class Web
     ]);
     }
 
-    public function entrada(?array $data) : void 
+    public function login(?array $data) : void 
     {
         if(!empty($data)){
 
@@ -254,10 +254,6 @@ class Web
                     "typeUser" => "person"
                 ];
 
-                
-
-                setcookie("user", "person", time() + 30);
-
                 echo json_encode($json);
                 return;
             }
@@ -275,7 +271,7 @@ class Web
         echo $this->view->render("login",["eventName" => CONF_SITE_NAME]);
     }
 
-    public function login(?array $data) : void
+    /* public function login(?array $data) : void
     {
         if(!empty($data)){
 
@@ -345,5 +341,5 @@ class Web
         }
 
         echo $this->view->render("login",["eventName" => CONF_SITE_NAME]);
-    }
+    } */
 }

@@ -7,9 +7,9 @@
     <title>To Solve</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
     <!-- <link rel='stylesheet' type='text/css' media='screen' href='assets/app/css/styles.css'> -->
-    <link rel="stylesheet" href="assets/app/css/style.css">
-    <link rel="stylesheet" href="assets/app/css/style-repositories.css">
-    <link rel="stylesheet" href="assets/app/css/style-specific-repository.css">
+    <link rel="stylesheet" href="<?= url("assets/app/") ?>css/style.css">
+    <link rel="stylesheet" href="<?= url("assets/app/") ?>css/style-repositories.css">
+    <link rel="stylesheet" href="<?= url("assets/app/") ?>css/style-specific-repository.css">
     <?php
     if ($this->section("css")) {
         echo $this->section("css");
@@ -47,17 +47,17 @@
                         </li>
 
                         <li class="nav-item">
-                            <span data-bs-dismiss="offcanvas"><a class="nav-link" href="home">Home</a></span>
+                            <span data-bs-dismiss="offcanvas"><a class="nav-link" href="<?= url("app") ?>">Home</a></span>
                         </li>                       
                         
                         <li class="nav-item">
-                            <span data-bs-dismiss="offcanvas"><a class="nav-link" href="repositorios">Repositórios</a></span>
+                            <span data-bs-dismiss="offcanvas"><a class="nav-link" href="<?= url("app/repositorios") ?>">Repositórios</a></span>
                         </li>
                         <li class="nav-item">
                             <span data-bs-dismiss="offcanvas"><a class="nav-link" href="#contact">Contato</a></span>
                         </li>
                         <li class="nav-item">
-                            <span data-bs-dismiss="offcanvas"><a class="nav-link" href="<?= url("login") ?>">Logout</a></span>
+                            <span data-bs-dismiss="offcanvas"><a class="nav-link" href="<?= url("app/sair") ?>">Logout</a></span>
                         </li>
                     </ul>
                 </div>

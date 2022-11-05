@@ -1,7 +1,4 @@
 <?php
-    if(!$_COOKIE["user"]){
-        header("Location: login");
-    }
   $this->layout("_theme");
 ?>
 
@@ -16,9 +13,10 @@
             </div>
             <div class="box-bottom">
                 <div class="content">
-                    <p>Name</p>
-                    <p>Email</p>
-                    <p>Linguagem</p>                   
+                    
+                    <p><?=$user["name"];?></p>
+                    <p><?=$user["email"];?></p>
+                    <p><?=$user["description"];?></p>                   
                 </div>
                 <div class="btn-edit">
                     <button>
@@ -43,7 +41,7 @@
             }
                ?>
                 <div class="box-bottom">
-                    <a href="cadastroRepositorio">Criar Novo</a>
+                    <a href="<?php url() ?>app/cadastroRepositorio">Criar Novo</a>
                 </div>
             </div>
             <div class="box-repositories">

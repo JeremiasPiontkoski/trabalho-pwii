@@ -8,5 +8,9 @@
 </head>
 <body>
     <h1>Lista Clientes</h1>
+
+    <?=$user["name"];?>
+
+    <input type="file" name="avatar" id="avatar">
 </body>
 </html>

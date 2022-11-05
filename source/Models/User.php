@@ -203,6 +203,18 @@ class User
         $this->description = $user->description;
         $this->typeUser = $user->typeUser;
 
+        $arrayUser = [
+            "id" => $this->id,
+            "name" => $this->name,
+            "email" => $this->email,
+            "password" => $this->password,
+            "description" => $this->description,
+            "typeUser" => $this->typeUser
+        ];
+
+        session_start();
+        $_SESSION["user"] = $arrayUser;
+
         return true;
     }
 
