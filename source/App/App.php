@@ -42,9 +42,13 @@ class App
 
     public function profile () : void 
     {
-        echo $this->view->render("list",
+        $person = new Person();
+        $personData = $person->getDataUser($_SESSION['user']["id"]);
+        echo $this->view->render("profile",
     [
-        "user" => $_SESSION["user"]
+        "user" => $_SESSION["user"],
+        "languages" => $this->languages,
+        "id" => $personData
     ]);
     }
 
@@ -57,13 +61,12 @@ class App
                 $upload = $_SESSION["user"]["image"];
             } 
 
-
            $user = new User(
                 $_SESSION["user"]["id"],
-                $_SESSION["user"]["name"],
-                $_SESSION["user"]["email"],
+                $data["name"],
+                $data["email"],
                 null,
-                $_SESSION["user"]["description"],
+                $data["description"],
                 $_SESSION["user"]["typeUser"],
                 $upload
             );

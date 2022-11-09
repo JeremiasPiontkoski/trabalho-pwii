@@ -160,19 +160,11 @@ section.box-user .box-left .box-bottom .btn-edit {
     margin-block: 1rem;
 }
 
-section.box-user .box-left .box-bottom .btn-edit button {
-    width: 50%;
-    height: 50%;
-    background-color: var(--text-color);
-    color: var(--secundary-color);
-    border: none;
-    outline: none;
-    border-radius: 2rem;
-    font-size: 1.6rem;
-    padding-inline: .3rem;
-    padding-block: .5rem;
+section.box-user .box-left .box-bottom .btn-edit a {
+    text-decoration: none;
     text-transform: uppercase;
-    font-weight: 600;
+    font-size: 2rem;
+    color: var(--text-color);
 }
 
 section.box-user .box-right {

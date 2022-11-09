@@ -89,8 +89,6 @@ class Web
 
     public function register(?array $data){
         if(!empty($data)){
-
-
             if(in_array("", $data)) {
                 $json = [
                     "message" => "Preencha todos os campos!",

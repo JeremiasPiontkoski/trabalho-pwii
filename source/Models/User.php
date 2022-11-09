@@ -240,8 +240,11 @@ class User
 
     public function update() 
     {
-        $query = "UPDATE users SET profilePicture = :profilePicture WHERE id = :id";
+        $query = "UPDATE users SET name = :name, email = :email, description = :description, profilePicture = :profilePicture WHERE id = :id";
         $stmt = Connect::getInstance()->prepare($query);
+        $stmt->bindParam(":name", $this->name);
+        $stmt->bindParam(":email", $this->email);
+        $stmt->bindParam(":description", $this->description);
         $stmt->bindParam(":profilePicture", $this->image);
         $stmt->bindParam(":id", $this->id);
         $stmt->execute();
@@ -259,7 +262,6 @@ class User
         $_SESSION["user"] = $arrayUser;
 
         return true;
-
     }
 
    
