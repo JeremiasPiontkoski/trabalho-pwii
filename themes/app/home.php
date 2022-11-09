@@ -19,7 +19,7 @@
                     <p><?=$user["description"];?></p>                   
                 </div>
                 <div class="btn-edit">
-                    <a href="<?php url()?>profile">Editar</a>
+                <a href="<?php url() ?>app/profile">Editar</a>
                 </div>
             </div>
         </div>

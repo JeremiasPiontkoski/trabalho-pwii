@@ -15,7 +15,6 @@ class User
 
     private $image;
 
-
     public function getDescription() {
         return $this->description;
     }
@@ -204,6 +203,7 @@ class User
         $this->password = $user->password;
         $this->description = $user->description;
         $this->typeUser = $user->typeUser;
+        $this->image = $user->profilePicture;
 
         $arrayUser = [
             "id" => $this->id,
@@ -211,7 +211,8 @@ class User
             "email" => $this->email,
             "password" => $this->password,
             "description" => $this->description,
-            "typeUser" => $this->typeUser
+            "typeUser" => $this->typeUser,
+            "image"   => $this->image
         ];
 
         session_start();

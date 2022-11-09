@@ -12,6 +12,7 @@
     <?php var_dump($user) ?><br>
     <?=$user["name"];?><br>
     <?= $user["email"];?><br>
+    <?php var_dump($userPerson);?>
 
 <form enctype="multipart/form-data" method="post" id="form">
     
@@ -30,10 +31,10 @@
         <input type="text" name="description" id="description" value="<?=$user["description"]?>">
     </div>
 
-    <!-- <div class="box">
+    <div class="box">
         <label for="language">Linguagem:</label>
         <select name="language" id="selectUser">
-            <option value="">Escolha...</option>                    
+            <option value=""><?= $userPerson["language"]; ?></option>                    
                 <?php
                     foreach($languages as $language) {
                 ?>
@@ -42,12 +43,12 @@
                     }
                 ?>
         </select>
-    </div> -->
+    </div>
     
     <?php
         if(!empty($user["image"])):
     ?>     
-        <img src="<?= url($user["image"]); ?>" id="image">   
+        <img src="<?= url($user["image"]); ?>" id="imgUser">   
     <?php
         endif;
     ?>
@@ -63,7 +64,7 @@
 
     <script type="text/javascript" async>
         const form = document.querySelector("#form");
-        const image = document.querySelector("#image");
+        const image = document.querySelector("#imgUser");
         form.addEventListener("submit", async (e) => {
             e.preventDefault();
         const dataUser = new FormData(form);
@@ -74,8 +75,8 @@
         const user = await data.json();
         if(user) {
             console.log(user);
-            /* image.setAttribute("src", user.image);
-            location.reload(); */
+            console.log(user.email)
+            image.setAttribute("src", user.image);
         }
         });
     </script>

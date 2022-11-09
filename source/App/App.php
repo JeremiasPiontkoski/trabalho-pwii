@@ -47,6 +47,7 @@ class App
         echo $this->view->render("profile",
     [
         "user" => $_SESSION["user"],
+        "userPerson" => $_SESSION["userPerson"],
         "languages" => $this->languages,
         "id" => $personData
     ]);
@@ -74,7 +75,11 @@ class App
             $user->update();
 
             $json = [
-                "message" => "Imagem alterada com sucesso"
+                "id" => $user->getId(),
+                "name" => $user->getName(),
+                "email" => $user->getEmail(),
+                "description" => $user->getDescription(),
+                "image" => url($user->getImage())
             ];
             echo json_encode($json);
         }

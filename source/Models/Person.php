@@ -91,6 +91,15 @@ class Person
         $this->idUser = $person->idUser;
         $this->cpf = $person->cpf;
         $this->language = $person->language;
+
+        $arrayUser = [
+            "id" => $this->id,
+            "idUser" => $this->idUser,
+            "cpf" => $this->cpf,
+            "language" => $this->language
+        ];
+
+        $_SESSION["userPerson"] = $arrayUser;
         
         return true;
         
