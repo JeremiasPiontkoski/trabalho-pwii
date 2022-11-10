@@ -496,6 +496,26 @@ footer#footer .box ul li path[fill] {
     fill: #bbf7d0;
   }
 }
+/* MESSAGE ERROR */
+.data-error > p {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 600;
+  padding-block: 0.8rem;
+}
+
+.message.warning {
+  color: var(--primary-color);
+}
+
+.message.error {
+  color: red;
+}
+
+.message.success {
+  color: lightblue;
+}
+
 /* LOGIN */
 section#login {
   width: 100vw;
@@ -664,6 +684,125 @@ section#login .content form .not-acount a {
 .none {
   display: none;
   transition: 0.5s ease;
+}
+
+.card-register {
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.card-register form {
+  overflow: hidden;
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: #57a78f;
+  box-shadow: 0rem 1rem 4rem rgb(36, 46, 46);
+}
+.card-register form h1 {
+  overflow: hidden;
+  font-size: 2.8rem;
+  font-weight: 600;
+  padding: 1.5rem;
+  color: #198557;
+  text-transform: uppercase;
+}
+.card-register form select {
+  width: 90%;
+  min-width: 15ch;
+  border: 1px solid var(--select-border);
+  border-radius: 0.25em;
+  padding: 0.25em 0.5em;
+  font-size: 1.6rem;
+  cursor: pointer;
+  line-height: 1.1;
+  background-color: #fff;
+}
+.card-register form .container-inputs {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.card-register form .container-inputs label {
+  color: #198557;
+  font-size: 2rem;
+  font-weight: 600;
+  padding-top: 2rem;
+}
+.card-register form .container-inputs input {
+  overflow: hidden;
+  width: 90%;
+  border: none;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  font-size: 1.6rem;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  outline: none;
+}
+.card-register form .container-inputs input::placeholder {
+  font-size: 1.6rem;
+  font-weight: 500;
+}
+.card-register form .container-inputs select {
+  width: 90%;
+  min-width: 15ch;
+  border: 1px solid var(--select-border);
+  border-radius: 0.25em;
+  padding: 0.25em 0.5em;
+  font-size: 1.6rem;
+  cursor: pointer;
+  line-height: 1.1;
+  background-color: #fff;
+  margin-top: 1.5rem;
+}
+.card-register form .btn-register {
+  min-width: 40vw;
+  padding: 1.6rem 0rem;
+  margin-top: 2.5rem;
+  margin-bottom: 1.5rem;
+  border: none;
+  border-radius: 0.8rem;
+  outline: none;
+  text-transform: uppercase;
+  font-weight: 800;
+  font-size: 1.6rem;
+  letter-spacing: 0.3rem;
+  color: var(--primary-color);
+  cursor: pointer;
+}
+.card-register form .btn-register:hover {
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.card-register form .not-acount {
+  width: 100%;
+  text-align: center;
+  margin-block: 1.2rem;
+}
+.card-register form .not-acount p, .card-register form .not-acount a {
+  font-size: 2rem;
+  color: var(--text-color);
+  text-decoration: none;
+}
+.card-register form .not-acount pa:hover, .card-register form .not-acount aa:hover {
+  color: #198557;
+}
+
+@media (min-width: 992px) {
+  .card-register {
+    background-color: #198557;
+  }
+  .card-register form {
+    width: 50%;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */

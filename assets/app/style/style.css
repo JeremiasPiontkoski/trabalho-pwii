@@ -1,0 +1,130 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
+  overflow-x: hidden;
+}
+
+:root {
+  font-size: 62.5%;
+} /* GREEN-200 */
+/* GRAY-100 */
+/* GRAY-500 */
+/* GRAY-800 */
+.container-form {
+  width: 100vw;
+  min-height: 100vh;
+  background-color: #57a78f;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.container-form h1 {
+  font-size: 2rem;
+  text-transform: uppercase;
+  color: #6b7280;
+  padding: 1rem;
+}
+.container-form form {
+  width: 90%;
+  height: 100%;
+  margin-bottom: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 10px;
+}
+.container-form form .box {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 0.5rem;
+}
+.container-form form .box label {
+  font-size: 2rem;
+  font-weight: 700;
+  padding-block: 0.8rem;
+  color: #6b7280;
+}
+.container-form form .box input {
+  height: 3.2rem;
+  border: none;
+  outline: none;
+  color: #6b7280;
+  padding: 0.4rem;
+  font-size: 1.6rem;
+  border-radius: 5px;
+}
+.container-form form .box select {
+  width: 100%;
+  min-width: 15ch;
+  border: 1px solid var(--select-border);
+  border-radius: 0.25em;
+  padding: 0.25em 0.5em;
+  font-size: 1.6rem;
+  cursor: pointer;
+  line-height: 1.1;
+  background-color: #fff;
+}
+.container-form form .data-error {
+  width: 50%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-block: 1.2rem;
+}
+.container-form form .data-error p {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: red;
+}
+.container-form form .box-image {
+  width: 15rem;
+  height: 15rem;
+  background-color: white;
+  margin-top: 1rem;
+  border-radius: 100%;
+  overflow: hidden;
+}
+.container-form form button {
+  width: 75%;
+  height: 4rem;
+  outline: none;
+  border: none;
+  border-radius: 1rem;
+  font-size: 2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-block: 1.2rem;
+  background-color: #d1d5db;
+  color: #6b7280;
+  transition: 0.5s ease;
+}
+.container-form a {
+  text-decoration: none;
+  font-size: 2rem;
+  color: #1f2937;
+  transition: 0.5s ease;
+}
+.container-form a:hover {
+  color: #6b7280;
+}
+
+@media (min-width: 992px) {
+  .container-form form {
+    width: 50%;
+    background-color: #198557;
+    padding: 5rem;
+  }
+  .container-form .box label {
+    color: #f3f4f6;
+  }
+}
+
+/*# sourceMappingURL=style.css.map */

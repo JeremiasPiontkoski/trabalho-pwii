@@ -105,14 +105,6 @@ class Person
         
     }
 
-    public function validateTeste($id) {
-        if($id == 25) {
-            return true;
-        }else {
-            return false;
-        }
-    }
-
     public function insert() : bool
     {
         /* $query = "INSERT INTO person VALUES (NULL, :idUser, :cpf, :language)"; */
@@ -124,6 +116,26 @@ class Person
         $stmt->execute();
 
         $this->message = "Usuário cadastrado com sucesso!";
+        return true;
+    }
+
+    public function update()
+     {
+        $query = "UPDATE person SET language = :language WHERE idUser = :idUser";
+        $stmt = Connect::getInstance()->prepare($query);
+        $stmt->bindParam(":idUser", $this->idUser);
+        $stmt->bindParam(":language", $this->language);
+        $stmt->execute();
+
+        $arrayUser = [
+            "id" => $this->id,
+            "idUser" => $this->idUser,
+            "cpf" => $this->cpf,
+            "language" => $this->cpf
+        ];
+
+        $_SESSION["userPerson"] = $arrayUser;
+        
         return true;
     }
 }

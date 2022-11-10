@@ -21,11 +21,11 @@
                 <form id="form-login">
                     <div class="line">
                         <label for="email">Email:</label>
-                        <input type="text" name="email" id="email" placeholder="Email" value="jeremias@gmail.com">
+                        <input type="text" name="email" id="email" placeholder="Email" value="testeperson@gmail.com">
                     </div>
                     <div class="line">
                         <label for="password">Senha:</label>
-                        <input type="password" name="password" id="password" placeholder="Senha" value="123456789">
+                        <input type="password" name="password" id="password" placeholder="Senha" value="testeperson123">
                     </div>
                     <button>Login</button>
                     <div class="data-error">

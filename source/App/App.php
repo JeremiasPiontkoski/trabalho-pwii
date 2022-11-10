@@ -74,11 +74,21 @@ class App
 
             $user->update();
 
+            $person = new Person(
+                $_SESSION["userPerson"]["id"],
+                $_SESSION["userPerson"]["idUser"],
+                $_SESSION["userPerson"]["cpf"],
+                $data["language"]
+            );
+
+            $person->update();
+
             $json = [
                 "id" => $user->getId(),
                 "name" => $user->getName(),
                 "email" => $user->getEmail(),
                 "description" => $user->getDescription(),
+                "language" => $person->getLanguage(),
                 "image" => url($user->getImage())
             ];
             echo json_encode($json);

@@ -125,11 +125,15 @@ section.box-user .box-left .box-top{
 }
 
 section.box-user .box-left .box-top .radius {
-    width: 6.5rem;
-    height: 6.5rem;
+    width: 8.5rem;
+    height: 8.5rem;
     background-color: white;
-    border-radius: 3rem;
+
     margin: 1rem;
+
+    border-radius: 100%;
+
+    overflow: hidden;
 }
 
 section.box-user .box-left .box-bottom {
@@ -358,8 +362,8 @@ div.box-repositories .box-bottom > a {
     }
 
     section.box-user .box-left .box-top .radius {
-        width: 10rem;
-        height: 10rem;
+        width: 11rem;
+        height: 11rem;
         border-radius: 100%;
     }
 

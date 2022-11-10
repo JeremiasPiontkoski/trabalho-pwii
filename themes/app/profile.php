@@ -1,72 +1,107 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&family=Montserrat&display=swap');
+    </style>
+
+    <link rel="stylesheet" href="<?= url("assets/app/style/style.css") ?>">
+    <title>Edição de Perfil</title>
 </head>
 <body>
-
+<!-- 
     <?php var_dump($id) ?><br>
     <?php var_dump($user) ?><br>
     <?=$user["name"];?><br>
     <?= $user["email"];?><br>
-    <?php var_dump($userPerson);?>
+    <?php var_dump($userPerson);?> -->
 
-<form enctype="multipart/form-data" method="post" id="form">
-    
-    <div class="box">
-        <label for="name">Nome:</label>
-        <input type="text" name="name" id="name" value="<?=$user["name"]?>">
+    <div class="container-form">
+        <h1>Edição de perfil</h1>
+        <form enctype="multipart/form-data" method="post" id="form">
+            <div class="box">
+                <label for="name">Nome:</label>
+                <input type="text" name="name" id="name" value="<?=$user["name"]?>">
+            </div>
+            <div class="box">
+                <label for="email">Email:</label>
+                <input type="email" name="email" id="email" value="<?=$user["email"]?>">
+            </div>
+            <div class="box">
+                <label for="description">Descrição:</label>
+                <input type="text" name="description" id="description" value="<?=$user["description"]?>">
+            </div>
+            <div class="box">
+                <label for="language">Linguagem:</label>
+                <select name="language" id="selectUser">
+                    <?php
+                        foreach($languages as $language) {
+                    ?>
+                    <?php
+                        if(($language->id == $userPerson["language"])){
+                    ?>
+                        <option value="<?= $userPerson["language"]; ?>">
+                            <?= $language->language ?>
+                    <?php
+                        }
+                    ?>
+                        </option>
+                    <?php
+                        }
+                    ?>
+                    <?php
+                        foreach($languages as $language) {
+                    ?>
+                    <?php
+                        if(($language->id != $userPerson["language"])){
+                    ?>
+                        <option value="<?= $language->id?>">
+                        <?= $language->language ?>
+                    <?php
+                        }
+                    ?>
+                    </option>
+                    <?php
+                        }
+                    ?>
+                </select>
+            </div>
+        
+           <div class="box-image">
+           <?php
+                if(!empty($user["image"])):
+            ?>
+                <img src="<?= url($user["image"]); ?>" id="imgUser">
+            <?php
+                endif;
+            ?>
+           </div>
+            
+            <div class="box">
+                <label for="image">Foto de perfil:</label>
+                <input class="form-control" type="file" name="image" id="image">
+            </div>
+
+            <div class="data-error">
+                <p id="message"></p>
+            </div>
+
+            <button type="submit">Enviar</button>
+
+            <a href="<?= url("app") ?>">Menu Principal</a>
+        </form>
     </div>
-
-    <div class="box">
-        <label for="email">Email:</label>
-        <input type="email" name="email" id="email" value="<?=$user["email"]?>">
-    </div>
-
-    <div class="box">
-        <label for="description">Descrição:</label>
-        <input type="text" name="description" id="description" value="<?=$user["description"]?>">
-    </div>
-
-    <div class="box">
-        <label for="language">Linguagem:</label>
-        <select name="language" id="selectUser">
-            <option value=""><?= $userPerson["language"]; ?></option>                    
-                <?php
-                    foreach($languages as $language) {
-                ?>
-            <option value="<?= $language->language ?>"><?= $language->language ?></option>
-                <?php
-                    }
-                ?>
-        </select>
-    </div>
-    
-    <?php
-        if(!empty($user["image"])):
-    ?>     
-        <img src="<?= url($user["image"]); ?>" id="imgUser">   
-    <?php
-        endif;
-    ?>
-
-    <div class="box">
-        <label for="image">Foto de perfil:</label>
-        <input class="form-control" type="file" name="image" id="image">
-    </div>
-
-    <button type="submit">Enviar</button>
-</form>
 
 
     <script type="text/javascript" async>
         const form = document.querySelector("#form");
         const image = document.querySelector("#imgUser");
         form.addEventListener("submit", async (e) => {
-            e.preventDefault();
+        e.preventDefault();
         const dataUser = new FormData(form);
         const data = await fetch("<?= url("app/profile"); ?>",{
             method: "POST",

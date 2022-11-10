@@ -9,7 +9,15 @@
     <section class="box-user">
         <div class="box-left">
             <div class="box-top">
-                <div class="radius"></div>
+                <div class="radius">
+                    <?php
+                        if(!empty($user["image"])):
+                    ?>
+                    <img src="<?= url($user["image"]); ?>" id="imgUser" width="250px" height="200pxlocal">
+                    <?php
+                        endif;
+                    ?>
+                </div>
             </div>
             <div class="box-bottom">
                 <div class="content">

@@ -5,10 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@200&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&family=Montserrat&display=swap');
     </style>
-    <link rel="stylesheet" href="<?= url("assets/web/css/style-cadastro.css") ?>">
-    <link rel="stylesheet" href="<?= url("assets/web/css/style-message.css") ?>">
+    <!-- <link rel="stylesheet" href="<?= url("assets/web/css/style-cadastro.css") ?>">
+    <link rel="stylesheet" href="<?= url("assets/web/css/style-message.css") ?>"> -->
     <!-- <link rel="stylesheet" href="../../assets/web/css/style-cadastro.css">
     <link rel="stylesheet" href="../../assets/web/css/style-message.css"> -->
 
@@ -18,7 +18,6 @@
 </head>
 
 <body>
-    <section>
             <div class="card-register">
                 <form id="form-register" novalidate>
                     <h1>Cadastro</h1>
@@ -35,24 +34,24 @@
 
                     <div class="container-inputs">
                         <label for="name">Nome:</label>
-                        <input type="text" placeholder="Nome:" name="name" id="name" required>
+                        <input type="text" placeholder="Nome" name="name" id="name" required>
                     </div>
                     <div class="container-inputs">
                         <label for="email">Email:</label>
-                        <input type="email" placeholder="Email:" name="email" id="email" required>
+                        <input type="email" placeholder="Email" name="email" id="email" required>
                     </div>
                     <div class="container-inputs">
                         <label for="password">Senha:</label>
-                        <input type="password" placeholder="Senha:" name="password" id="password" required>
+                        <input type="password" placeholder="Senha" name="password" id="password" required>
                     </div>
                     <div class="container-inputs">
                         <label for="confirmPassoword">Confirme:</label>
-                        <input type="password" placeholder="Confirme a Senha:" name="confirmPassword" id="confirmPassword" required>
+                        <input type="password" placeholder="Confirme a Senha" name="confirmPassword" id="confirmPassword" required>
                     </div>
 
                     <div class="container-inputs forPerson">
-                        <label for="cpf">CPF:</label>
-                        <input type="number" name="cpf" id="cpf" class="forPerson">
+                        <label for="cpf" class="forPerson" >CPF:</label>
+                        <input type="number" name="cpf" id="cpf" class="forPerson" placeholder="CPF">
                     </div>
 
                     <!-- ADICIONAR FOREACH TABELA CATEGORIAS -->
@@ -75,8 +74,8 @@
                     </div>
 
                     <div class="container-inputs forCompany">
-                        <label for="cnpj">CNPJ:</label>
-                        <input type="text" name="cnpj" id="cnpj" class="forCompany">
+                        <label for="cnpj" class="forCompany">CNPJ:</label>
+                        <input type="text" name="cnpj" id="cnpj" class="forCompany" placeholder="CNPJ">
                     </div>
 
                     <div class="container-inputs forCompany">
@@ -102,7 +101,7 @@
                     <button type="submit" class="btn-register">Cadastrar</button>
 
                     <div class="data-error"> 
-                        <p id="message"></p>                               
+                        <p id="message">ERRO</p>                               
                     </div>
 
                     <div class="not-acount">
@@ -140,7 +139,6 @@
                             });
                     </script>
             </div>
-    </section>
 
     <script src="<?= url("assets/web/scripts/register.js") ?>"></script>
 
