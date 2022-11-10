@@ -166,8 +166,7 @@ class Web
                 if($person->insert()) {
                     $json = [
                         "message" => "Cadastro",
-                        "password" => $data['password'],
-                        "type" => "warning"
+                        "type" => "success"
                     ];
                     echo json_encode($json);
                     return;
@@ -193,7 +192,7 @@ class Web
                 if($company->insert()) {
                     $json = [
                         "message" => "Cadastro",
-                        "type" => "warning"
+                        "type" => "success"
                     ];
                     echo json_encode($json);
                     return;

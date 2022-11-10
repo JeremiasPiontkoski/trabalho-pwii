@@ -101,7 +101,7 @@
                     <button type="submit" class="btn-register">Cadastrar</button>
 
                     <div class="data-error"> 
-                        <p id="message">ERRO</p>                               
+                        <p id="message"></p>                               
                     </div>
 
                     <div class="not-acount">
@@ -124,18 +124,16 @@
                                 const user = await data.json();
 
                                 console.log(user);
-                                // tratamento da mensagem
-                                /* if(user) {
+                                if(user) {
                                     if(user.type == "success") {
                                         window.location.href = "login";
                                     }else {
                                         message.innerHTML = user.message;
                                         message.classList.remove("warning", "error");
                                         message.classList.add("message");
-                                        console.log(`${user.type}`);
                                         message.classList.add(`${user.type}`);
                                     }
-                                } */
+                                }
                             });
                     </script>
             </div>

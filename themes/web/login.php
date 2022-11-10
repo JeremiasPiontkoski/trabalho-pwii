@@ -53,8 +53,13 @@
                                 
                                 if(user.type == "success") {
                                     window.location.href = "<?= url("app"); ?>";
+                                }else {
+                                    message.classList.add("message");
+                                    message.classList.remove("success", "warning", "error");
+                                    message.classList.add(`${user.type}`);
+                                    message.innerHTML = user.message;
                                 }
-                                /* user.type == "success" ? window.location.href = "<?= url("app"); ?>"; : false; */
+                
 
                                 /* if(user) {
                                     if(user.type === "success"){
