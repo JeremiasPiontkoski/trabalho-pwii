@@ -64,7 +64,7 @@ class App
                 return;
             }
 
-            if(is_email($data["email"])) {
+            if(!is_email($data["email"])) {
                 $json = [
                     "message" => "Informe um email válido!",
                     "type" => "warning"
@@ -108,7 +108,8 @@ class App
                 "description" => $user->getDescription(),
                 "language" => $person->getLanguage(),
                 "image" => url($user->getImage()),
-                "type" => "success"
+                "type" => "success",
+                "message" => "Dados Alteradoso como sucesso!"
             ];
             echo json_encode($json);
         }

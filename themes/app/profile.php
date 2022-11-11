@@ -112,12 +112,10 @@
         });
         const user = await data.json();
         image.setAttribute("src", user.image);
-        if(user.type != "success") {
             message.classList.add("message");
             message.classList.remove("success", "warning", "error");
             message.classList.add(`${user.type}`);
             message.innerHTML = user.message;
-        }
         });
     </script>
 

@@ -1,3 +1,10 @@
+<?php
+    session_start();
+    if(!empty($_SESSION["user"])) {
+        header("Location:http://www.localhost/trabalho-pwii/app");
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
