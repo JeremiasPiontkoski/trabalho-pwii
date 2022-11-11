@@ -12,6 +12,25 @@
 /* GRAY-100 */
 /* GRAY-500 */
 /* GRAY-800 */
+.data-error > p {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 600;
+  padding-block: 0.8rem;
+}
+
+.message.warning {
+  color: var(--primary-color);
+}
+
+.message.error {
+  color: red;
+}
+
+.message.success {
+  color: lightblue;
+}
+
 .container-form {
   width: 100vw;
   min-height: 100vh;
@@ -49,7 +68,7 @@
   font-size: 2rem;
   font-weight: 700;
   padding-block: 0.8rem;
-  color: #6b7280;
+  color: #f3f4f6;
 }
 .container-form form .box input {
   height: 3.2rem;

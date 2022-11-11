@@ -519,7 +519,7 @@ footer#footer .box ul li path[fill] {
 /* LOGIN */
 section#login {
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   background-color: #198557;
   display: flex;
   align-items: center;

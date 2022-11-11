@@ -92,6 +92,8 @@
 
             <button type="submit">Enviar</button>
 
+            <p id="message"></p>
+
             <a href="<?= url("app") ?>">Menu Principal</a>
         </form>
     </div>
@@ -100,6 +102,7 @@
     <script type="text/javascript" async>
         const form = document.querySelector("#form");
         const image = document.querySelector("#imgUser");
+        const message = document.querySelector("#message");
         form.addEventListener("submit", async (e) => {
         e.preventDefault();
         const dataUser = new FormData(form);
@@ -108,10 +111,12 @@
             body: dataUser,
         });
         const user = await data.json();
-        if(user) {
-            console.log(user);
-            console.log(user.email)
-            image.setAttribute("src", user.image);
+        image.setAttribute("src", user.image);
+        if(user.type != "success") {
+            message.classList.add("message");
+            message.classList.remove("success", "warning", "error");
+            message.classList.add(`${user.type}`);
+            message.innerHTML = user.message;
         }
         });
     </script>

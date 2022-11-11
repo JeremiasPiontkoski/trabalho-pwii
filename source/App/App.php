@@ -55,6 +55,24 @@ class App
 
     public function editProfile(array $data) {
         if(!empty($data)) {
+            if(in_array("", $data)) {
+                $json = [
+                    "message" => "Preencha todos os campos",
+                    "type" => "warning"
+                ];
+                echo json_encode($json);
+                return;
+            }
+
+            if(is_email($data["email"])) {
+                $json = [
+                    "message" => "Informe um email válido!",
+                    "type" => "warning"
+                ];
+                echo json_encode($json);
+                return;
+            }
+
             if(!empty($_FILES['image']['tmp_name'])) {
                 $upload = uploadImage($_FILES['image']);
                 unlink($_SESSION["user"]["image"]);
@@ -89,7 +107,8 @@ class App
                 "email" => $user->getEmail(),
                 "description" => $user->getDescription(),
                 "language" => $person->getLanguage(),
-                "image" => url($user->getImage())
+                "image" => url($user->getImage()),
+                "type" => "success"
             ];
             echo json_encode($json);
         }

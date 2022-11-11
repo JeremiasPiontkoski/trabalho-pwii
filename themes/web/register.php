@@ -56,6 +56,7 @@
 
                     <!-- ADICIONAR FOREACH TABELA CATEGORIAS -->
                     <div class="container-inputs forPerson">
+                        <label for="language" class="forPerson">Linguagem:</label>
                         <select name="language" id="selectUser" class="forPerson">
                             <option value="">Escolha...</option>
                             <!-- <option value="javaScript">JavaScript</option>
@@ -79,6 +80,7 @@
                     </div>
 
                     <div class="container-inputs forCompany">
+                        <label for="typeDevelopment" class="forCompany">Tipo de software:</label>
                         <select name="typeDevelopment" id="typeDevelopment" class="forCompany">
                             <option value="">Escolha</option>
                             <?php
