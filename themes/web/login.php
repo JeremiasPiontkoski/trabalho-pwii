@@ -28,11 +28,11 @@
                 <form id="form-login">
                     <div class="line">
                         <label for="email">Email:</label>
-                        <input type="text" name="email" id="email" placeholder="Email" value="testeperson@gmail.com">
+                        <input type="text" name="email" id="email" placeholder="Email">
                     </div>
                     <div class="line">
                         <label for="password">Senha:</label>
-                        <input type="password" name="password" id="password" placeholder="Senha" value="testeperson123">
+                        <input type="password" name="password" id="password" placeholder="Senha">
                     </div>
                     <button>Login</button>
                     <div class="data-error">
@@ -65,23 +65,8 @@
                                     message.classList.remove("success", "warning", "error");
                                     message.classList.add(`${user.type}`);
                                     message.innerHTML = user.message;
-                                }
-                
-
-                                /* if(user) {
-                                    if(user.type === "success"){
-                                        window.location.href = "home";
-                                        console.log(`${user.idUser}`)
-                                    } else {
-                                        console.log(`${user.type}`);
-                                        message.classList.add("message");
-                                        message.classList.remove("success", "warning", "error");
-                                        message.classList.add(`${user.type}`);
-                                            message.innerHTML = user.message;
-                                    }
-                                }  */
-                            }
-                            );
+                                }                       
+                            });
                         </script>
             </div>
     </section>

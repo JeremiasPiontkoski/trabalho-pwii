@@ -163,7 +163,7 @@ class User
      * @param string $email
      * @return bool
      */
-    public function findByEmail(string $email) : bool
+    public static function findByEmail(string $email) : bool
     {
         $query = "SELECT * FROM users WHERE email = :email";
         $stmt = Connect::getInstance()->prepare($query);
@@ -226,12 +226,11 @@ class User
      */
     public function insert()
     {
-        $query = "INSERT INTO users (name, email, password, description, typeUser) VALUES (:name, :email, :password, :description, :typeUser)";
+        $query = "INSERT INTO users (name, email, password, typeUser) VALUES (:name, :email, :password, :typeUser)";
         $stmt = Connect::getInstance()->prepare($query);
         $stmt->bindParam(":name", $this->name);
         $stmt->bindParam(":email", $this->email);
         $stmt->bindValue(":password", password_hash($this->password,PASSWORD_DEFAULT));
-        $stmt->bindParam(":description", $this->description);
         $stmt->bindParam(":typeUser", $this->typeUser);
         $stmt->execute();
 
@@ -263,6 +262,16 @@ class User
         $_SESSION["user"] = $arrayUser;
 
         return true;
+    }
+
+    public function getJSON() : string
+    {
+        return json_encode(
+            ["user" => [
+                "name" => $this->getName(),
+                "email" => $this->getEmail()
+            ]], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE
+            );
     }
 
    

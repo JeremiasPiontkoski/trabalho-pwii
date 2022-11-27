@@ -10,8 +10,17 @@ class Person
     private $id;
     private $idUser;
     private $cpf;
-    private $language;
-    private $message;
+    private $idLanguage;
+    private $repositories;
+
+
+    public function getRepositories() {
+        return $this->repositories;
+    }
+
+    public function setRepositories(int $repositories){
+        $this->repositories = $repositories;
+    }
 
     public function getId(): ?int
     {
@@ -26,17 +35,17 @@ class Person
         $this->id = $id;
     }
 
-    public function getLanguage(): ?int
+    public function getIdLanguage(): ?int
     {
-        return $this->language;
+        return $this->idLanguage;
     }
 
     /**
      * @param int|null $id
      */
-    public function setLanguage(?int $language): void
+    public function setIdLanguage(?int $idLanguage): void
     {
-        $this->language = $language;
+        $this->language = $idLanguage;
     }
 
     public function getCpf(){
@@ -64,13 +73,15 @@ class Person
         int $id = NULL,
         int $idUser = NULL,
         string $cpf = NULL,
-        string $language = NULL
+        int $idLanguage = NULL,
+        string $repositories = NULL
     )
     {
         $this->id = $id;
         $this->idUser = $idUser;
         $this->cpf = $cpf;
-        $this->language = $language;
+        $this->idLanguage = $idLanguage;
+        $this->repositories = $repositories;
     }
 
     public function getDataUser($idUser)
@@ -90,13 +101,11 @@ class Person
         $this->id = $person->id;
         $this->idUser = $person->idUser;
         $this->cpf = $person->cpf;
-        $this->language = $person->language;
 
         $arrayUser = [
             "id" => $this->id,
             "idUser" => $this->idUser,
             "cpf" => $this->cpf,
-            "language" => $this->language
         ];
 
         $_SESSION["userPerson"] = $arrayUser;
@@ -108,11 +117,9 @@ class Person
     public function insert() : bool
     {
         /* $query = "INSERT INTO person VALUES (NULL, :idUser, :cpf, :language)"; */
-        $query = "INSERT INTO person (idUser, cpf, language) VALUES (:idUser, :cpf, :language)";
+        $query = "INSERT INTO person (idUser) VALUES (:idUser)";
         $stmt = Connect::getInstance()->prepare($query);
         $stmt->bindParam(":idUser", $this->idUser);
-        $stmt->bindParam(":cpf", $this->cpf);
-        $stmt->bindParam(":language", $this->language);
         $stmt->execute();
 
         $this->message = "Usuário cadastrado com sucesso!";
@@ -121,21 +128,45 @@ class Person
 
     public function update()
      {
-        $query = "UPDATE person SET language = :language WHERE idUser = :idUser";
+        $query = "UPDATE person SET idLanguage = :idLanguage, cpf = :cpf WHERE idUser = :idUser";
         $stmt = Connect::getInstance()->prepare($query);
         $stmt->bindParam(":idUser", $this->idUser);
-        $stmt->bindParam(":language", $this->language);
+        $stmt->bindParam(":idLanguage", $this->idLanguage);
+        $stmt->bindParam(":cpf", $this->cpf);
         $stmt->execute();
+
+        $person = $stmt->fetch();
+
+        /* $this->id = $person->id;
+        $this->idUser = $person->idUser;
+        $this->cpf = $person->cpf;
+        $this->idLanguage = $person->idLanguage; */
 
         $arrayUser = [
             "id" => $this->id,
             "idUser" => $this->idUser,
             "cpf" => $this->cpf,
-            "language" => $this->cpf
+            "idLanguage" => $this->idLanguage
         ];
 
         $_SESSION["userPerson"] = $arrayUser;
         
         return true;
     }
+
+
+    public function getReposity($idUser) {
+        $query = "SELECT repositories FROM person WHERE idUser LIKE :idUser";
+        $stmt = Connect::getInstance()->prepare($query);
+
+        $stmt->bindParam(":idUser", $idUser);
+        $stmt->execute();
+
+        $person = $stmt->fetch();
+
+        $this->repositories = $person->repositories;
+
+        return true;
+    }
+
 }

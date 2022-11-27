@@ -31,6 +31,11 @@
   color: lightblue;
 }
 
+.none {
+  display: none;
+  transition: 0.5s ease;
+}
+
 .container-form {
   width: 100vw;
   min-height: 100vh;

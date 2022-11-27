@@ -10,13 +10,18 @@ use Source\Models\Language;
 use Source\Models\Project;
 use Source\Models\User;
 use Source\Models\Repository;
+use Source\Models\Type;
+use Source\Models\typeUser;
 
 class App
 {
-
     private $view;
     private $languages;
     private $repositories;
+    private $projects;
+    private $postProjects;
+    private $postRepositories;
+    private $typeUser;
 
     public function __construct()
     {
@@ -31,14 +36,24 @@ class App
         $repositories = new Repository();
         $this->repositories = $repositories->selectAll();
 
+        $projects = new Project();
+        $this->projects = $projects->selectAll();
+
+        $typeUser = new Type();
+        $this->typeUser = $typeUser->selectAll();
+
+        if(!empty($_SESSION["userCompany"])){
+            $postProjects = new Project();
+            $this->postProjects = $postProjects->findPostProjects($_SESSION["userCompany"]["id"]);
+        }
+        
+
+        $postRepositories = new Repository();
+        $this->postRepositories = $postRepositories->findAllPostRepositories();
+
         $this->view = new Engine(CONF_VIEW_APP,'php');
         //$this->view = new Engine(__DIR__ . "/../../themes/web",'php');
     }
-
-    /* public function home () : void 
-    {
-        echo $this->view->render("repositories");
-    } */
 
     public function profile () : void 
     {
@@ -47,14 +62,15 @@ class App
         echo $this->view->render("profile",
     [
         "user" => $_SESSION["user"],
-        "userPerson" => $_SESSION["userPerson"],
         "languages" => $this->languages,
+        "typeUser" => $this->typeUser,
         "id" => $personData
     ]);
     }
 
     public function editProfile(array $data) {
         if(!empty($data)) {
+
             if(in_array("", $data)) {
                 $json = [
                     "message" => "Preencha todos os campos",
@@ -92,25 +108,26 @@ class App
 
             $user->update();
 
-            $person = new Person(
-                $_SESSION["userPerson"]["id"],
-                $_SESSION["userPerson"]["idUser"],
-                $_SESSION["userPerson"]["cpf"],
-                $data["language"]
-            );
-
-            $person->update();
-
+            if(!empty($_SESSION["userPerson"])) {
+                $person = new Person(
+                    $_SESSION["userPerson"]["id"],
+                    $_SESSION["userPerson"]["idUser"],
+                    $data["cpf"],
+                    $data["language"]
+                );
+                $person->update();
+            }
             $json = [
                 "id" => $user->getId(),
                 "name" => $user->getName(),
                 "email" => $user->getEmail(),
                 "description" => $user->getDescription(),
-                "language" => $person->getLanguage(),
+                "language" => $person->getIdLanguage(),
                 "image" => url($user->getImage()),
                 "type" => "success",
                 "message" => "Dados Alteradoso como sucesso!"
             ];
+
             echo json_encode($json);
         }
     }
@@ -122,8 +139,12 @@ class App
 
     public function registerRepository(array $data) : void
     {
-        if(!empty($data)){
 
+        if(empty($_SESSION["userPerson"])) {
+            header("Location:http://www.localhost/trabalho-pwii/app");
+        }
+
+        if(!empty($data)){
             if(in_array("", $data)) {
                 $json = [
                     "message" => "Preencha todos os campos!",
@@ -132,34 +153,80 @@ class App
                 echo json_encode($json);
                 return;
             }
-
-            $language = new Language();
-            $languages = $language->selectByLanguage($data["language"]);
         
-                $repository = new Repository(
-                    null,
-                    $data["name"],
-                    $data["language"],
-                    $data["description"],
-                    $languages->id
-                );
+            $repository = new Repository(
+                null,
+                $data["name"],
+                $data["description"],
+                $data["language"],
+                $_SESSION['userPerson']['id']
+            );
 
-                if($repository->insert()) {
-                    $json = [
-                        "name" => $data["name"],                        
-                        "type" => "success"
-                    ];
-                    echo json_encode($json);
-                    return;
-                }
-
-                echo json_encode($repository->getName());
+            if(!$repository->insertPostRepositories($repository->insert())) {
+                $json = [
+                    "message" => "Não foi possivel realizar o cadastro, tente novamente!",                        
+                    "type" => "warning"
+                ];
+                echo json_encode($json);
                 return;
+            }
 
-        
+            $json = [
+                "message" => "Cadastro realizado com sucesso",
+                "type" => "success"
+            ];
+            echo json_encode($json);
+            return;
         }
         
         echo $this->view->render("register-repository",[
+            "languages" => $this->languages
+        ]);
+    }
+
+    public function registerProject(?array $data) :void {
+
+        if(empty($_SESSION["userCompany"])) {
+            header("Location:http://www.localhost/trabalho-pwii/app");
+        }
+
+        if(!empty($data)) {
+            if(in_array("", $data)) {
+                $json = [
+                    "message" => "Preencha todos os campos!",
+                    "type" => "warning",
+                ];
+                echo json_encode($json);
+                return;
+            }
+        
+            $project = new Project(
+                null,
+                $data["name"],
+                $data["description"],
+                $data["vacancies"],
+                $data["language"],
+                $_SESSION['userCompany']['id']
+            );
+
+            if(!$project->insertPostProjects($project->insert())) {
+                $json = [
+                    "message" => "Não foi possivel realizar o cadastro, tente novamente!",                        
+                    "type" => "warning"
+                ];
+                echo json_encode($json);
+                return;
+            }
+
+            $json = [
+                "message" => "Cadastro realizado com sucesso",
+                "type" => "success"
+            ];
+            echo json_encode($json);
+            return;
+        }
+
+        echo $this->view->render("registerProject",[
             "languages" => $this->languages
         ]);
     }
@@ -170,6 +237,7 @@ class App
             $repository = new Repository();
             $repositories = $repository->findByIdLanguage($data["idLanguage"]);
         }
+
         echo $this->view->render(
             "filterRepositories",[
                 "languages" => $this->languages,
@@ -183,15 +251,47 @@ class App
         echo $this->view->render("repositories", 
         [
             "languages" => $this->languages,
-            "repositories" => $this->repositories
+            "repositories" => $this->repositories,
+            "postRepositories" => $this->postRepositories
+        ]);
+    }
+
+    public function projects(?array $data) : void
+    {
+        if(!empty($data)){
+            $project = new Project();
+            $projects = $project->findByIdLanguage($data["idProject"]);
+        }
+
+        echo $this->view->render(
+            "filterProjects",[
+                "languages" => $this->languages,
+                "projects" => $projects
+            ]
+        );
+    }
+
+    public function showProjects() : void
+    {        
+        echo $this->view->render("projects", 
+        [
+            "languages" => $this->languages,
+            "projects" => $this->projects
         ]);
     }
 
     public function home() {
+
+        $project = new Project();
+        $projects = $project->findById();
+
         echo $this->view->render("home", 
     [
         "user" => $_SESSION["user"],
-        "repositories" => $this->repositories
+        "repositories" => $this->repositories,
+        "languages" => $this->languages,
+        "projects" => $this->projects,
+        "postProjects" => $this->postProjects
     ]);
     }
 

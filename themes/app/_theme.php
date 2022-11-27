@@ -1,3 +1,8 @@
+
+<?php
+    // var_dump($_SESSION['user']);
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -42,22 +47,41 @@
                     <ul class="navbar-nav">
                         <li class="nav-item">
                             <span data-bs-dismiss="offcanvas">
-                                <a class="nav-link" href="#"></a>
-                            </span>                                                                                                      
-                        </li>
-
-                        <li class="nav-item">
-                            <span data-bs-dismiss="offcanvas"><a class="nav-link" href="<?= url("app") ?>">Home</a></span>
+                                <a class="nav-link" href="<?= url("app") ?>">
+                                    Home
+                                </a>
+                            </span>
                         </li>                       
                         
                         <li class="nav-item">
-                            <span data-bs-dismiss="offcanvas"><a class="nav-link" href="<?= url("app/repositorios") ?>">Repositórios</a></span>
+                            <span data-bs-dismiss="offcanvas">
+                                <a class="nav-link" href="<?= url("app/repositorios") ?>">
+                                    Repositórios
+                                </a>
+                            </span>
+                        </li>
+
+                        <li class="nav-item">
+                            <span data-bs-dismiss="offcanvas">
+                                <a class="nav-link" href="<?= url("app/projetos") ?>">
+                                    Projetos
+                                </a>
+                            </span>
+                        </li>
+
+                        <li class="nav-item">
+                            <span data-bs-dismiss="offcanvas">
+                                <a class="nav-link" href="#contact">
+                                    Contato
+                                </a>
+                            </span>
                         </li>
                         <li class="nav-item">
-                            <span data-bs-dismiss="offcanvas"><a class="nav-link" href="#contact">Contato</a></span>
-                        </li>
-                        <li class="nav-item">
-                            <span data-bs-dismiss="offcanvas"><a class="nav-link" href="<?= url("app/sair") ?>">Logout</a></span>
+                            <span data-bs-dismiss="offcanvas">
+                                <a class="nav-link" href="<?= url("app/sair") ?>">
+                                Logout
+                                </a>
+                            </span>
                         </li>
                     </ul>
                 </div>

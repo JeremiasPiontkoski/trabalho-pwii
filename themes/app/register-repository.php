@@ -28,7 +28,7 @@
                             <?php
                             foreach($languages as $language) {
                                 ?>
-                                <option value="<?= $language->language ?>"><?= $language->language ?></option>
+                                <option value="<?= $language->id ?>"><?= $language->language ?></option>
                                 <?php
                             }
                             ?>
@@ -60,17 +60,13 @@
                                 });
                                 const user = await data.json();
                                 console.log(user);
-                                // tratamento da mensagem
                                 if(user) {
                                     if(user.type == "success") {
-                                        console.log(`${user.name}`)
                                         window.location.href = "<?= url("app"); ?>";
                                     }else {
                                         message.innerHTML = user.message; 
                                         message.classList.remove("warning", "error");
                                         message.classList.add("message");
-                                        /* console.log(`${user.type}`); */
-                                        console.log(user);
                                         message.classList.add(`${user.type}`);
                                     }
                                 }

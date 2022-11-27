@@ -1,6 +1,5 @@
 <?php
   $this->layout("_theme");
-  var_dump($postRepositories);
 ?>
     <div class="nav-links">
         <div class="nav-links-inside">
@@ -11,7 +10,7 @@
         ?>
                 <li>
                    
-        <a href="<?= url("app/repositorios/{$language->id}"); ?>"><?= $language->language; ?></a>
+        <a href="<?= url("app/projetos/{$language->id}"); ?>"><?= $language->language; ?></a>
         <?php
         }
         ?> 
@@ -22,7 +21,7 @@
 
     <section class="box-repository">
         <?php
-            foreach($repositories as $repository) {
+            foreach($projects as $project) {
             ?>
             
         <div class="box-inside">
@@ -42,16 +41,16 @@
             <div class="box-right">
                 <div class="box-repositories">
                     <div class="box-head">
-                        <h1>REPOSITÓRIO</h1>
+                        <h1>PROJETO</h1>
                     </div>
                     <div class="box-content">
-                        <p><?= $repository->name; ?></p>
+                        <p><?= $project->name; ?></p>
                     </div>
                     <div class="box-content">
                         <p>
                             <?php
                                 foreach($languages as $language) {
-                                    if($repository->idLanguage == $language->id){
+                                    if($project->idLanguage == $language->id){
                                         echo $language->language;
                                     }
                                 ?>
@@ -61,10 +60,14 @@
                         </p>
                     </div>
                     <div class="box-content">
-                        <p><?=$repository->description ?></p>
+                        <p><?=$project->description ?></p>
+                    </div>
+                    <div class="box-content">
+                        <p>Vagas: <?= $project->vacancies; ?></p>
                     </div>
                     <div class="box-bottom">
                         <a href="#">Favoritar</a>
+                        <a href="#">CANDIDATAR-SE</a>
                     </div>
                 </div>            
             </div>

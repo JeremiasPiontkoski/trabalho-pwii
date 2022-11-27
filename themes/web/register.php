@@ -49,21 +49,15 @@
                         <input type="password" placeholder="Confirme a Senha" name="confirmPassword" id="confirmPassword" required>
                     </div>
 
-                    <div class="container-inputs forPerson">
+                    <!-- <div class="container-inputs forPerson">
                         <label for="cpf" class="forPerson" >CPF:</label>
                         <input type="number" name="cpf" id="cpf" class="forPerson" placeholder="CPF">
-                    </div>
+                    </div> -->
 
-                    <!-- ADICIONAR FOREACH TABELA CATEGORIAS -->
-                    <div class="container-inputs forPerson">
+                    <!-- <div class="container-inputs forPerson">
                         <label for="language" class="forPerson">Linguagem:</label>
                         <select name="language" id="selectUser" class="forPerson">
                             <option value="">Escolha...</option>
-                            <!-- <option value="javaScript">JavaScript</option>
-                            <option value="java">Java</option>
-                            <option value="htmlCss">HTML E CSS</option>
-                            <option value="php">Php</option>
-                            <option value="python">Python</option> -->
                             <?php
                             foreach($languages as $language) {
                                 ?>
@@ -72,14 +66,14 @@
                             }
                             ?>
                         </select>
-                    </div>
+                    </div> -->
 
                     <div class="container-inputs forCompany">
                         <label for="cnpj" class="forCompany">CNPJ:</label>
                         <input type="text" name="cnpj" id="cnpj" class="forCompany" placeholder="CNPJ">
                     </div>
 
-                    <div class="container-inputs forCompany">
+                    <!-- <div class="container-inputs forCompany">
                         <label for="typeDevelopment" class="forCompany">Tipo de software:</label>
                         <select name="typeDevelopment" id="typeDevelopment" class="forCompany">
                             <option value="">Escolha</option>
@@ -91,12 +85,12 @@
                             }
                             ?>
                         </select>
-                    </div>
+                    </div> -->
 
-                    <div class="container-inputs">
+                    <!-- <div class="container-inputs">
                         <label for="description">Descrição:</label>
                         <input type="text" placeholder="Descrição:" name="description" id="description" required>
-                    </div>
+                    </div> -->
 
                    
 
@@ -113,12 +107,11 @@
                 </form>
 
                 <script type="text/javascript" async>
-                            const form = document.querySelector("#form-register"); // id do formulário
-                            const message = document.querySelector("#message"); // id da div message
+                            const form = document.querySelector("#form-register");
+                            const message = document.querySelector("#message"); 
                             form.addEventListener("submit", async (e) => {
                                 e.preventDefault();
                                 const dataUser = new FormData(form);
-                                // enviar para a rota já definida
                                 const data = await fetch("<?= url("registro"); ?>",{
                                     method: "POST",
                                     body: dataUser,
@@ -128,7 +121,7 @@
                                 console.log(user);
                                 if(user) {
                                     if(user.type == "success") {
-                                        window.location.href = "login";
+                                        window.location.href = "<?= url("login") ?>";
                                     }else {
                                         message.innerHTML = user.message;
                                         message.classList.remove("warning", "error");

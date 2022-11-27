@@ -98,8 +98,15 @@ class Company
         $this->idUser = $company->idUser;
         $this->cnpj = $company->cnpj;
         $this->type = $company->type;
-        
+
+        $arrayUser = [
+            "id" => $this->id,
+            "idUser" => $this->idUser,
+            "cnpj" => $this->cnpj,
+            "type" => $this->type
+        ];
+
+        $_SESSION["userCompany"] = $arrayUser;
         return true;
-        
     }
 }

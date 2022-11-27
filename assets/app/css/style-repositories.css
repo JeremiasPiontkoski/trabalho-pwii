@@ -208,7 +208,13 @@ section.box-repository .box-inside .box-right .box-repositories .box-head {
     }
 
     section.box-repository .box-inside .box-right .box-repositories .box-bottom {
+        width: auto;
+        height: auto;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
         border-radius: 0rem 0rem 2rem 2rem;
+        padding-bottom: 1.6rem;
     }
 
     div.nav-links div.nav-links-inside ul li a:hover {

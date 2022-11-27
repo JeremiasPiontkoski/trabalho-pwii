@@ -1,3 +1,7 @@
+<?php
+    var_dump($_SESSION["userPerson"]);
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -13,12 +17,6 @@
     <title>Edição de Perfil</title>
 </head>
 <body>
-<!-- 
-    <?php var_dump($id) ?><br>
-    <?php var_dump($user) ?><br>
-    <?=$user["name"];?><br>
-    <?= $user["email"];?><br>
-    <?php var_dump($userPerson);?> -->
 
     <div class="container-form">
         <h1>Edição de perfil</h1>
@@ -35,6 +33,29 @@
                 <label for="description">Descrição:</label>
                 <input type="text" name="description" id="description" value="<?=$user["description"]?>">
             </div>
+
+            <?php
+                if(!empty($_SESSION["userPerson"])) {?>
+                    <div class="box">
+                        <label for="cpf">Cpf:</label>
+                        <input type="number" name="cpf" namespace="Cpf">
+                    </div>
+            <?php
+                }
+            ?>
+
+            <?php
+                if(!empty($_SESSION["userCompany"])) {?>
+                    <div class="box">
+                        <label for="cnpj">Cnpj:</label>
+                        <input type="number" name="cnpj" namespace="cnpj">
+                    </div>
+            <?php
+                }
+            ?>
+
+            <?php
+            if(!empty($_SESSION["userPerson"])) {?>
             <div class="box">
                 <label for="language">Linguagem:</label>
                 <select name="language" id="selectUser">
@@ -42,9 +63,9 @@
                         foreach($languages as $language) {
                     ?>
                     <?php
-                        if(($language->id == $userPerson["language"])){
+                        if(($language->id == $userPerson["idLanguage"])){
                     ?>
-                        <option value="<?= $userPerson["language"]; ?>">
+                        <option value="<?= $userPerson["idLanguage"]; ?>">
                             <?= $language->language ?>
                     <?php
                         }
@@ -57,7 +78,7 @@
                         foreach($languages as $language) {
                     ?>
                     <?php
-                        if(($language->id != $userPerson["language"])){
+                        if(($language->id != $userPerson["idLanguage"])){
                     ?>
                         <option value="<?= $language->id?>">
                         <?= $language->language ?>
@@ -70,8 +91,52 @@
                     ?>
                 </select>
             </div>
+            <?php
+                }
+            ?>
+
+            <?php
+            if(!empty($_SESSION["userCompany"])) {?>
+            <div class="box">
+                <label for="typeDelopment">Desenvolvimento:</label>
+                <select name="typeDevelopment" id="typeDevelopment">
+                <?php
+                        foreach($typeUser as $type) {
+                    ?>
+                    <?php
+                        if(($type->id == $userCompany["type"])){
+                    ?>
+                        <option value="<?= $userCompany["type"]; ?>">
+                            <?= $type->type ?>
+                    <?php
+                        }
+                    ?>
+                        </option>
+                    <?php
+                        }
+                    ?>
+                    <?php
+                        foreach($typeUser as $type) {
+                    ?>
+                    <?php
+                        if(($type->id != $userCompany["type"])){
+                    ?>
+                        <option value="<?= $type->id?>">
+                        <?= $type->type ?>
+                    <?php
+                        }
+                    ?>
+                    </option>
+                    <?php
+                        }
+                    ?>            
+                </select>
+            </div> 
+            <?php
+                }
+            ?>
         
-           <div class="box-image">
+           <!-- <div class="box-image">
            <?php
                 if(!empty($user["image"])):
             ?>
@@ -79,7 +144,7 @@
             <?php
                 endif;
             ?>
-           </div>
+           </div> -->
             
             <div class="box">
                 <label for="image">Foto de perfil:</label>
@@ -101,7 +166,7 @@
 
     <script type="text/javascript" async>
         const form = document.querySelector("#form");
-        const image = document.querySelector("#imgUser");
+        // const image = document.querySelector("#imgUser");
         const message = document.querySelector("#message");
         form.addEventListener("submit", async (e) => {
         e.preventDefault();
@@ -111,7 +176,8 @@
             body: dataUser,
         });
         const user = await data.json();
-        image.setAttribute("src", user.image);
+        console.log(user)
+        // image.setAttribute("src", user.image);
             message.classList.add("message");
             message.classList.remove("success", "warning", "error");
             message.classList.add(`${user.type}`);

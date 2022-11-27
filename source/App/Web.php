@@ -89,6 +89,7 @@ class Web
 
     public function register(?array $data){
         if(!empty($data)){
+
             if(in_array("", $data)) {
                 $json = [
                     "message" => "Preencha todos os campos!",
@@ -108,9 +109,7 @@ class Web
                 return;
             }
 
-            $user = new User();
-
-            if($user->findByEmail($data["email"])){
+            if(User::findByEmail($data["email"])){
                 $json = [
                     "message" => "Email já cadastrado!",
                     "type" => "warning"
@@ -142,56 +141,47 @@ class Web
                 $data["name"],
                 $data["email"],
                 $data["password"],
-                $data["description"],
-                $data["userType"]
+                null,
+                $data["userType"],
+                null
             );
 
-            if($data["userType"] == '1') {
-                if(strlen($data["cpf"]) != 11) {
+            if($data["userType"] == 1) {
+                $person = new Person(
+                    null,
+                    $user->insert()
+                );
+
+                if($person->insert()) {
                     $json = [
-                        "message" => "O cpf deve conter 11 dígitos",
+                        "message" => "Pessoa cadastrada com sucesso!",
+                        "type" => "success"
+                    ];
+                    echo json_encode($json);
+                    return;
+                }
+            }
+
+            if($data["userType"] == 2) {
+                if(strlen($data["cnpj"]) != 11) {
+                    $json = [
+                        "message" => "O CNPJ deve ter 11 dígitos!",
                         "type" => "warning"
                     ];
                     echo json_encode($json);
                     return;
                 }
 
-                $person = new Person(
+                $company = new Company(
                     null,
                     $user->insert(),
-                    $data["cpf"],
-                    $data["language"]
-                );
-    
-                if($person->insert()) {
-                    $json = [
-                        "message" => "Cadastro",
-                        "type" => "success"
-                    ];
-                    echo json_encode($json);
-                    return;
-                }
-            }else {
-                
-            if(strlen($data["cnpj"]) != 14) {
-                $json = [
-                    "message" => "O cnpj deve conter 14 dígitos",
-                    "type" => "warning"
-                ];
-                echo json_encode($json);
-                return;
-            }
-            
-                $company = new Company(
-                    null, 
-                    $user->insert(),
                     $data["cnpj"],
-                    $data["typeDevelopment"]
+                    null
                 );
 
                 if($company->insert()) {
                     $json = [
-                        "message" => "Cadastro",
+                        "message" => "Empresa cadastrada com sucesso!",
                         "type" => "success"
                     ];
                     echo json_encode($json);
@@ -199,21 +189,18 @@ class Web
                 }
             }
         }
- 
 
-        $language = new Language();
+       /*  $language = new Language();
         $languages = $language->selectAll();
 
         $type = new Type();
-        $types = $type->selectAll();
+        $types = $type->selectAll(); */
 
         $typeUser = new typeUser();
         $typeUsers = $typeUser->selectAll();
 
         echo $this->view->render("register",
     [
-        "languages" => $languages,
-        "types" => $types,
         "typeUsers" => $typeUsers
     ]);
     }
@@ -221,11 +208,10 @@ class Web
     public function login(?array $data) : void 
     {
         if(!empty($data)){
-
             if(in_array("",$data)){
                 $json = [
                     "message" => "Informe e-mail e senha para entrar!",
-                    "type" => "danger"
+                    "type" => "warning"
                 ];
                 echo json_encode($json);
                 return;
@@ -238,7 +224,7 @@ class Web
             if(!$user->validate($data["email"], $data["password"])) {
                 $json = [
                 "message" => "Usuário e/ou senha inválidos",
-                "type" => "danger"
+                "type" => "warning"
                 ];
                 echo json_encode($json);
                 return;

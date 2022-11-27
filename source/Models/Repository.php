@@ -2,6 +2,7 @@
 
 namespace Source\Models;
 
+use League\Plates\Template\Func;
 use Source\Core\Connect;
 
 
@@ -9,10 +10,9 @@ class Repository
 {
     private $id;
     private $name;
-    private $language;
     private $description;
     private $idLanguage;
-    private $message;
+    private $idPerson;
 
     /**
      * @return mixed
@@ -43,21 +43,7 @@ class Repository
         $this->idLanguage = $idLanguage;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getLanguage()
-    {
-        return $this->language;
-    }
-
-    /**
-     * @param mixed $language
-     */
-    public function setLanguage($language): void
-    {
-        $this->language = $language;
-    }
+    
 
     /**
      * @return mixed
@@ -92,48 +78,49 @@ class Repository
         $this->id = $id;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getMessage()
-    {
-        return $this->message;
+    public function getIdPerson() {
+        return $this->idPerson;
     }
 
-    /**
-     * @param mixed $message
-     */
-    public function setMessage($message): void
-    {
-        $this->message = $message;
+    public function setIdPerson($idPerson) {
+        $this->idPerson = $idPerson;
     }
 
 
     public function __construct(
         int $id = NULL,
         string $name = NULL,
-        string $language = NULL,
         string $description = NULL,
-        int $idLanguage = NULL
+        int $idLanguage = NULL,
+        int $idPerson = NULL
     )
     {
         $this->id = $id;
         $this->name = $name;
-        $this->language = $language;
         $this->description = $description;
         $this->idLanguage = $idLanguage;
+        $this->idPerson = $idPerson;
     }
 
-    public function insert() : bool{
-        $query = "INSERT INTO repositories (name, language, description, idLanguage) VALUES (:name, :language, :description, :idLanguage)";
+    public function insert(){
+        $query = "INSERT INTO repositories (name, description, idLanguage, idPerson) VALUES (:name, :description, :idLanguage, :idPerson)";
         $stmt = Connect::getInstance()->prepare($query);
         $stmt->bindParam(":name", $this->name);
-        $stmt->bindParam(":language", $this->language);
         $stmt->bindParam(":description", $this->description);
         $stmt->bindParam(":idLanguage", $this->idLanguage);
+        $stmt->bindParam(":idPerson", $this->idPerson);
         $stmt->execute();
 
-        $this->message = "Repositório cadastrado com sucesso!";
+        return Connect::getInstance()->lastInsertId();
+    }
+
+    public function insertPostRepositories($idRepository) {
+        $query = "INSERT INTO post_repositories (idPerson, idRepository) VALUES (:idPerson, :idRepository)";
+        $stmt = Connect::getInstance()->prepare($query);
+        $stmt->bindParam(":idPerson", $this->idPerson);
+        $stmt->bindParam(":idRepository", $idRepository);
+        $stmt->execute();
+
         return true;
     }
 
@@ -161,4 +148,57 @@ class Repository
             return $stmt->fetchAll();
         }
     }
+
+    public function findById() 
+    {
+        $query = "SELECT * FROM repositories WHERE id = :id";
+        $stmt = Connect::getInstance()->prepare($query);
+        $stmt->bindParam(":id",$this->id);
+        $stmt->execute();
+
+        if($stmt->rowCount() == 0){
+            return false;
+        } else {
+            $user = $stmt->fetch();
+            $this->name = $user->name;
+            $this->language = $user->language;
+            return true;
+        }
+    }
+
+    public function getRepository($idPerson) {
+        $query = "SELECT * FROM post_repositories WHERE idPerson = :idPerson";
+        $stmt = Connect::getInstance()->prepare($query);
+        $stmt->bindParam(":idPerson", ":idPerson");
+
+        $stmt->execute();
+
+        $repository = $stmt->fetch();
+
+        $this->idPerson = $repository->idRepository;
+    }
+
+    public function findAllPostRepositories() 
+    {
+        $query = "SELECT * FROM post_repositories";
+        $stmt = Connect::getInstance()->prepare($query);
+        $stmt->execute();
+
+        if($stmt->rowCount() == 0){
+            return false;
+        } else {
+            return $stmt->fetchAll();
+        }
+    }
+
+    // public function getJSON() : string
+    // {
+    //     return json_encode(
+    //         ["user" => [
+    //             "name" => $this->getName(),
+    //             "language" => $this->getLanguage()
+    //         ]], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE
+    //         );
+    // }
+
 }

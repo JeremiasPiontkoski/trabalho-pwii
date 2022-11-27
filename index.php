@@ -39,9 +39,16 @@ $route->get("/", "App:home");
 $route->post("/cadastroRepositorio", "App:registerRepository");
 $route->get("/cadastroRepositorio", "App:registerRepository");
 
+$route->post("/cadastroProjeto", "App:registerProject");
+$route->get("/cadastroProjeto", "App:registerProject");
+
 /* SHOW REPOSITORIES */
 $route->get("/repositorios/{idLanguage}", "App:repositories");
 $route->get("/repositorios", "App:showRepositories");
+
+/* SHOW PROJECTS */
+$route->get("/projetos/{idProject}", "App:projects");
+$route->get("/projetos", "App:showProjects");
 
 /* LOGOUT */
 $route->get("/sair", "App:logout");

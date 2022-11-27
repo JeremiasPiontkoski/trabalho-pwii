@@ -24,7 +24,15 @@
                     
                     <p><?=$user["name"];?></p>
                     <p><?=$user["email"];?></p>
-                    <p><?=$user["description"];?></p>                   
+                    <p>
+                        <?php
+                            if($user["description"] == "") {
+                                echo "Este usuário não possui descrição no seu perfil";
+                            }else {
+                                echo $user["description"];
+                            }
+                        ?>
+                    </p>                   
                 </div>
                 <div class="btn-edit">
                 <a href="<?php url() ?>app/profile">Editar</a>
@@ -35,19 +43,47 @@
         <div class="box-right">
             <div class="box-repositories">
                 <div class="box-head">
-                    <h1>Repositórios</h1>
+                    <h1>
+                        <?php
+                            if(!empty($_SESSION["userPerson"])) {
+                                echo "Repositórios";
+                            }else {
+                                echo "Projetos";
+                            }
+                        ?>
+                    </h1>
                 </div>
                 <?php
+                if(!empty($_SESSION["userPerson"])){
             foreach($repositories as $repository) {
             ?>
                 <div class="box-content">
                     <p><?= $repository->name; ?></p>
                 </div>
                <?php
-            }
-               ?>
+                    }
+                }     
+                    else {
+                        foreach($projects as $project) {
+                            ?>
+                            <div class="box-content">
+                                <p>
+                                    <?= $project->name; ?></p>
+                            </div>
+                <?php 
+                        }
+                    }
+                ?>
                 <div class="box-bottom">
-                    <a href="<?php url() ?>app/cadastroRepositorio">Criar Novo</a>
+                    <a href="<?php url() ?>
+                    <?php
+                        if(!empty($_SESSION["userPerson"])) {
+                            echo "app/cadastroRepositorio";
+                        }else {
+                            echo "app/cadastroProjeto";
+                        }
+                    ?>
+                    ">Criar Novo</a>
                 </div>
             </div>
             <div class="box-repositories">
