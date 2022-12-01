@@ -101,11 +101,13 @@ class Person
         $this->id = $person->id;
         $this->idUser = $person->idUser;
         $this->cpf = $person->cpf;
+        $this->idLanguage = $person->idLanguage;
 
         $arrayUser = [
             "id" => $this->id,
             "idUser" => $this->idUser,
             "cpf" => $this->cpf,
+            "idLanguage" => $this->idLanguage
         ];
 
         $_SESSION["userPerson"] = $arrayUser;
@@ -135,13 +137,6 @@ class Person
         $stmt->bindParam(":cpf", $this->cpf);
         $stmt->execute();
 
-        $person = $stmt->fetch();
-
-        /* $this->id = $person->id;
-        $this->idUser = $person->idUser;
-        $this->cpf = $person->cpf;
-        $this->idLanguage = $person->idLanguage; */
-
         $arrayUser = [
             "id" => $this->id,
             "idUser" => $this->idUser,
@@ -149,7 +144,7 @@ class Person
             "idLanguage" => $this->idLanguage
         ];
 
-        $_SESSION["userPerson"] = $arrayUser;
+        $_SESSION["userPerson"] = $arrayUser; 
         
         return true;
     }

@@ -50,6 +50,13 @@ $route->get("/repositorios", "App:showRepositories");
 $route->get("/projetos/{idProject}", "App:projects");
 $route->get("/projetos", "App:showProjects");
 
+/* SPECIFIC REPOSITORY */
+$route->get("/repositorio/{idRepositorio}", "App:showRepository");
+
+/* EDIT REPOSITORY */
+$route->get("/editarRepositorio/{idRepository}", "App:renderEditRepository");
+$route->post("/editarRepositorio/{idRepository}", "App:postEditRepository");
+
 /* LOGOUT */
 $route->get("/sair", "App:logout");
 

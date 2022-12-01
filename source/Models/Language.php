@@ -73,4 +73,17 @@ class Language
             return $stmt->fetch();
         }
     }
+
+    public static function findById($id) {
+        $query = "SELECT * FROM languages WHERE id = :id";
+        $stmt = Connect::getInstance()->prepare($query);
+        $stmt->bindParam(":id", $id);
+        $stmt->execute();
+
+        if($stmt->rowCount() == 0) {
+            return 0;
+        }
+
+        return $stmt->fetch();
+    }
 }

@@ -1,6 +1,3 @@
-<?php
-    var_dump($_SESSION["userPerson"]);
-?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -38,7 +35,7 @@
                 if(!empty($_SESSION["userPerson"])) {?>
                     <div class="box">
                         <label for="cpf">Cpf:</label>
-                        <input type="number" name="cpf" namespace="Cpf">
+                        <input type="number" name="cpf" namespace="Cpf" value="<?= $_SESSION["userPerson"]["cpf"]?>">
                     </div>
             <?php
                 }
@@ -63,9 +60,9 @@
                         foreach($languages as $language) {
                     ?>
                     <?php
-                        if(($language->id == $userPerson["idLanguage"])){
+                        if(($language->id == $_SESSION["userPerson"]["idLanguage"])){
                     ?>
-                        <option value="<?= $userPerson["idLanguage"]; ?>">
+                        <option value="<?= $_SESSION["userPerson"]["idLanguage"]; ?>">
                             <?= $language->language ?>
                     <?php
                         }
@@ -78,7 +75,7 @@
                         foreach($languages as $language) {
                     ?>
                     <?php
-                        if(($language->id != $userPerson["idLanguage"])){
+                        if(($language->id != $_SESSION["userPerson"]["idLanguage"])){
                     ?>
                         <option value="<?= $language->id?>">
                         <?= $language->language ?>
@@ -136,7 +133,7 @@
                 }
             ?>
         
-           <!-- <div class="box-image">
+           <div class="box-image">
            <?php
                 if(!empty($user["image"])):
             ?>
@@ -144,7 +141,7 @@
             <?php
                 endif;
             ?>
-           </div> -->
+           </div>
             
             <div class="box">
                 <label for="image">Foto de perfil:</label>
@@ -166,7 +163,7 @@
 
     <script type="text/javascript" async>
         const form = document.querySelector("#form");
-        // const image = document.querySelector("#imgUser");
+        const image = document.querySelector("#imgUser");
         const message = document.querySelector("#message");
         form.addEventListener("submit", async (e) => {
         e.preventDefault();
@@ -177,7 +174,9 @@
         });
         const user = await data.json();
         console.log(user)
-        // image.setAttribute("src", user.image);
+            if(user.type == "success") {
+                image.setAttribute("src", user.image);
+            }
             message.classList.add("message");
             message.classList.remove("success", "warning", "error");
             message.classList.add(`${user.type}`);

@@ -1,6 +1,5 @@
 <?php
   $this->layout("_theme");
-  var_dump($postRepositories);
 ?>
     <div class="nav-links">
         <div class="nav-links-inside">

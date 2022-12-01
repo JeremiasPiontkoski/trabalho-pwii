@@ -139,6 +139,20 @@ class Project
         }
     }
 
+    public static function findByIdCompany() 
+    {
+        $id = 11;
+        $query = "SELECT * FROM projects WHERE idCompany = :idCompany";
+        $stmt = Connect::getInstance()->prepare($query);
+        $stmt->bindParam(":idCompany", $id);
+        $stmt->execute();
+
+        if($stmt->rowCount() == 0){
+            return false;
+        }
+        return $stmt->fetchAll();
+    }
+
     public function getProjectFromCompany($idCompany) {
         $query = "SELECT * FROM post_projects WHERE idCompany = :idCompany";
         $stmt = Connect::getInstance()->prepare($query);

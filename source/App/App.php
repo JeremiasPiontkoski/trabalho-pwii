@@ -63,8 +63,7 @@ class App
     [
         "user" => $_SESSION["user"],
         "languages" => $this->languages,
-        "typeUser" => $this->typeUser,
-        "id" => $personData
+        "typeUser" => $this->typeUser
     ]);
     }
 
@@ -106,7 +105,14 @@ class App
                 $upload
             );
 
-            $user->update();
+            if(!$user->update()) {
+                $json = [
+                    "message" => "Não foi possivel fazer a alteração, tente novamente!",
+                    "type" => "warning"
+                ];
+                echo json_encode($json);
+                return;
+            }
 
             if(!empty($_SESSION["userPerson"])) {
                 $person = new Person(
@@ -116,19 +122,25 @@ class App
                     $data["language"]
                 );
                 $person->update();
+                $json = [
+                    "message" => "Dados alterados com sucesso!",
+                    "image" => url($user->getImage()),
+                    "type" => "success"
+                ];
+                echo json_encode($json);
+                return;
             }
-            $json = [
-                "id" => $user->getId(),
-                "name" => $user->getName(),
-                "email" => $user->getEmail(),
-                "description" => $user->getDescription(),
-                "language" => $person->getIdLanguage(),
-                "image" => url($user->getImage()),
-                "type" => "success",
-                "message" => "Dados Alteradoso como sucesso!"
-            ];
-
-            echo json_encode($json);
+            // $json = [
+            //     "id" => $user->getId(),
+            //     "name" => $user->getName(),
+            //     "email" => $user->getEmail(),
+            //     "description" => $user->getDescription(),
+            //     "language" => $person->getIdLanguage(),
+            //     "image" => url($user->getImage()),
+            //     "type" => "success",
+            //     "message" => "Dados Alteradoso como sucesso!"
+            // ];
+            
         }
     }
 
@@ -285,12 +297,16 @@ class App
         $project = new Project();
         $projects = $project->findById();
 
+        $repository = new Repository();
+        $project = new Project();
+
         echo $this->view->render("home", 
     [
         "user" => $_SESSION["user"],
-        "repositories" => $this->repositories,
+        "repositories" => $repository::findByIdPerson(),
+        /* "repositories" => $this->repositories, */
         "languages" => $this->languages,
-        "projects" => $this->projects,
+        "projects" => $project::findByIdCompany(),
         "postProjects" => $this->postProjects
     ]);
     }
@@ -299,5 +315,23 @@ class App
         session_destroy();
         setcookie("user", "Logout", time() -3600, "/");
         header("Location:http://www.localhost/trabalho-pwii/login");
+    }
+
+    public function showRepository(){
+        $repository = Repository::findById($_GET["id"]);
+        echo $this->view->render("repository", [
+            "eventName" => CONF_SITE_NAME,
+            "repository" => $repository,
+            "language" => Language::findById($repository->idLanguage)
+        ]);
+    }
+
+    public function renderEditRepository() {
+        $repository = Repository::findById($_GET["id"]);
+        echo $this->view->render("editRepository", [
+            "eventName" => CONF_SITE_NAME,
+            "repository" => $repository,
+            "language" => Language::findById($repository->idLanguage)
+        ]);
     }
 }

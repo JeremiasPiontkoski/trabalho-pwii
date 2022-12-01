@@ -58,7 +58,7 @@
             foreach($repositories as $repository) {
             ?>
                 <div class="box-content">
-                    <p><?= $repository->name; ?></p>
+                    <p><a href="<?= url("app/repositorio/id?id=" . $repository->id)?>"><?=$repository->name?></a></p>
                 </div>
                <?php
                     }
