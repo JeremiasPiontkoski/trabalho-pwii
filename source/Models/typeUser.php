@@ -49,4 +49,17 @@ class typeUser
         }
     }
 
+    public function selectById()
+    {
+        $query = "SELECT type FROM typeusers WHERE id = :id";
+        $stmt = Connect::getInstance()->prepare($query);
+        $stmt->bindParam(":id", $this->id);
+        $stmt->execute();
+
+        if($stmt->rowCount() == 0) {
+            return false;
+        }
+
+        return $stmt->fetch();
+    }
 }

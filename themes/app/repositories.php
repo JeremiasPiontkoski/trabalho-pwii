@@ -47,17 +47,7 @@
                         <p><?= $repository->name; ?></p>
                     </div>
                     <div class="box-content">
-                        <p>
-                            <?php
-                                foreach($languages as $language) {
-                                    if($repository->idLanguage == $language->id){
-                                        echo $language->language;
-                                    }
-                                ?>
-                                <?php
-                                }
-                            ?>
-                        </p>
+                        <p><?= $repository->language; ?></p>
                     </div>
                     <div class="box-content">
                         <p><?=$repository->description ?></p>

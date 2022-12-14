@@ -55,6 +55,24 @@ class App
         //$this->view = new Engine(__DIR__ . "/../../themes/web",'php');
     }
 
+    public function home() {
+
+        $project = new Project();
+        $projects = $project->findById();
+
+        $repository = new Repository();
+        $project = new Project();
+
+        echo $this->view->render("home",
+            [
+                "user" => $_SESSION["user"],
+                "repositories" => $repository->findByIdPerson($_SESSION["userPerson"]["id"]),
+                "languages" => $this->languages,
+                "projects" => $project::findByIdCompany(),
+                "postProjects" => $this->postProjects
+            ]);
+    }
+
     public function profile () : void 
     {
         $person = new Person();
@@ -259,11 +277,12 @@ class App
     }
 
     public function showRepositories() : void
-    {        
+    {
+        $repository = new Repository();
         echo $this->view->render("repositories", 
         [
             "languages" => $this->languages,
-            "repositories" => $this->repositories,
+            "repositories" => $repository->findByIdPerson($_SESSION["userPerson"]["id"]),
             "postRepositories" => $this->postRepositories
         ]);
     }
@@ -290,25 +309,6 @@ class App
             "languages" => $this->languages,
             "projects" => $this->projects
         ]);
-    }
-
-    public function home() {
-
-        $project = new Project();
-        $projects = $project->findById();
-
-        $repository = new Repository();
-        $project = new Project();
-
-        echo $this->view->render("home", 
-    [
-        "user" => $_SESSION["user"],
-        "repositories" => $repository::findByIdPerson(),
-        /* "repositories" => $this->repositories, */
-        "languages" => $this->languages,
-        "projects" => $project::findByIdCompany(),
-        "postProjects" => $this->postProjects
-    ]);
     }
 
     public function logout() {

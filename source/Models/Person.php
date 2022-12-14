@@ -13,62 +13,6 @@ class Person
     private $idLanguage;
     private $repositories;
 
-
-    public function getRepositories() {
-        return $this->repositories;
-    }
-
-    public function setRepositories(int $repositories){
-        $this->repositories = $repositories;
-    }
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
-    /**
-     * @param int|null $id
-     */
-    public function setId(?int $id): void
-    {
-        $this->id = $id;
-    }
-
-    public function getIdLanguage(): ?int
-    {
-        return $this->idLanguage;
-    }
-
-    /**
-     * @param int|null $id
-     */
-    public function setIdLanguage(?int $idLanguage): void
-    {
-        $this->language = $idLanguage;
-    }
-
-    public function getCpf(){
-        return $this->cpf;
-    }
-
-    public function setCpf($cpf) {
-        $this->cpf = $cpf;
-    }
-
-    public function getIdUser(): ?int
-    {
-        return $this->idUser;
-    }
-
-    /**
-     * @param int|null $id
-     */
-    public function setIdUser(?int $idUser): void
-    {
-        $this->id = $idUser;
-    }
-
     public function __construct(
         int $id = NULL,
         int $idUser = NULL,
@@ -82,6 +26,33 @@ class Person
         $this->cpf = $cpf;
         $this->idLanguage = $idLanguage;
         $this->repositories = $repositories;
+    }
+
+    public function getDataPerson()
+    {
+        $query = "SELECT * FROM person
+        JOIN users ON person.idUser = users.id 
+        JOIN typeUsers on users.typeUser = typeUsers.id
+        WHERE idUser = :idUser";
+        $stmt = Connect::getInstance()->prepare($query);
+        $stmt->bindParam(":idUser", $this->idUser);
+        $stmt->execute();
+        if($stmt->rowCount() == 0) {
+            return false;
+        }
+        return $stmt->fetch();
+    }
+
+    public function getAll() {
+        $query = "SELECT * FROM person 
+        JOIN users ON person.idUser = users.id 
+        JOIN typeUsers ON users.typeUser = typeUsers.id";
+        $stmt = Connect::getInstance()->prepare($query);
+        $stmt->execute();
+        if($stmt->rowCount() == 0) {
+            return false;
+        }
+        return  $stmt->fetchAll();
     }
 
     public function getDataUser($idUser)
@@ -149,7 +120,6 @@ class Person
         return true;
     }
 
-
     public function getReposity($idUser) {
         $query = "SELECT repositories FROM person WHERE idUser LIKE :idUser";
         $stmt = Connect::getInstance()->prepare($query);
@@ -164,4 +134,48 @@ class Person
         return true;
     }
 
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function setId(int $id): void {
+        $this->id = $id;
+    }
+
+    public function getIdUser()
+    {
+        return $this->idUser;
+    }
+
+    public function setIdUser($idUser): void
+    {
+        $this->idUser = $idUser;
+    }
+
+    public function getRepositories() {
+        return $this->repositories;
+    }
+
+    public function setRepositories(int $repositories){
+        $this->repositories = $repositories;
+    }
+
+    public function getIdLanguage()
+    {
+        return $this->idLanguage;
+    }
+
+    public function setIdLanguage($idLanguage): void
+    {
+        $this->idLanguage = $idLanguage;
+    }
+
+    public function getCpf(){
+        return $this->cpf;
+    }
+
+    public function setCpf($cpf) {
+        $this->cpf = $cpf;
+    }
 }

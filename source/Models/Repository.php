@@ -14,79 +14,6 @@ class Repository
     private $idLanguage;
     private $idPerson;
 
-    /**
-     * @return mixed
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * @param mixed $name
-     */
-    public function setName($name): void
-    {
-        $this->name = $name;
-    }
-
-    public function getIdlanguage()
-    {
-        return $this->idLanguage;
-    }
-
-    /**
-     * @param mixed $name
-     */
-    public function setIdLanguage($idLanguage): void
-    {
-        $this->idLanguage = $idLanguage;
-    }
-
-    
-
-    /**
-     * @return mixed
-     */
-    public function getDescription()
-    {
-        return $this->description;
-    }
-
-    /**
-     * @param mixed $description
-     */
-    public function setDescription($description): void
-    {
-        $this->description = $description;
-    }
-
-
-    /**
-     * @return int|null
-     */
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
-    /**
-     * @param int|null $id
-     */
-    public function setId(?int $id): void
-    {
-        $this->id = $id;
-    }
-
-    public function getIdPerson() {
-        return $this->idPerson;
-    }
-
-    public function setIdPerson($idPerson) {
-        $this->idPerson = $idPerson;
-    }
-
-
     public function __construct(
         int $id = NULL,
         string $name = NULL,
@@ -149,33 +76,48 @@ class Repository
         }
     }
 
-    public static function findByIdPerson() 
+    public function findByIdPerson(int $idPerson)
     {
-        $query = "SELECT * FROM repositories WHERE idPerson = :idPerson";
+        $query = "SELECT * FROM repositories
+        JOIN post_repositories ON repositories.id = post_repositories.idRepository 
+        JOIN languages ON repositories.idLanguage = languages.id 
+        WHERE post_repositories.idPerson = :idPerson";
         $stmt = Connect::getInstance()->prepare($query);
-        $stmt->bindParam(":idPerson", $_SESSION["userPerson"]["id"]);
-        $stmt->execute();
-
-        if($stmt->rowCount() == 0){
-            return false;
-        }
-        return $stmt->fetchAll();
-    }
-
-
-    public static function findByIdPersonPostRepositories() {
-        $query = "SELECT * FROM post_repositories";
-        $stmt = Connect::getInstance()->prepare($query);
-        // $stmt->bindParam(":idPerson", $_SESSION['userPerson']['id']);
-
+        $stmt->bindParam(":idPerson", $idPerson);
         $stmt->execute();
 
         if($stmt->rowCount() == 0) {
             return false;
         }
-
         return $stmt->fetchAll();
     }
+
+//    public static function findByIdPerson()
+//    {
+//        $query = "SELECT * FROM repositories WHERE idPerson = :idPerson";
+//        $stmt = Connect::getInstance()->prepare($query);
+//        $stmt->bindParam(":idPerson", $_SESSION["userPerson"]["id"]);
+//        $stmt->execute();
+//
+//        if($stmt->rowCount() == 0){
+//            return false;
+//        }
+//        return $stmt->fetchAll();
+//    }
+
+//    public static function findByIdPersonPostRepositories() {
+//        $query = "SELECT * FROM post_repositories";
+//        $stmt = Connect::getInstance()->prepare($query);
+//        // $stmt->bindParam(":idPerson", $_SESSION['userPerson']['id']);
+//
+//        $stmt->execute();
+//
+//        if($stmt->rowCount() == 0) {
+//            return false;
+//        }
+//
+//        return $stmt->fetchAll();
+//    }
 
     public function findAllPostRepositories() 
     {
@@ -190,7 +132,20 @@ class Repository
         }
     }
 
-    public static function findById($id) {
+//    public static function findById($id) {
+//        $query = "SELECT * FROM repositories WHERE id = :id";
+//        $stmt = Connect::getInstance()->prepare($query);
+//        $stmt->bindParam(":id", $id);
+//        $stmt->execute();
+//
+//        if($stmt->rowCount() == 0) {
+//            return false;
+//        }
+//
+//        return $stmt->fetch();
+//    }
+
+    public function findById($id) {
         $query = "SELECT * FROM repositories WHERE id = :id";
         $stmt = Connect::getInstance()->prepare($query);
         $stmt->bindParam(":id", $id);
@@ -200,17 +155,82 @@ class Repository
             return false;
         }
 
-        return $stmt->fetch();
+        $repository = $stmt->fetch();
+        $this->id = $repository->id;
+        $this->name = $repository->name;
+        $this->description = $repository->description;
+        return true;
     }
 
-    // public function getJSON() : string
-    // {
-    //     return json_encode(
-    //         ["user" => [
-    //             "name" => $this->getName(),
-    //             "language" => $this->getLanguage()
-    //         ]], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE
-    //         );
-    // }
+    /**
+     * @return mixed
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
 
+    /**
+     * @param mixed $name
+     */
+    public function setName($name): void
+    {
+        $this->name = $name;
+    }
+
+    public function getIdlanguage()
+    {
+        return $this->idLanguage;
+    }
+
+    /**
+     * @param mixed $name
+     */
+    public function setIdLanguage($idLanguage): void
+    {
+        $this->idLanguage = $idLanguage;
+    }
+
+
+
+    /**
+     * @return mixed
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param mixed $description
+     */
+    public function setDescription($description): void
+    {
+        $this->description = $description;
+    }
+
+
+    /**
+     * @return int|null
+     */
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param int|null $id
+     */
+    public function setId(?int $id): void
+    {
+        $this->id = $id;
+    }
+
+    public function getIdPerson() {
+        return $this->idPerson;
+    }
+
+    public function setIdPerson($idPerson) {
+        $this->idPerson = $idPerson;
+    }
 }

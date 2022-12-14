@@ -43,17 +43,14 @@ class Company
         $this->type = $type;
     }
 
-    public function getIdUser(): ?int
+    public function getIdUser()
     {
         return $this->idUser;
     }
 
-    /**
-     * @param int|null $id
-     */
-    public function setIdUser(?int $idUser): void
+    public function setIdUser($idUser): void
     {
-        $this->id = $idUser;
+        $this->idUser = $idUser;
     }
 
     public function __construct(
@@ -69,44 +66,68 @@ class Company
         $this->type = $type;
     }
 
-    public function insert() {
-        $query = "INSERT INTO company (idUser, cnpj, type) VALUES (:idUser, :cnpj, :type)";
+    public function insert() : bool{
+        $query = "INSERT INTO company (idUser) VALUES (:idUser)";
         $stmt = Connect::getInstance()->prepare($query);
         $stmt->bindParam(":idUser", $this->idUser);
-        $stmt->bindParam(":cnpj", $this->cnpj);
-        $stmt->bindParam(":type", $this->type);
-
         $stmt->execute();
         return true;
     }
 
-    public function getDataCompany($idUser)
-    {
-        $query = "SELECT * FROM company WHERE idUser LIKE :idUser";
+//    public function getDataCompany($idUser)
+//    {
+//        $query = "SELECT * FROM company WHERE idUser LIKE :idUser";
+//        $stmt = Connect::getInstance()->prepare($query);
+//
+//        $stmt->bindParam(":idUser", $idUser);
+//        $stmt->execute();
+//
+//        if ($stmt->rowCount() == 0) {
+//            return false;
+//        }
+//
+//        $company = $stmt->fetch();
+//
+//        $this->id = $company->id;
+//        $this->idUser = $company->idUser;
+//        $this->cnpj = $company->cnpj;
+//        $this->type = $company->type;
+//
+//        $arrayUser = [
+//            "id" => $this->id,
+//            "idUser" => $this->idUser,
+//            "cnpj" => $this->cnpj,
+//            "type" => $this->type
+//        ];
+//
+//        $_SESSION["userCompany"] = $arrayUser;
+//        return true;
+//    }
+
+    public function getAll() {
+        $query = "SELECT * FROM company 
+        JOIN users ON company.idUser = users.id 
+        JOIN typeUsers ON users.typeUser = typeUsers.id";
         $stmt = Connect::getInstance()->prepare($query);
-
-        $stmt->bindParam(":idUser", $idUser);
         $stmt->execute();
-
-        if ($stmt->rowCount() == 0) {
+        if($stmt->rowCount() == 0) {
             return false;
         }
+        return  $stmt->fetchAll();
+    }
 
-        $company = $stmt->fetch();
-
-        $this->id = $company->id;
-        $this->idUser = $company->idUser;
-        $this->cnpj = $company->cnpj;
-        $this->type = $company->type;
-
-        $arrayUser = [
-            "id" => $this->id,
-            "idUser" => $this->idUser,
-            "cnpj" => $this->cnpj,
-            "type" => $this->type
-        ];
-
-        $_SESSION["userCompany"] = $arrayUser;
-        return true;
+    public function getDataCompany()
+    {
+        $query = "SELECT * FROM company
+        JOIN users ON company.idUser = users.id
+        JOIN typeUsers on users.typeUser = typeUsers.id 
+        WHERE idUser = :idUser";
+        $stmt = Connect::getInstance()->prepare($query);
+        $stmt->bindParam(":idUser", $this->idUser);
+        $stmt->execute();
+        if($stmt->rowCount() == 0) {
+            return false;
+        }
+        return $stmt->fetch();
     }
 }

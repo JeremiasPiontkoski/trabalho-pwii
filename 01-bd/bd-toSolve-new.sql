@@ -102,3 +102,6 @@ INSERT INTO languages (language) VALUES ("JavaScript"), ("Java"), ("Php"), ("Pyt
 INSERT INTO type (type) VALUES ("Criação de software"), ("Programação Web"), ("Programação Mobile");
 
 INSERT INTO repositories (id, name, language, description, idLanguage) VALUES (null, "Repositorio teste", "Java", "Descricao teste", 2);
+
+
+-- SELECT * FROM repositories JOIN post_repositories ON repositories.id = post_repositories.idRepository WHERE post_repositories.idPerson = idPerson;
