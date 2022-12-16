@@ -1,17 +1,38 @@
+
+<?php
+$this->layout("_theme");
+?>
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>.:: Área Administrativa ::.</title>
-    <link rel='stylesheet' type='text/css' media='screen' href='assets/adm/css/styles.css'>
-    <script src='assets/adm/scripts/scripts.js' async></script>
+    <title>Área Administrativa</title>
+    <?php $this->start("css"); ?>
+    <link rel="stylesheet" href="<?= url("assets/adm/") ?>css/style.css">
+    <?php $this->end(); ?>
 </head>
 <body>
-    <h1>Home da Aplicação dos Administradores do sistema...</h1>
-    <?php
-      echo __DIR__;
-    ?>
+    <section class="container-content">
+        <div class="inside">
+            <h1>FAQ</h1>
+
+            <?php
+
+            foreach ($faqs as $faq) {?>
+            <div class="content">
+                <a href="<?= url("admin/editarFaq/id?id=" . $faq->id)?>"><?=$faq->question?></a>
+            </div>
+            <?php
+            }
+            ?>
+
+            <div class="content">
+                <a href="<?= url("admin/registroFaq") ?>">CRIAR</a>
+            </div>
+        </div>
+    </section>
 </body>
 </html>

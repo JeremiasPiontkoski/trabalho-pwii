@@ -44,46 +44,32 @@
             <div class="box-repositories">
                 <div class="box-head">
                     <h1>
-                        <?php
-                            if(!empty($_SESSION["userPerson"])) {
-                                echo "Repositórios";
-                            }else {
-                                echo "Projetos";
-                            }
-                        ?>
+                        REPOSITÓRIOS
                     </h1>
                 </div>
                 <?php
-                if(!empty($_SESSION["userPerson"])){
+                if(!empty($repositories)){
             foreach($repositories as $repository) {
             ?>
                 <div class="box-content">
-                    <p><a href="<?= url("app/repositorio/id?id=" . $repository->id)?>"><?=$repository->name?></a></p>
+                    <p><a href="<?= url("app/repositorio/id?id=" . $repository->idRepository)?>"><?=$repository->name?></a></p>
                 </div>
                <?php
                     }
-                }     
-                    else {
-                        foreach($projects as $project) {
-                            ?>
-                            <div class="box-content">
-                                <p>
-                                    <?= $project->name; ?></p>
-                            </div>
-                <?php 
-                        }
+                }
+                else {
+                    ?>
+                    <div class="box-content">
+                        <p>Este usuário não possui repositórios!</p>
+                    </div>
+
+                <?php
                     }
                 ?>
                 <div class="box-bottom">
                     <a href="<?php url() ?>
-                    <?php
-                        if(!empty($_SESSION["userPerson"])) {
-                            echo "app/cadastroRepositorio";
-                        }else {
-                            echo "app/cadastroProjeto";
-                        }
-                    ?>
-                    ">Criar Novo</a>
+                    app/cadastroRepositorio";
+                    ?> Criar Novo</a>
                 </div>
             </div>
             <div class="box-repositories">

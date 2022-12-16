@@ -140,7 +140,6 @@ class User
 
         session_start();
         $_SESSION["user"] = $arrayUser;
-
         return true;
     }
 
@@ -182,7 +181,6 @@ class User
         ];
 
         $_SESSION["user"] = $arrayUser;
-
         return true;
     }
 

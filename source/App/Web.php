@@ -6,6 +6,7 @@ use JsonException;
 use LDAP\Result;
 use League\Plates\Engine;
 use Source\Models\Company;
+use Source\Models\Faq;
 use Source\Models\Language;
 use Source\Models\Person;
 use Source\Models\Type;
@@ -24,12 +25,16 @@ class Web
 
     public function home() : void
     {
+        $faq = new Faq();
         $user = new User(2);
         $user->findById();
         //var_dump($user);
 
         echo $this->view->render(
-            "home",["user" => $user]);
+            "home",[
+                "user" => $user,
+                "faqs" => $faq->getAll()
+            ]);
     }
 
     public function about() : void
@@ -109,7 +114,9 @@ class Web
                 return;
             }
 
-            if(User::findByEmail($data["email"])){
+            $user = new User();
+
+            if($user->findByEmail($data["email"])){
                 $json = [
                     "message" => "Email já cadastrado!",
                     "type" => "warning"

@@ -1,4 +1,5 @@
-
+<?php
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -20,7 +21,8 @@
         <form enctype="multipart/form-data" method="post" id="form">
             <div class="box">
                 <label for="name">Nome:</label>
-                <input type="text" name="name" id="name" value="<?=$user["name"]?>">
+                <input type="text" name="name" id="name" value="<?=$user["name"]?>
+">
             </div>
             <div class="box">
                 <label for="email">Email:</label>
@@ -126,9 +128,9 @@
                     </option>
                     <?php
                         }
-                    ?>            
+                    ?>
                 </select>
-            </div> 
+            </div>
             <?php
                 }
             ?>

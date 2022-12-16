@@ -169,27 +169,32 @@
     <h1>FAQ</h1>
 
         <div class="content">
-            <div class="card">
-                <h1>Title</h1>
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi, nemo rerum! Perferendis numquam cumque neque!</p>
-            </div>
-            <div class="card">
-                <h1>Title</h1>
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi, nemo rerum! Perferendis numquam cumque neque!</p>
-            </div>
-            <div class="card">
-                <h1>Title</h1>
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi, nemo rerum! Perferendis numquam cumque neque!</p>
-            </div>
-
-            <div class="card">
-                <h1>Title</h1>
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi, nemo rerum! Perferendis numquam cumque neque!</p>
-            </div>
-            <div class="card">
-                <h1>Title</h1>
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi, nemo rerum! Perferendis numquam cumque neque!</p>
-            </div>
+            <?php
+                foreach ($faqs as $faq) {?>
+                    <div class="card">
+                        <h1><?= $faq->question ?></h1>
+                        <p><?= $faq->answer ?></p>
+                    </div>
+            <?php
+                }
+            ?>
+<!--            <div class="card">-->
+<!--                <h1>Title</h1>-->
+<!--                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi, nemo rerum! Perferendis numquam cumque neque!</p>-->
+<!--            </div>-->
+<!--            <div class="card">-->
+<!--                <h1>Title</h1>-->
+<!--                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi, nemo rerum! Perferendis numquam cumque neque!</p>-->
+<!--            </div>-->
+<!---->
+<!--            <div class="card">-->
+<!--                <h1>Title</h1>-->
+<!--                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi, nemo rerum! Perferendis numquam cumque neque!</p>-->
+<!--            </div>-->
+<!--            <div class="card">-->
+<!--                <h1>Title</h1>-->
+<!--                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi, nemo rerum! Perferendis numquam cumque neque!</p>-->
+<!--            </div>-->
         </div>
     </section>
 

@@ -13,10 +13,20 @@ $route->namespace("Source\App");
 // users
 $route->get("/user","Api:getUser");
 $route->get("/users/{typeUser}", "Api:getUsers");
+
 $route->put("/user/name/{name}/description/{description}", "Api:updateUser");
+
+//ADD AFTER PROFILE PICTURE
+$route->put("/pessoa/name/{name}/email/{email}/description/{description}/cpf/{cpf}/idLanguage/{idLanguage}", "Api:updatePerson");
+$route->put("/empresa/name/{name}/email/{email}/description/{description}/cnpj/{cnpj}/type/{type}", "Api:updateCompany");
+
 $route->post("/user/name/{name}/email/{email}/password/{password}/typeUser/{typeUser}", "Api:createUser");
-$route->get("/user/repository/{idRepository}", "Api:getRepository");
-$route->get("/user/repositories", "Api:getRepositories");
+
+$route->get("/repository/{idRepository}", "Api:getRepository");
+$route->get("/repositoriesByPerson", "Api:getRepositoriesByPerson");
+$route->get("/repositories", "Api:getRepositories");
+$route->post("/createRepository/name/{name}/description/{description}/idLanguage/{idLanguage}", "Api:createRepository");
+$route->put("/uploadRepository/name/{name}/description/{description}/idLanguage/{idLanguage}/idRepository/{idRepository}", "Api:uploadRepository");
 
 $route->dispatch();
 

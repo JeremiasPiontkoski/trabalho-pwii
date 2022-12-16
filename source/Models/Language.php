@@ -10,38 +10,6 @@ class Language
     private $id;
     private $language;
 
-    /**
-     * @return mixed
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @param mixed $id
-     */
-    public function setId($id): void
-    {
-        $this->id = $id;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getLanguage()
-    {
-        return $this->language;
-    }
-
-    /**
-     * @param mixed $language
-     */
-    public function setLanguage($language): void
-    {
-        $this->language = $language;
-    }
-
     public function __construct($id = null, $language = null)
     {
         $this->id = $id;
@@ -74,7 +42,7 @@ class Language
         }
     }
 
-    public static function findById($id) {
+    public function findById($id) {
         $query = "SELECT * FROM languages WHERE id = :id";
         $stmt = Connect::getInstance()->prepare($query);
         $stmt->bindParam(":id", $id);
@@ -85,5 +53,37 @@ class Language
         }
 
         return $stmt->fetch();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id): void
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLanguage()
+    {
+        return $this->language;
+    }
+
+    /**
+     * @param mixed $language
+     */
+    public function setLanguage($language): void
+    {
+        $this->language = $language;
     }
 }

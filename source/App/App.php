@@ -56,10 +56,6 @@ class App
     }
 
     public function home() {
-
-        $project = new Project();
-        $projects = $project->findById();
-
         $repository = new Repository();
         $project = new Project();
 
@@ -68,8 +64,6 @@ class App
                 "user" => $_SESSION["user"],
                 "repositories" => $repository->findByIdPerson($_SESSION["userPerson"]["id"]),
                 "languages" => $this->languages,
-                "projects" => $project::findByIdCompany(),
-                "postProjects" => $this->postProjects
             ]);
     }
 
@@ -87,7 +81,6 @@ class App
 
     public function editProfile(array $data) {
         if(!empty($data)) {
-
             if(in_array("", $data)) {
                 $json = [
                     "message" => "Preencha todos os campos",
@@ -145,6 +138,18 @@ class App
                     "image" => url($user->getImage()),
                     "type" => "success"
                 ];
+
+//                 $json = [
+//                     "id" => $user->getId(),
+//                     "name" => $user->getName(),
+//                     "email" => $user->getEmail(),
+//                     "description" => $user->getDescription(),
+//                     "language" => $person->getIdLanguage(),
+//                     "image" => url($user->getImage()),
+//                     "type" => "success",
+//                     "message" => "Dados Alteradoso como sucesso!"
+//                 ];
+
                 echo json_encode($json);
                 return;
             }
@@ -192,9 +197,17 @@ class App
                 $_SESSION['userPerson']['id']
             );
 
-            if(!$repository->insertPostRepositories($repository->insert())) {
+            $postRepo = new Repository(
+                $repository->insert(),
+                null,
+                null,
+                $data["language"],
+                $_SESSION['userPerson']['id']
+            );
+
+            if(!$postRepo->insertPostRepositories()) {
                 $json = [
-                    "message" => "Não foi possivel realizar o cadastro, tente novamente!",                        
+                    "message" => "Não foi possivel realizar o cadastro, tente novamente!",
                     "type" => "warning"
                 ];
                 echo json_encode($json);
@@ -279,11 +292,12 @@ class App
     public function showRepositories() : void
     {
         $repository = new Repository();
-        echo $this->view->render("repositories", 
+        $person = new Person();
+        echo $this->view->render("repositories",
         [
             "languages" => $this->languages,
-            "repositories" => $repository->findByIdPerson($_SESSION["userPerson"]["id"]),
-            "postRepositories" => $this->postRepositories
+            "repositories" => $this->repositories,
+            "person" => $person->getAll2()
         ]);
     }
 
@@ -318,20 +332,56 @@ class App
     }
 
     public function showRepository(){
-        $repository = Repository::findById($_GET["id"]);
+//        $repository = Repository::findById($_GET["id"]);
+        $repository = new Repository();
+        $language = new Language();
         echo $this->view->render("repository", [
             "eventName" => CONF_SITE_NAME,
-            "repository" => $repository,
-            "language" => Language::findById($repository->idLanguage)
+            "repository" => $repository->findById($_GET["id"]),
+            "language" => $language->findById($repository->getIdlanguage())
         ]);
     }
 
     public function renderEditRepository() {
-        $repository = Repository::findById($_GET["id"]);
+//        $repository = Repository::findById($_GET["id"]);
+        $repository = new Repository();
+        $language = new Language();
         echo $this->view->render("editRepository", [
             "eventName" => CONF_SITE_NAME,
-            "repository" => $repository,
-            "language" => Language::findById($repository->idLanguage)
+            "repository" => $repository->findById($_GET["id"]),
+//            "language" => Language::findById($repository->idLanguage)
+            "languages" => $language->selectAll()
         ]);
+    }
+
+    public function postEditRepository(array $data) {
+//        echo json_encode($data);
+//        return;
+        if(!empty($data)) {
+            if(in_array("", $data)) {
+                $json = [
+                    "message" => "Preencha todos os campos!",
+                    "type" => "warning",
+                ];
+                echo json_encode($json);
+                return;
+            }
+
+            $repository = new Repository(
+                $_GET["id"],
+                $data["name"],
+                $data["description"],
+                $data["idLanguage"]
+            );
+
+            $repository->update();
+
+            $json = [
+                "message" => "Repositório alterado com sucesso!",
+                "type" => "success"
+            ];
+            echo json_encode($json);
+            return;
+        }
     }
 }

@@ -97,6 +97,13 @@ CREATE TABLE IF NOT EXISTS `post_projects` (
     FOREIGN KEY (`idProject`) REFERENCES `projects` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 )ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
+CREATE TABLE IF NOT EXISTS `faqs` (
+    `id` int(11) NOT NULL AUTO_INCREMENT,
+    `question` VARCHAR(250) NOT NULL,
+    `answer` VARCHAR(250) NOT NULL,
+    PRIMARY KEY(`id`)
+)ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
 INSERT INTO languages (language) VALUES ("JavaScript"), ("Java"), ("Php"), ("Python");
 
 INSERT INTO type (type) VALUES ("Criação de software"), ("Programação Web"), ("Programação Mobile");

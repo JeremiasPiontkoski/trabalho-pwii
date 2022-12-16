@@ -31,10 +31,19 @@
                 </div>
                 <div class="box-bottom">
                     <div class="content">
-                        <p>Name</p>
-                        <p>Email</p>
-                        <p>Linguagem</p>
-                    </div>                 
+                        <?php
+                            foreach ($person as $per) {
+                                if($per->id == $repository->idPerson) {
+                                    ?>
+
+                                    <p><?= $per->name ?></p>
+                                    <p><?= $per->email ?></p>
+                                    <p><?= $per->description ?></p>
+                        <?php
+                                }
+                            }
+                        ?>
+                    </div>
                 </div>
             </div>
 

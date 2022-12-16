@@ -62,9 +62,17 @@ $route->get("/sair", "App:logout");
 
 $route->get("/profile","App:profile");
 $route->post("/profile", "App:editProfile");
-/**
- * App Routs
- */
+
+$route->group("/admin");
+$route->get("/","Adm:home");
+
+$route->get("/registroFaq", "Adm:registerFaq");
+$route->post("/registroFaq", "Adm:registerFaq");
+
+$route->get("/editarFaq/{idFaq}", "Adm:editFaq");
+$route->post("/editarFaq/{idFaq}", "Adm:postEditFaq");
+$route->group(null);
+
 
 /* $route->group("/app"); // agrupa em /app
 $route->get("/","App:home");
@@ -72,9 +80,9 @@ $route->get("/listar","App:list");
 $route->get("/pdf","App:createPDF");
 $route->group(null); // desagrupo do /app
 
-$route->group("/admin"); // agrupa em /admin
+$route->group("/admin");
 $route->get("/","Adm:home");
-$route->group(null); // desagrupo do /admin */
+$route->group(null);
 
 /*
  * Erros Routes

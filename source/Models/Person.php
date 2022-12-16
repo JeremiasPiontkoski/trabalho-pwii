@@ -2,6 +2,7 @@
 
 namespace Source\Models;
 
+use MongoDB\Driver\Exception\ConnectionException;
 use Source\Core\Connect;
 
 class Person
@@ -40,6 +41,8 @@ class Person
         if($stmt->rowCount() == 0) {
             return false;
         }
+//        $dataPerson = $stmt->fetch();
+//        $this->id = $dataPerson->id;
         return $stmt->fetch();
     }
 
@@ -47,6 +50,17 @@ class Person
         $query = "SELECT * FROM person 
         JOIN users ON person.idUser = users.id 
         JOIN typeUsers ON users.typeUser = typeUsers.id";
+        $stmt = Connect::getInstance()->prepare($query);
+        $stmt->execute();
+        if($stmt->rowCount() == 0) {
+            return false;
+        }
+        return  $stmt->fetchAll();
+    }
+
+    public function getAll2(){
+        $query = "SELECT * FROM person 
+        JOIN users ON person.idUser = users.id";
         $stmt = Connect::getInstance()->prepare($query);
         $stmt->execute();
         if($stmt->rowCount() == 0) {
@@ -82,9 +96,7 @@ class Person
         ];
 
         $_SESSION["userPerson"] = $arrayUser;
-        
         return true;
-        
     }
 
     public function insert() : bool
@@ -134,12 +146,12 @@ class Person
         return true;
     }
 
-    public function getId(): ?int
+    public function getId()
     {
         return $this->id;
     }
 
-    public function setId(int $id): void {
+    public function setId($id): void {
         $this->id = $id;
     }
 

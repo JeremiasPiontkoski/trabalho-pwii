@@ -12,47 +12,6 @@ class Company
     private $cnpj;
     private $type;
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
-    /**
-     * @param int|null $id
-     */
-    public function setId(?int $id): void
-    {
-        $this->id = $id;
-    }
-
-    public function getCnpj()
-    {
-        return $this->cnpj;
-    }
-
-    public function setCnpj($cnpj): void
-    {
-        $this->cnpj = $cnpj;
-    }
-
-    public function getType(){
-        return $this->type;
-    }
-
-    public function setType($type) {
-        $this->type = $type;
-    }
-
-    public function getIdUser()
-    {
-        return $this->idUser;
-    }
-
-    public function setIdUser($idUser): void
-    {
-        $this->idUser = $idUser;
-    }
-
     public function __construct(
         int $id = NULL,
         int $idUser = NULL,
@@ -130,4 +89,68 @@ class Company
         }
         return $stmt->fetch();
     }
+
+    public function update()
+    {
+        $query = "UPDATE company SET cnpj = :cnpj, type = :type WHERE idUser = :idUser";
+        $stmt = Connect::getInstance()->prepare($query);
+        $stmt->bindParam(":idUser", $this->idUser);
+        $stmt->bindParam(":cnpj", $this->cnpj);
+        $stmt->bindParam(":type", $this->type);
+        $stmt->execute();
+
+        $arrayUser = [
+            "id" => $this->id,
+            "idUser" => $this->idUser,
+            "cnpj" => $this->cnpj,
+            "type" => $this->type
+        ];
+
+        $_SESSION["userCompany"] = $arrayUser;
+
+        return true;
+    }
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param int|null $id
+     */
+    public function setId(?int $id): void
+    {
+        $this->id = $id;
+    }
+
+    public function getCnpj()
+    {
+        return $this->cnpj;
+    }
+
+    public function setCnpj($cnpj): void
+    {
+        $this->cnpj = $cnpj;
+    }
+
+    public function getType(){
+        return $this->type;
+    }
+
+    public function setType($type) {
+        $this->type = $type;
+    }
+
+    public function getIdUser()
+    {
+        return $this->idUser;
+    }
+
+    public function setIdUser($idUser): void
+    {
+        $this->idUser = $idUser;
+    }
+
+
 }
