@@ -18,8 +18,73 @@
 </head>
 
 <body>
-            <div class="card-register">
-                <form id="form-register" novalidate>
+
+    <section class="container">
+        <div class="content">
+            <header>
+                <img src=<?= url("assets/web/imgs/toSolveLogo/dark-col.svg")?> alt="Logo ToSolve">
+                <h1>Cadastro</h1>
+            </header>
+
+            <form id="form" novalidate>
+                <div class="line">
+                    <label for="userType">Escolha o tipo de usuário:</label>
+                    <select name="userType" id="userType">
+                         <?php
+                            foreach($typeUsers as $type) {
+                                ?>
+                                <option value="<?= $type->id ?>"><?= $type->type ?></option>
+                                <?php
+                            }
+                            ?>
+                    </select>
+                </div>
+
+                <div class="line">
+                    <label for="name">Nome:</label>
+                     <input type="text" placeholder="Nome" name="name" id="name" required>
+                </div>
+
+                <div class="line">
+                    <label for="email">Email:</label>
+                    <input type="email" placeholder="Email" name="email" id="email" required>
+                </div>
+
+                <div class="line">
+                    <label for="password">Senha:</label>
+                    <input type="password" placeholder="Senha" name="password" id="password" required>
+                </div>
+
+                <div class="line">
+                    <label for="confirmPassoword">Confirme:</label>
+                    <input type="password" placeholder="Confirme a Senha" name="confirmPassword" id="confirmPassword" required>
+                </div>
+
+                <div class="line forCompany">
+                        <label for="cnpj" class="forCompany">CNPJ:</label>
+                        <input type="text" name="cnpj" id="cnpj" class="forCompany" placeholder="CNPJ">
+                    </div>
+
+                <button>Cadastro</button>
+
+                <div class="data-error">
+                    <p id="message">
+                    </p>
+                </div>
+
+                <div class="not-acount">
+                    <p>
+                        Possui conta ?
+                        <a href="<?= url("login") ?>">Faça o Login!</a>
+                    </p>
+                </div>
+            </form>
+
+        </div>
+    </section>
+
+           <!--  <div class="card-register">
+                <form id="form">
                     <h1>Cadastro</h1>
 
                     <select name="userType" id="userType">
@@ -47,52 +112,12 @@
                     <div class="container-inputs">
                         <label for="confirmPassoword">Confirme:</label>
                         <input type="password" placeholder="Confirme a Senha" name="confirmPassword" id="confirmPassword" required>
-                    </div>
-
-                    <!-- <div class="container-inputs forPerson">
-                        <label for="cpf" class="forPerson" >CPF:</label>
-                        <input type="number" name="cpf" id="cpf" class="forPerson" placeholder="CPF">
-                    </div> -->
-
-                    <!-- <div class="container-inputs forPerson">
-                        <label for="language" class="forPerson">Linguagem:</label>
-                        <select name="language" id="selectUser" class="forPerson">
-                            <option value="">Escolha...</option>
-                            <?php
-                            foreach($languages as $language) {
-                                ?>
-                                <option value="<?= $language->id ?>"><?= $language->language ?></option>
-                                <?php
-                            }
-                            ?>
-                        </select>
-                    </div> -->
+                    </div>    
 
                     <div class="container-inputs forCompany">
                         <label for="cnpj" class="forCompany">CNPJ:</label>
                         <input type="text" name="cnpj" id="cnpj" class="forCompany" placeholder="CNPJ">
                     </div>
-
-                    <!-- <div class="container-inputs forCompany">
-                        <label for="typeDevelopment" class="forCompany">Tipo de software:</label>
-                        <select name="typeDevelopment" id="typeDevelopment" class="forCompany">
-                            <option value="">Escolha</option>
-                            <?php
-                            foreach($types as $type) {
-                                ?>
-                                <option value="<?= $type->id ?>"><?= $type->type ?></option>
-                                <?php
-                            }
-                            ?>
-                        </select>
-                    </div> -->
-
-                    <!-- <div class="container-inputs">
-                        <label for="description">Descrição:</label>
-                        <input type="text" placeholder="Descrição:" name="description" id="description" required>
-                    </div> -->
-
-                   
 
                     <button type="submit" class="btn-register">Cadastrar</button>
 
@@ -104,10 +129,11 @@
                             <p>Possui uma conta?
                             <a href="<?= url("login") ?>">Faça o login!</a></p>
                         </div>
-                </form>
+                </form>       
+            </div> -->
 
-                <script type="text/javascript" async>
-                            const form = document.querySelector("#form-register");
+            <script type="text/javascript" async>
+                            const form = document.querySelector("#form");
                             const message = document.querySelector("#message"); 
                             form.addEventListener("submit", async (e) => {
                                 e.preventDefault();
@@ -131,7 +157,6 @@
                                 }
                             });
                     </script>
-            </div>
 
     <script src="<?= url("assets/web/scripts/register.js") ?>"></script>
 

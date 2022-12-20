@@ -203,17 +203,18 @@
         <form action="" id="formUsers">
             <div class="line">
                 <label for="name">Nome:</label>
-                <input type="text" name="name" id="name">
+                <input type="text" name="name" id="name" placeholder="Nome">
             </div>
 
             <div class="line">
                 <label for="email">Email:</label>
-                <input type="email" name="email" id="email">
+                <input type="email" name="email" id="email" placeholder="Email">
             </div>
 
             <div class="line">
                 <label for="question">Pergunta:</label>
-                <input type="text" name="question" id="question">
+                <input type="text" name="question" id="question"
+                placeholder="Pergunta">
             </div>
 
             <button>Enviar</button>

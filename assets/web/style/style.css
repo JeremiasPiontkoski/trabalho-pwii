@@ -517,7 +517,7 @@ footer#footer .box ul li path[fill] {
 }
 
 /* LOGIN */
-section#login {
+section.container {
   width: 100vw;
   min-height: 100vh;
   background-color: #198557;
@@ -526,63 +526,64 @@ section#login {
   justify-content: center;
   flex-direction: column;
 }
-section#login .content {
-  width: 80%;
-  height: 90%;
-  background-color: white;
+section.container .content {
+  width: 90%;
+  background-color: #f3f4f6;
   display: flex;
   align-items: center;
   flex-direction: column;
-  border-radius: 1rem;
+  border-radius: 10px;
+  margin-block: 2rem;
+  padding-block: 2rem;
 }
-section#login .content header {
+section.container .content header {
   width: 100%;
   height: auto;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin-top: 3rem;
 }
-section#login .content header h1 {
+section.container .content header h1 {
   font-size: 2rem;
   font-weight: 700;
-  padding: 1.2rem 0.4rem;
   text-transform: uppercase;
   color: #6b7280;
+  padding-block: 0.8rem;
 }
-section#login .content form {
+section.container .content form {
   width: 100%;
   height: auto;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin-top: 3rem;
+  margin-top: 0.8rem;
 }
-section#login .content form .line {
+section.container .content form .line {
   width: 90%;
   height: auto;
   display: flex;
   justify-content: center;
   flex-direction: column;
 }
-section#login .content form .line label {
+section.container .content form .line label {
   font-size: 2rem;
   font-weight: 700;
   padding-block: 0.8rem;
 }
-section#login .content form .line input {
+section.container .content form .line input {
   height: 3.2rem;
   border: none;
   outline: none;
   border-bottom: 1px solid black;
+  background-color: initial;
   color: #6b7280;
   padding: 0.4rem;
   font-size: 1.6rem;
 }
-section#login .content form button {
-  width: 75%;
+section.container .content form button {
+  width: 20rem;
   height: 4rem;
   outline: none;
   border: none;
@@ -595,7 +596,7 @@ section#login .content form button {
   color: #6b7280;
   transition: 0.5s ease;
 }
-section#login .content form .data-error {
+section.container .content form .data-error {
   width: 50%;
   height: auto;
   display: flex;
@@ -603,206 +604,91 @@ section#login .content form .data-error {
   align-items: center;
   margin-block: 1.2rem;
 }
-section#login .content form .data-error p {
+section.container .content form .data-error p {
   font-size: 1.2rem;
   font-weight: 700;
   color: red;
 }
-section#login .content form .not-acount {
+section.container .content form .not-acount {
   width: 90%;
   height: auto;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-section#login .content form .not-acount p {
+section.container .content form .not-acount p {
   font-size: 1.6rem;
   font-weight: 500;
   color: #4d7c0f;
 }
-section#login .content form .not-acount a {
+section.container .content form .not-acount a {
   text-decoration: none;
   color: #4d7c0f;
   transition: 0.5s ease;
 }
 
 @media (min-width: 750px) {
-  section#login .content {
+  section.container .content {
     width: 75%;
     height: 60%;
   }
-  section#login .content form .line {
+  section.container .content form .line {
     width: 75%;
   }
-  section#login .content form button {
+  section.container .content form button {
     width: 30%;
   }
-  section#login .content form .data-error p {
+  section.container .content form .data-error p {
     font-size: 1.6rem;
   }
 }
 @media (min-width: 992px) {
-  section#login {
+  section.container {
     width: 100vw;
   }
-  section#login .content {
+  section.container .content {
     width: 40%;
     height: 75%;
   }
-  section#login .content form .line {
+  section.container .content form .line {
     width: 75%;
   }
-  section#login .content form button {
+  section.container .content form button {
     width: 30%;
   }
-  section#login .content form button:hover {
+  section.container .content form button:hover {
     background-color: transparent;
     border: 1px solid #6b7280;
     border-radius: 1rem;
   }
-  section#login .content form .not-acount {
+  section.container .content form .not-acount {
     padding: 2rem;
   }
-  section#login .content form .not-acount a:hover {
+  section.container .content form .not-acount a:hover {
     color: #6b7280;
     font-weight: 700;
   }
 }
-.message.warning {
-  color: var(--primary-color);
-}
-
-.message.error {
-  color: red;
-}
-
-.message.success {
-  color: lightblue;
-}
-
 /* REGISTER */
 .none {
   display: none;
   transition: 0.5s ease;
 }
 
-.card-register {
-  width: 100vw;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.card-register form {
-  overflow: hidden;
+select {
   width: 100%;
-  height: auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  background-color: #57a78f;
-  box-shadow: 0rem 1rem 4rem rgb(36, 46, 46);
-}
-.card-register form h1 {
-  overflow: hidden;
-  font-size: 2.8rem;
-  font-weight: 600;
-  padding: 1.5rem;
-  color: #198557;
-  text-transform: uppercase;
-}
-.card-register form select {
-  width: 90%;
-  min-width: 15ch;
-  border: 1px solid var(--select-border);
-  border-radius: 0.25em;
-  padding: 0.25em 0.5em;
+  height: 3.2rem;
   font-size: 1.6rem;
-  cursor: pointer;
-  line-height: 1.1;
-  background-color: #fff;
-}
-.card-register form .container-inputs {
-  width: 100%;
-  height: auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-.card-register form .container-inputs label {
-  color: #198557;
-  font-size: 2rem;
-  font-weight: 600;
-  padding-top: 2rem;
-}
-.card-register form .container-inputs input {
-  overflow: hidden;
-  width: 90%;
   border: none;
-  border-radius: 1rem;
-  padding: 1.5rem;
-  font-size: 1.6rem;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  border-bottom: 1px solid black;
   outline: none;
+  background-color: initial;
+  font-weight: 400;
+  padding: 0.4rem;
 }
-.card-register form .container-inputs input::placeholder {
-  font-size: 1.6rem;
-  font-weight: 500;
-}
-.card-register form .container-inputs select {
-  width: 90%;
-  min-width: 15ch;
-  border: 1px solid var(--select-border);
-  border-radius: 0.25em;
-  padding: 0.25em 0.5em;
-  font-size: 1.6rem;
-  cursor: pointer;
-  line-height: 1.1;
-  background-color: #fff;
-  margin-top: 1.5rem;
-}
-.card-register form .btn-register {
-  min-width: 40vw;
-  padding: 1.6rem 0rem;
-  margin-top: 2.5rem;
-  margin-bottom: 1.5rem;
+select option {
   border: none;
-  border-radius: 0.8rem;
   outline: none;
-  text-transform: uppercase;
-  font-weight: 800;
-  font-size: 1.6rem;
-  letter-spacing: 0.3rem;
-  color: var(--primary-color);
-  cursor: pointer;
-}
-.card-register form .btn-register:hover {
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-}
-.card-register form .not-acount {
-  width: 100%;
-  text-align: center;
-  margin-block: 1.2rem;
-}
-.card-register form .not-acount p, .card-register form .not-acount a {
-  font-size: 2rem;
-  color: var(--text-color);
-  text-decoration: none;
-}
-.card-register form .not-acount pa:hover, .card-register form .not-acount aa:hover {
-  color: #198557;
-}
-
-@media (min-width: 992px) {
-  .card-register {
-    background-color: #198557;
-  }
-  .card-register form {
-    width: 50%;
-  }
 }
 
 /*# sourceMappingURL=style.css.map */

@@ -19,13 +19,13 @@
 </head>
 <body>
 
-    <section id="login">
+    <section class="container">
             <div class="content">
                 <header>
-                    <img src=<?= url("assets/web/imgs/toSolveLogo/dark-col.svg")?> alt="...">
+                    <img src=<?= url("assets/web/imgs/toSolveLogo/dark-col.svg")?> alt="Logo ToSolve">
                     <h1>Login</h1>
                 </header>
-                <form id="form-login">
+                <form id="form">
                     <div class="line">
                         <label for="email">Email:</label>
                         <input type="text" name="email" id="email" placeholder="Email">
@@ -36,7 +36,8 @@
                     </div>
                     <button>Login</button>
                     <div class="data-error">
-                        <p id="message"></p>
+                        <p id="message">
+                        </p>
                     </div>
                     <div class="not-acount">
                         <p>Não possui conta ?
@@ -44,9 +45,11 @@
                         </p>
                     </div>
             </form>
+            </div>
+    </section>
 
-            <script type="text/javascript" async>
-                            const form = document.querySelector("#form-login");
+    <script type="text/javascript" async>
+                            const form = document.querySelector("#form");
                             const message = document.querySelector("#message");
                             form.addEventListener("submit", async (e) => {
                                 e.preventDefault();
@@ -68,7 +71,6 @@
                                 }                       
                             });
                         </script>
-            </div>
-    </section>
+
 </body>
 </html>

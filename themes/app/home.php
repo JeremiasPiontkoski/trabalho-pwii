@@ -2,9 +2,9 @@
   $this->layout("_theme");
 ?>
 
-<?php $this->start("css"); ?>
+<!-- <?php $this->start("css"); ?>
     <link rel="stylesheet" href="<?= url("assets/app/") ?>css/style.css">
-<?php $this->end(); ?>
+<?php $this->end(); ?> -->
 
     <section class="box-user">
         <div class="box-left">
