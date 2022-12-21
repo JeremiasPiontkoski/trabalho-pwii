@@ -126,5 +126,492 @@ nav div ul li a {
     transition: 0.4s;
   }
 }
+section.container-user {
+  width: 100vw;
+  height: auto;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 1.2rem;
+  padding-block: 2rem;
+  background-color: #57a78f;
+}
+section.container-user div.image {
+  height: 25rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+section.container-user div.image div.circle {
+  width: 25rem;
+  height: 25rem;
+  background-color: white;
+  border-radius: 100%;
+  overflow: hidden;
+}
+section.container-user div.image div.circle img {
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+section.container-user div.data {
+  height: auto;
+}
+section.container-user div.data .text {
+  width: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+section.container-user div.data .text p:first-child {
+  font-size: 2rem;
+  font-weight: 500;
+  color: #f3f4f6;
+}
+section.container-user div.data .text p:nth-child(2) {
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: white;
+}
+section.container-user div.data .text p {
+  font-size: 1.6rem;
+  font-weight: 400;
+  color: #f3f4f6;
+}
+section.container-user div.data a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  width: 20rem;
+  height: 4rem;
+  font-size: 2rem;
+  font-weight: 500;
+  text-decoration: none;
+  border: none;
+  outline: none;
+  border-radius: 1rem;
+  background-color: #d1d5db;
+  color: #6b7280;
+  transition: 0.5s ease;
+}
+section.container-user .container-box {
+  width: 95vw;
+}
+section.container-user .container-box .content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+@media (min-width: 992px) {
+  section.container-user {
+    flex-direction: row;
+  }
+  section.container-user div.image {
+    width: 60%;
+    height: 30rem;
+  }
+  section.container-user div.image div.circle {
+    width: 35rem;
+    height: 35rem;
+  }
+  section.container-user div.data .text {
+    gap: 2rem;
+  }
+  section.container-user div.data .text a:hover {
+    background-color: transparent;
+    border: 1px solid #d1d5db;
+    font-weight: 700;
+    overflow: hidden;
+  }
+}
+section.container-repositories {
+  width: 100vw;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-block: 2rem;
+}
+section.container-repositories .head {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+section.container-repositories .head h1 {
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: #6b7280;
+}
+section.container-repositories .content {
+  width: 25rem;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+section.container-repositories .content a {
+  height: 3rem;
+  width: 90%;
+  text-align: center;
+  text-decoration: none;
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: #6b7280;
+  margin-block: 0.8rem;
+  border-bottom: 1px solid black;
+  transition: 0.5s ease;
+}
+section.container-repositories .content p {
+  text-align: center;
+  font-size: 1.6rem;
+  font-weight: 500;
+}
+section.container-repositories .footer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+section.container-repositories .footer a {
+  width: 20rem;
+  height: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  font-size: 2rem;
+  font-weight: 500;
+  text-decoration: none;
+  border: none;
+  outline: none;
+  border-radius: 1rem;
+  background-color: #d1d5db;
+  color: black;
+  transition: 0.5s ease;
+  margin-top: 0.8rem;
+}
+
+@media (min-width: 600px) {
+  section.container-repositories .content {
+    width: 40rem;
+  }
+}
+@media (min-width: 992px) {
+  section.container-repositories .content {
+    width: 50rem;
+  }
+  section.container-repositories .content a:hover {
+    background-color: #d1d5db;
+    border: initial;
+    border-radius: 5px;
+    color: #f3f4f6;
+  }
+  section.container-repositories .footer a:hover {
+    background-color: transparent;
+    border: 1px solid #6b7280;
+    font-weight: 700;
+    color: #6b7280;
+    overflow: hidden;
+  }
+}
+section.container {
+  width: 100vw;
+  min-height: 100vh;
+  background-color: #198557;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+section.container .content {
+  width: 90%;
+  background-color: #f3f4f6;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 10px;
+  margin-block: 2rem;
+  padding-block: 2rem;
+}
+section.container .content header {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+section.container .content header h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-align: center;
+  color: #6b7280;
+  padding-block: 0.8rem;
+}
+section.container .content form {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 0.8rem;
+}
+section.container .content form .line {
+  width: 90%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+section.container .content form .line label {
+  font-size: 2rem;
+  font-weight: 700;
+  padding-block: 0.8rem;
+}
+section.container .content form .line input {
+  height: 3.2rem;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid black;
+  background-color: initial;
+  color: #6b7280;
+  padding: 0.4rem;
+  font-size: 1.6rem;
+}
+section.container .content form button {
+  width: 20rem;
+  height: 4rem;
+  outline: none;
+  border: none;
+  border-radius: 1rem;
+  font-size: 2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-top: 2rem;
+  background-color: #d1d5db;
+  color: #6b7280;
+  transition: 0.5s ease;
+}
+section.container .content form .data-error {
+  width: 50%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-block: 1.2rem;
+}
+section.container .content form .data-error p {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: red;
+}
+section.container .content form .not-acount {
+  width: 90%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+section.container .content form .not-acount p {
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: #4d7c0f;
+}
+section.container .content form .not-acount a {
+  text-decoration: none;
+  color: #4d7c0f;
+  transition: 0.5s ease;
+}
+
+select {
+  width: 100%;
+  height: 3.2rem;
+  font-size: 1.6rem;
+  border: none;
+  border-bottom: 1px solid black;
+  outline: none;
+  background-color: initial;
+  font-weight: 400;
+  padding: 0.4rem;
+}
+select option {
+  border: none;
+  outline: none;
+}
+
+@media (min-width: 750px) {
+  section.container .content {
+    width: 75%;
+    height: 60%;
+  }
+  section.container .content form .line {
+    width: 75%;
+  }
+  section.container .content form button {
+    width: 30%;
+  }
+  section.container .content form .data-error p {
+    font-size: 1.6rem;
+  }
+}
+@media (min-width: 992px) {
+  section.container {
+    width: 100vw;
+  }
+  section.container .content {
+    width: 40%;
+    height: 75%;
+  }
+  section.container .content form .line {
+    width: 75%;
+  }
+  section.container .content form button {
+    width: 30%;
+  }
+  section.container .content form button:hover {
+    background-color: transparent;
+    border: 1px solid #6b7280;
+    border-radius: 1rem;
+  }
+  section.container .content form .not-acount {
+    padding: 2rem;
+  }
+  section.container .content form .not-acount a:hover {
+    color: #6b7280;
+    font-weight: 700;
+  }
+}
+.none {
+  display: none;
+  transition: 0.5s ease;
+}
+
+.container-form {
+  width: 100vw;
+  min-height: 100vh;
+  background-color: #57a78f;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.container-form h1 {
+  font-size: 2rem;
+  text-transform: uppercase;
+  color: #6b7280;
+  padding: 1rem;
+}
+.container-form form {
+  width: 90%;
+  height: 100%;
+  margin-bottom: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 10px;
+}
+.container-form form .box {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 0.5rem;
+}
+.container-form form .box label {
+  font-size: 2rem;
+  font-weight: 700;
+  padding-block: 0.8rem;
+  color: #f3f4f6;
+}
+.container-form form .box input {
+  height: 3.2rem;
+  border: none;
+  outline: none;
+  color: #6b7280;
+  padding: 0.4rem;
+  font-size: 1.6rem;
+  border-radius: 5px;
+}
+.container-form form .box select {
+  width: 100%;
+  min-width: 15ch;
+  border: 1px solid var(--select-border);
+  border-radius: 0.25em;
+  padding: 0.25em 0.5em;
+  font-size: 1.6rem;
+  cursor: pointer;
+  line-height: 1.1;
+  background-color: #fff;
+}
+.container-form form .data-error {
+  width: 50%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-block: 1.2rem;
+}
+.container-form form .data-error p {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: red;
+}
+.container-form form .box-image {
+  width: 15rem;
+  height: 15rem;
+  background-color: white;
+  margin-top: 1rem;
+  border-radius: 100%;
+  overflow: hidden;
+}
+.container-form form button {
+  width: 75%;
+  height: 4rem;
+  outline: none;
+  border: none;
+  border-radius: 1rem;
+  font-size: 2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-block: 1.2rem;
+  background-color: #d1d5db;
+  color: #6b7280;
+  transition: 0.5s ease;
+}
+.container-form a {
+  text-decoration: none;
+  font-size: 2rem;
+  color: #1f2937;
+  transition: 0.5s ease;
+}
+.container-form a:hover {
+  color: #6b7280;
+}
+
+@media (min-width: 992px) {
+  .container-form form {
+    width: 50%;
+    background-color: #198557;
+    padding: 5rem;
+  }
+  .container-form .box label {
+    color: #f3f4f6;
+  }
+}
 
 /*# sourceMappingURL=style.css.map */

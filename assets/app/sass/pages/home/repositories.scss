@@ -1,0 +1,136 @@
+section.container-repositories {
+    width: 100vw;
+    height: auto;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    margin-block: 2rem;
+
+    .head {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        h1 {
+            font-size: map-get($font-sizes, extra-large);
+            font-weight: map-get($font-weights, bold);
+
+            color: $text-color-medium;
+        }
+    }
+
+    .content {
+        width: 25rem;
+        height: auto;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+        a {
+            height: 3rem;
+            width: 90%;
+
+            text-align: center;
+            text-decoration: none;
+
+            font-size: map-get($font-sizes, normal);
+            font-weight: map-get($font-weights, medium);
+
+            color: $text-color-medium;
+
+            margin-block: .8rem;
+
+            border-bottom: 1px solid black;
+
+            transition: .5s ease;
+        }
+
+        p {
+            text-align: center;
+            font-size: map-get($font-sizes, normal);
+            font-weight: map-get($font-weights, medium); 
+        }
+    }
+
+    .footer {
+        width: 100%;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+            a {
+                width: 20rem;
+                height: 4rem;
+
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                padding: .5rem 1rem;
+
+                font-size: map-get($font-sizes, $key: large);
+                font-weight: map-get($font-weights, medium);
+
+                text-decoration: none;
+
+                border: none;
+
+                outline: none;
+
+                border-radius: 1rem;
+
+                background-color: $btn-color-medium;
+                color: black;
+
+                transition: .5s ease;
+
+                margin-top: .8rem;
+            }
+    }
+}
+
+@media(min-width: 600px) {
+    section.container-repositories {
+        .content {
+            width: 40rem;
+        }
+    }
+}
+
+@media(min-width: 992px) {
+    section.container-repositories {
+        .content {
+            width: 50rem;
+
+            a {
+                &:hover {
+                    background-color: $gray-300;
+                    border: initial;
+
+                    border-radius: 5px;
+
+                    color: $text-color-light;
+                }
+            }
+        }
+
+        .footer {
+            a {
+                &:hover {
+                    background-color: transparent;
+                    border: 1px solid $text-color-medium;
+                    font-weight: map-get($font-weights, bold);
+                    color: $text-color-medium;
+                    overflow: hidden;
+                }
+            }
+        }
+    }
+}

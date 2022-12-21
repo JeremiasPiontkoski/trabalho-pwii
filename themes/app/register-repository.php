@@ -9,12 +9,50 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@200&display=swap');
     </style>
-    <link rel="stylesheet" href="<?= url("assets/web/css/style-cadastro.css") ?>">
-    <link rel="stylesheet" href="<?= url("assets/web/css/style-message.css") ?>">
+    <!-- <link rel="stylesheet" href="<?= url("assets/web/css/style-cadastro.css") ?>"> -->
+    <!-- <link rel="stylesheet" href="<?= url("assets/web/css/style-message.css") ?>"> -->
+    <link rel="stylesheet" href="<?= url("assets/app/style/style.css") ?>">
     <title>To Solve - Cadastro</title>
 </head>
 <body>
-    <section>
+    <section class="container">
+        <div class="content">
+            <header><h1>Cadastro de Repositório</h1></header>
+            <form action="" id="form">
+                <div class="line">
+                    <label for="name">Nome:</label>
+                    <input type="text" placeholder="Nome" name="name" id="name">
+                </div>
+
+                <div class="line">
+                    <label for="language">Escolha a linguagem:</label>
+                    <select name="language" id="selectUser">
+                            <option value="">Escolha...</option>                    
+                            <?php
+                            foreach($languages as $language) {
+                                ?>
+                                <option value="<?= $language->id ?>"><?= $language->language ?></option>
+                                <?php
+                            }
+                            ?>
+                        </select>
+                </div>
+
+                <div class="line">
+                    <label for="description">Descrição:</label>
+                    <input type="text" name="description" placeholder="Descrição" id="description">
+                </div>
+
+                <button>Cadastrar</button>
+
+                <div class="data-error">
+                    <p id="message"></p>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- <section>
             <div class="card-register">
                 <form id="form-register" novalidate>
                     <h1>CADASTRO REPOSITÓRIO</h1>
@@ -47,9 +85,13 @@
 
                 </form>
 
-                <script type="text/javascript" async>
-                            const form = document.querySelector("#form-register"); // id do formulário
-                            const message = document.querySelector("#message"); // id da div message
+                
+            </div>
+    </section> -->
+
+    <script type="text/javascript" async>
+                            const form = document.querySelector("#form");
+                            const message = document.querySelector("#message");
                             form.addEventListener("submit", async (e) => {
                                 e.preventDefault();
                                 const dataUser = new FormData(form);
@@ -72,7 +114,5 @@
                                 }
                             });
                     </script>
-            </div>
-    </section>
 </body>
 </html>

@@ -1,6 +1,7 @@
 <?php
   $this->layout("_theme");
 ?>
+
     <div class="nav-links">
         <div class="nav-links-inside">
             <ul>
