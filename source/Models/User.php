@@ -12,6 +12,7 @@ class User
     private $password;
     private $description;
     private $typeUser;
+    private $idPerson;
 
     private $image;
 
@@ -184,6 +185,20 @@ class User
         return true;
     }
 
+    public function findByIdPerson() {
+        $query = "SELECT * FROM users 
+        JOIN person ON users.id = person.idUser 
+        WHERE person.id = :id";
+        $stmt = Connect::getInstance()->prepare($query);
+        $stmt->bindParam(":id", $this->idPerson);
+        $stmt->execute();
+
+        if($stmt->rowCount() == 0) {
+            return false;
+        }
+        return $stmt->fetch();
+    }
+
     public function getJSON() : string
     {
         return json_encode(
@@ -305,5 +320,23 @@ class User
     {
         $this->password = $password;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getIdPerson()
+    {
+        return $this->idPerson;
+    }
+
+    /**
+     * @param mixed $idPerson
+     */
+    public function setIdPerson($idPerson): void
+    {
+        $this->idPerson = $idPerson;
+    }
+
+
 
 }

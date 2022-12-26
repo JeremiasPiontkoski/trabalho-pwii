@@ -21,19 +21,23 @@
         <form enctype="multipart/form-data" method="post" id="form">
             <div class="box">
                 <label for="name">Nome:</label>
-                <input type="text" name="name" id="name" value="<?=$user["name"]?>
+                <input type="text" name="name" id="name" value="<?=$user["user"]["name"]?>
 ">
             </div>
             <div class="box">
                 <label for="email">Email:</label>
-                <input type="email" name="email" id="email" value="<?=$user["email"]?>">
+                <input type="email" name="email" id="email" value="<?=$user["user"]["email"]?>">
             </div>
             <div class="box">
                 <label for="description">Descrição:</label>
-                <input type="text" name="description" id="description" value="<?=$user["description"]?>">
+                <input type="text" name="description" id="description" value="<?=$user["user"]["description"]?>">
+            </div>
+            <div class="box">
+                <label for="cpf">Cpf</label>
+                <input type="number" name="cpf" value="<?=$user["user"]["person"]["cpf"];?>">
             </div>
 
-            <?php
+            <!-- <?php
                 if(!empty($_SESSION["userPerson"])) {?>
                     <div class="box">
                         <label for="cpf">Cpf:</label>
@@ -41,9 +45,9 @@
                     </div>
             <?php
                 }
-            ?>
+            ?> -->
 
-            <?php
+            <!-- <?php
                 if(!empty($_SESSION["userCompany"])) {?>
                     <div class="box">
                         <label for="cnpj">Cnpj:</label>
@@ -51,7 +55,7 @@
                     </div>
             <?php
                 }
-            ?>
+            ?> -->
 
             <?php
             if(!empty($_SESSION["userPerson"])) {?>
@@ -62,9 +66,9 @@
                         foreach($languages as $language) {
                     ?>
                     <?php
-                        if(($language->id == $_SESSION["userPerson"]["idLanguage"])){
+                        if(($language->id == $user["user"]["person"]["idLanguage"])){
                     ?>
-                        <option value="<?= $_SESSION["userPerson"]["idLanguage"]; ?>">
+                        <option value="<?= $user["user"]["person"]["idLanguage"]; ?>">
                             <?= $language->language ?>
                     <?php
                         }
@@ -77,7 +81,7 @@
                         foreach($languages as $language) {
                     ?>
                     <?php
-                        if(($language->id != $_SESSION["userPerson"]["idLanguage"])){
+                        if(($language->id != $user["user"]["person"]["idLanguage"])){
                     ?>
                         <option value="<?= $language->id?>">
                         <?= $language->language ?>
@@ -94,7 +98,7 @@
                 }
             ?>
 
-            <?php
+            <!-- <?php
             if(!empty($_SESSION["userCompany"])) {?>
             <div class="box">
                 <label for="typeDelopment">Desenvolvimento:</label>
@@ -133,13 +137,13 @@
             </div>
             <?php
                 }
-            ?>
+            ?> -->
         
            <div class="box-image">
            <?php
-                if(!empty($user["image"])):
+                if(!empty($user["user"]["photo"])):
             ?>
-                <img src="<?= url($user["image"]); ?>" id="imgUser">
+                <img src="<?= url($user["user"]["photo"]); ?>" id="imgUser">
             <?php
                 endif;
             ?>

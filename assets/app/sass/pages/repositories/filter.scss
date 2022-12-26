@@ -1,0 +1,22 @@
+section.container-repositories {
+    width: 100vw;
+    height: auto;
+
+    margin: 0;
+
+    .head {
+        width: 100%;
+        min-height: 6rem;
+        display: flex;
+        background-color: orange;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+        gap: 1.2rem;
+
+        .options {
+            width: 100%;
+            height: auto;
+        }
+    }
+}

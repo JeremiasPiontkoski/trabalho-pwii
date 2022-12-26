@@ -23,6 +23,7 @@ $route->put("/empresa/name/{name}/email/{email}/description/{description}/cnpj/{
 $route->post("/user/name/{name}/email/{email}/password/{password}/typeUser/{typeUser}", "Api:createUser");
 
 $route->get("/repository/{idRepository}", "Api:getRepository");
+$route->get("/repositories/{idLanguage}", "Api:getReposotiesByIdLanguage");
 $route->get("/repositoriesByPerson", "Api:getRepositoriesByPerson");
 $route->get("/repositories", "Api:getRepositories");
 $route->post("/createRepository/name/{name}/description/{description}/idLanguage/{idLanguage}", "Api:createRepository");

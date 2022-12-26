@@ -21,6 +21,12 @@ class App
     private $projects;
     private $postProjects;
     private $postRepositories;
+    // private $typeUser;
+
+    private $user;
+    private $person;
+    private $language;
+    private $repository;
     private $typeUser;
 
     public function __construct()
@@ -30,17 +36,11 @@ class App
             header("Location:http://www.localhost/trabalho-pwii/login");
         }
 
-        $languages = new Language();
-        $this->languages = $languages->selectAll();
-
-        $repositories = new Repository();
-        $this->repositories = $repositories->selectAll();
-
-        $projects = new Project();
-        $this->projects = $projects->selectAll();
-
-        $typeUser = new Type();
-        $this->typeUser = $typeUser->selectAll();
+        $this->language = new Language();
+        $this->typeUser = new typeUser();
+        $this->user = new User();
+        $this->person = new Person();
+        $this->repository = new Repository();
 
         if(!empty($_SESSION["userCompany"])){
             $postProjects = new Project();
@@ -55,28 +55,101 @@ class App
         //$this->view = new Engine(__DIR__ . "/../../themes/web",'php');
     }
 
-    public function home() {
-        $repository = new Repository();
-        $project = new Project();
+    public function getResponsePerson()
+    {
+        $this->person->setIdUser($_SESSION["user"]["id"]);
+        $dataPerson = $this->person->getDataPerson();
 
+        $responsePerson = [
+            "user" => [
+                "id" => $_SESSION["user"]["id"],
+                "name" => $dataPerson->name,
+                "email" => $dataPerson->email,
+                "description" => $dataPerson->description,
+                "photo" => $dataPerson->profilePicture,
+                "idTypeUser" => $dataPerson->typeUser,
+                "typeUser" => $dataPerson->type,
+                "person" => [
+                    "cpf" => $dataPerson->cpf,
+                    "idLanguage" => $dataPerson->idLanguage
+                ]
+            ]
+        ];
+
+        return $responsePerson;
+    }
+
+    public function getResponseRepositoriesByIdPerson()
+    {
+        $this->person->getDataUser($_SESSION["user"]["id"]);
+        $this->repository->setIdPerson($this->person->getId());
+        $dataRepositories = $this->repository->findByIdPerson();
+        $repositories = [];
+
+        foreach($dataRepositories as $repository) {
+            $response = [
+                "repository" => [
+                    "id" => $repository->idRepository,
+                    "idPerson" => $repository->idPerson,
+                    "name" => $repository->name,
+                    "description" => $repository->description,
+                    "idLanguage" => $repository->idLanguage,
+                    "language" => $repository->language
+                ]
+            ];
+
+            $repositories[] = $response;
+        }
+       
+        return $repositories;
+    }
+
+    public function getResponseRepositories($dataRepository)
+    {
+        $repositories = [];
+        foreach($dataRepository as $repository) {
+            $this->user->setIdPerson($repository->idPerson);
+            $dataUser = $this->user->findByIdPerson();
+
+            $response = [
+                "repository" => [
+                    "id" => $repository->idRepository,
+                    "idPerson" => $repository->idPerson,
+                    "name" => $repository->name,
+                    "description" => $repository->description,
+                    "idLanguage" => $repository->idLanguage,
+                    "language" => $repository->language,
+                    "user" => [
+                        "id" => $dataUser->id,
+                        "name" => $dataUser->name,
+                        "email" => $dataUser->email,
+                        "description" => $dataUser->description,
+                        "photo" => $dataUser->profilePicture
+                    ]
+                ]
+            ];
+
+            $repositories[] = $response;            
+        }
+        return $repositories;
+    }
+
+    public function home() {
         echo $this->view->render("home",
-            [
-                "user" => $_SESSION["user"],
-                "repositories" => $repository->findByIdPerson($_SESSION["userPerson"]["id"]),
-                "languages" => $this->languages,
-            ]);
+        [
+            "user" => $this->getResponsePerson(),
+            "languages" => $this->language->selectAll(),
+            "repositories" => $this->getResponseRepositoriesByIdPerson()
+        ]);
     }
 
     public function profile () : void 
     {
-        $person = new Person();
-        $personData = $person->getDataUser($_SESSION['user']["id"]);
         echo $this->view->render("profile",
-    [
-        "user" => $_SESSION["user"],
-        "languages" => $this->languages,
-        "typeUser" => $this->typeUser
-    ]);
+        [
+            "user" => $this->getResponsePerson(),
+            "languages" => $this->language->selectAll()
+        ]);
     }
 
     public function editProfile(array $data) {
@@ -223,7 +296,7 @@ class App
         }
         
         echo $this->view->render("register-repository",[
-            "languages" => $this->languages
+            "languages" => $this->language->selectAll()
         ]);
     }
 
@@ -270,20 +343,22 @@ class App
         }
 
         echo $this->view->render("registerProject",[
-            "languages" => $this->languages
+            "languages" => $this->language->selectAll()
         ]);
     }
 
     public function repositories(?array $data) : void
     {
-        if(!empty($data)){
-            $repository = new Repository();
-            $repositories = $repository->findByIdLanguage($data["idLanguage"]);
+        $this->repository->setIdLanguage($data["idLanguage"]);
+        $dataRepositories = $this->repository->findByIdLanguage();
+
+        if($dataRepositories != null) {
+            $repositories = $this->getResponseRepositories($dataRepositories);
         }
 
         echo $this->view->render(
             "filterRepositories",[
-                "languages" => $this->languages,
+                "languages" => $this->language->selectAll(),
                 "repositories" => $repositories
             ]
         );
@@ -291,13 +366,13 @@ class App
 
     public function showRepositories() : void
     {
-        $repository = new Repository();
-        $person = new Person();
-        echo $this->view->render("repositories",
-        [
-            "languages" => $this->languages,
-            "repositories" => $this->repositories,
-            "person" => $person->getAll2()
+        $dataRepository = $this->repository->selectAll();
+        $repositories = $this->getResponseRepositories($dataRepository);
+        
+        
+        echo $this->view->render("repositories", [
+            "languages" => $this->language->selectAll(),
+            "repositories" => $repositories
         ]);
     }
 
@@ -332,31 +407,74 @@ class App
     }
 
     public function showRepository(){
-//        $repository = Repository::findById($_GET["id"]);
-        $repository = new Repository();
-        $language = new Language();
+        $this->repository->setId($_GET["id"]);
+        $repository = $this->repository->findById();
+
+        $this->user->setIdPerson($repository->idPerson);
+        $dataUser = $this->user->findByIdPerson();
+
+        $response = [
+            "repository" => [
+                "id" => $repository->idRepository,
+                "idPerson" => $repository->idPerson,
+                "name" => $repository->name,
+                "description" => $repository->description,
+                "idLanguage" => $repository->idLanguage,
+                "language" => $repository->language,
+                "user" => [
+                    "id" => $dataUser->id,
+                    "name" => $dataUser->name,
+                    "email" => $dataUser->email,
+                    "description" => $dataUser->description,
+                    "photo" => $dataUser->profilePicture
+                ]
+            ]
+        ];
         echo $this->view->render("repository", [
             "eventName" => CONF_SITE_NAME,
-            "repository" => $repository->findById($_GET["id"]),
-            "language" => $language->findById($repository->getIdlanguage())
+            "repository" => $response
         ]);
     }
 
     public function renderEditRepository() {
 //        $repository = Repository::findById($_GET["id"]);
-        $repository = new Repository();
-        $language = new Language();
+        // $repository = new Repository();
+        // $language = new Language();
+
+
+        $this->repository->setId($_GET["id"]);
+        $repository = $this->repository->findById();
+
+        $this->user->setIdPerson($repository->idPerson);
+        $dataUser = $this->user->findByIdPerson();
+
+        $response = [
+            "repository" => [
+                "id" => $repository->idRepository,
+                "idPerson" => $repository->idPerson,
+                "name" => $repository->name,
+                "description" => $repository->description,
+                "idLanguage" => $repository->idLanguage,
+                "language" => $repository->language,
+                "user" => [
+                    "id" => $dataUser->id,
+                    "name" => $dataUser->name,
+                    "email" => $dataUser->email,
+                    "description" => $dataUser->description,
+                    "photo" => $dataUser->profilePicture
+                ]
+            ]
+        ];
+
         echo $this->view->render("editRepository", [
             "eventName" => CONF_SITE_NAME,
-            "repository" => $repository->findById($_GET["id"]),
+            "repository" => $response,
 //            "language" => Language::findById($repository->idLanguage)
-            "languages" => $language->selectAll()
+            "languages" => $this->language->selectAll()
         ]);
     }
 
     public function postEditRepository(array $data) {
-//        echo json_encode($data);
-//        return;
         if(!empty($data)) {
             if(in_array("", $data)) {
                 $json = [

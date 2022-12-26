@@ -1,6 +1,9 @@
 
 <?php
 $this->layout("_theme");
+foreach($repositories as $repo) {
+    var_dump($repo);
+}
 ?>
 
 <?php $this->start("css"); ?>
@@ -25,7 +28,15 @@ $this->layout("_theme");
         </div>
     </div> 
 
-    <section class="box-container">
+    <?php
+        foreach($repositories as $repository) { ?>
+
+            <p><?= $repository["repository"]["language"]; ?></p>
+    <?php
+        }
+    ?>
+
+    <!-- <section class="box-container">
     <?php
         if($repositories) {
             foreach ($repositories as $repository) {        
@@ -61,4 +72,4 @@ $this->layout("_theme");
             }
             }
         ?>
-    </section>
+    </section> -->

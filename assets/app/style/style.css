@@ -325,6 +325,83 @@ section.container-repositories .footer a {
     overflow: hidden;
   }
 }
+section.container-repositories {
+  width: 100vw;
+  height: auto;
+  margin: 0;
+}
+section.container-repositories .head {
+  width: 100%;
+  min-height: 6rem;
+  display: flex;
+  background-color: orange;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 1.2rem;
+}
+section.container-repositories .head .options {
+  width: 100%;
+  height: auto;
+}
+
+section.container-repositories div.repositories {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-block: 1.6rem;
+}
+section.container-repositories div.repositories .line {
+  text-decoration: none;
+  width: 90%;
+  height: auto;
+  margin-bottom: 1.6rem;
+  background-color: #f3f4f6;
+  border-radius: 5px;
+}
+section.container-repositories div.repositories .line p#first {
+  background-color: #d1d5db;
+  color: #6b7280;
+  font-size: 1.6rem;
+  font-weight: 500;
+  padding: 0.8rem 1.2rem;
+  text-align: center;
+}
+section.container-repositories div.repositories .line p#first span {
+  color: #f3f4f6;
+  font-weight: 700;
+}
+section.container-repositories div.repositories .line .data {
+  width: 100%;
+  height: 100%;
+  background-color: #6b7280;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: row;
+}
+section.container-repositories div.repositories .line .data p {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #f3f4f6;
+  padding: 0.4rem 0.8rem;
+}
+section.container-repositories div.repositories .line p#last {
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #6b7280;
+  padding: 0.4rem 0.8rem;
+}
+
+@media (min-width: 500px) {
+  section.container-repositories div.repositories .line {
+    width: 45rem;
+  }
+}
 section.container {
   width: 100vw;
   min-height: 100vh;

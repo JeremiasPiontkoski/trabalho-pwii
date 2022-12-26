@@ -3,6 +3,7 @@
 namespace Source\App;
 
 use Source\Models\Company;
+use Source\Models\Language;
 use Source\Models\Person;
 use Source\Models\Project;
 use Source\Models\Repository;
@@ -17,6 +18,7 @@ class Api
     private $company;
     private $typeUser;
     private $repository;
+    private $language;
     private $headers;
 
     public function __construct()
@@ -28,6 +30,7 @@ class Api
         $this->company = new Company();
         $this->typeUser = new typeUser();
         $this->repository = new Repository();
+        $this->language = new Language();
 
         if($this->headers["Rule"] === "N") {
             return;
@@ -59,13 +62,43 @@ class Api
         if($this->user->getId() != null) {
             if($this->user->getTypeUser() == 1) {
                 $this->person->setIdUser($this->user->getId());
-                echo json_encode($this->person->getDataPerson(), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+                $dataPerson = $this->person->getDataPerson();
+                $response = [
+                    "user" => [
+                        "id" => $this->person->getIdUser(),
+                        "name" => $dataPerson->name,
+                        "email" => $dataPerson->email,
+                        "description" => $dataPerson->description,
+                        "photo" => $dataPerson->profilePicture,
+                        "idTypeUser" => $dataPerson->typeUser,
+                        "typeUser" => $dataPerson->type,
+                        "person" => [
+                            "cpf" => $dataPerson->cpf,
+                            "idLanguage" => $dataPerson->idLanguage
+                            ]
+                    ]
+                ];
+                echo json_encode($response, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
                 return;
             }
 
             if($this->user->getTypeUser() == 2) {
                 $this->company->setIdUser($this->user->getId());
-                echo json_encode($this->company->getDataCompany(), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+                $dataCompany = $this->company->getDataCompany();
+                $response = [
+                    "user" => [
+                        "id" => $this->company->getIdUser(),
+                        "name" => $dataCompany->name,
+                        "email" => $dataCompany->email,
+                        "description" => $dataCompany->description,
+                        "idTypeUser" => "$dataCompany->typeUser",
+                        "typeUser" => $dataCompany->type,
+                        "company" => [
+                            "cnpj" => $dataCompany->cnpj
+                        ]
+                    ]
+                ];
+                echo json_encode($response, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
                 return;
             }
         }
@@ -75,13 +108,46 @@ class Api
     {
         if($this->user->getId() != null){
             if($data["typeUser"] == 1) {
-                echo json_encode($this->person->getAll(), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
-                return;
+                $dataPerson = $this->person->getAll();
+                foreach ($dataPerson as $person) {
+                    $response = [
+                        "user" => [
+                            "id" => $person->idUser,
+                            "name" => $person->name,
+                            "email" => $person->email,
+                            "description" => $person->description,
+                            "photo" => $person->profilePicture,
+                            "idTypeUser" => $person->typeUser,
+                            "typeUser" => $person->type,
+                            "person" => [
+                                "cpf" => $person->cpf,
+                                "idLanguage" => $person->idLanguage
+                            ]
+                        ]
+                    ];
+                    echo json_encode($response, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+                }
             }
 
             if($data["typeUser"] == 2) {
-                echo json_encode($this->company->getAll(), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
-                return;
+                $dataCompany = $this->company->getAll();
+                foreach ($dataCompany as $company) {
+                    $response = [
+                        "user" => [
+                            "id" => $company->idUser,
+                            "name" => $company->name,
+                            "email" => $company->email,
+                            "description" => $company->description,
+                            "photo" => $company->profilePicture,
+                            "idTypeUser" => $company->typeUser,
+                            "typeUser" => $company->type,
+                            "company" => [
+                                "cnpj" => $company->cnpj
+                            ]
+                        ]
+                    ];
+                    echo json_encode($response, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+                }
             }
         }
     }
@@ -179,17 +245,20 @@ class Api
     {
         if($this->user->getId() != null){
             if(!empty($data["idRepository"])) {
-                $repository = new Repository();
-                $dataRepository = $repository->findById($data["idRepository"]);
+                $this->repository->setId($data["idRepository"]);
+                $dataRepository = $this->repository->findById();
                 if(!$dataRepository) {
                     $response = [
                         "code" => 400,
                         "type" => "bad_request",
-                        "message" => "Projeto não cadastrado"
+                        "message" => "Repositório não cadastrado"
                     ];
                     echo json_encode($response, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
                     return;
                 }
+
+                $this->user->setIdPerson($dataRepository->idPerson);
+                $dataUser = $this->user->findByIdPerson();
 
                 $response = [
                     "repository" => [
@@ -198,7 +267,13 @@ class Api
                         "name" => $dataRepository->name,
                         "description" => $dataRepository->description,
                         "idLanguage" => $dataRepository->idLanguage,
-                        "language" => $dataRepository->language
+                        "language" => $dataRepository->language,
+                        "user" => [
+                            "id" => $dataUser->id,
+                            "name" => $dataUser->name,
+                            "email" => $dataUser->email,
+                            "description" => $dataUser->description
+                        ]
                     ]
                 ];
 
@@ -211,32 +286,110 @@ class Api
     public function getRepositories()
     {
         if($this->user->getId() != null){
-            $repository = new Repository();
-            echo json_encode($repository->selectAll());
-            return;
+            $dataRepository = $this->repository->selectAll();
+            foreach ($dataRepository as $repo) {
+                $this->user->setIdPerson($repo->idPerson);
+                $dataUser = $this->user->findByIdPerson();
+                $response = [
+                    "repository" => [
+                        "id" => $repo->idRepository,
+                        "name" => $repo->name,
+                        "description" => $repo->description,
+                        "language" => $repo->language,
+                        "user" => [
+                            "id" => $dataUser->id,
+                            "name" => $dataUser->name,
+                            "email" => $dataUser->email,
+                            "description" => $dataUser->description,
+                            "photo" => $dataUser->profilePicture
+                        ]
+                    ]
+                ];
+                echo json_encode($response, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+            }
         }
     }
 
     public function getRepositoriesByPerson()
     {
         if($this->user->getId() != null){
-            $repository = new Repository();
             $this->person->getDataUser($this->user->getId());
 
-            $dataRepository = $repository->findByIdPerson($this->person->getId());
+            $this->repository->setIdPerson($this->person->getId());
 
-            if(!$dataRepository) {
+            $dataRepository = $this->repository->findByIdPerson();
+
+            if($dataRepository == null) {
                 $response = [
                     "code" => 400,
                     "type" => "bad_request",
-                    "message" => "Este usuário não possui projetos ainda"
+                    "message" => "Este usuário não possui repositórios"
                 ];
                 echo json_encode($response, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
                 return;
             }
 
-            echo json_encode($dataRepository, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
-            return;
+            foreach ($dataRepository as $repository) {
+                $response = [
+                    "repository" => [
+                        "id" => $repository->idRepository,
+                        "name" => $repository->name,
+                        "description" => $repository->description,
+                        "idLanguage" => $repository->idLanguage,
+                        "language" => $repository->language
+                    ]
+                ];
+
+                echo json_encode($response,  JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+            }
+
+//            $dataRepository = $repository->findByIdPerson();
+//
+//            if(!$dataRepository) {
+//                $response = [
+//                    "code" => 400,
+//                    "type" => "bad_request",
+//                    "message" => "Este usuário não possui projetos ainda"
+//                ];
+//                echo json_encode($response, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+//                return;
+//            }
+//
+//            echo json_encode($dataRepository, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+//            return;
+        }
+    }
+
+    public function getReposotiesByIdLanguage(array $data)
+    {
+        if($this->user->getId() != null) {
+            $this->repository->setIdLanguage($data["idLanguage"]);
+
+            $dataRepository = $this->repository->findByIdLanguage();
+
+            if ($dataRepository == null) {
+                $response = [
+                    "code" => 400,
+                    "type" => "bad_request",
+                    "message" => "Não há registro de repoitórios desta linguagem!"
+                ];
+                echo json_encode($response, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+                return;
+            }
+
+            foreach ($dataRepository as $repository) {
+                $response = [
+                    "repository" => [
+                        "id" => $repository->idRepository,
+                        "name" => $repository->name,
+                        "description" => $repository->description,
+                        "idLanguage" => $repository->idLanguage,
+                        "language" => $repository->language
+                    ]
+                ];
+
+                echo json_encode($response, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+            }
         }
     }
 

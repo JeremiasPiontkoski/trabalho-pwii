@@ -2,7 +2,55 @@
   $this->layout("_theme");
 ?>
 
-    <div class="nav-links">
+    <section class="container-repositories">
+        <div class="head">
+            <div class="options">
+                <ul>
+                    <li><a href="">Filtrar por:</a></li>
+                    <ul>
+                        <?php
+                            foreach($languages as $language) {
+                        ?>
+                            <li>
+                                <a href="<?= url("app/repositorios/{$language->id}"); ?>">
+                                <?= $language->language; ?>
+                                </a>
+                            </li>
+                        <?php
+                            }
+                        ?>
+                    </ul>
+                </ul>
+            </div>
+        </div>
+
+        <div class="repositories">
+            <?php foreach($repositories as $repository) {?>
+                <a href="<?= url("app/repositorio/id?id=" . $repository["repository"]["id"])?>" class="line">
+                    <p id="first">Proprietário: <span><?= $repository["repository"]["user"]["name"] ?></span></p>
+                        <div class="data">
+                            <p><?= $repository["repository"]["name"] ?></p>
+                            <p><?= $repository["repository"]["language"] ?></p>
+                        </div>
+                    <p id="last"><?= $repository["repository"]["description"] ?></p>
+                </a>
+
+                <?php
+                    }
+                ?>
+             <!-- <div class="line">
+                <p id="first">Proprietário: <span>Usuário tal</span></p>
+                <div class="data">
+                    <p>Nome</p>
+                    <p>Language</p>
+                </div>
+                <p id="last">Descrição</p>
+            </div>  -->
+        </div>
+    </section>
+
+
+    <!-- <div class="nav-links">
         <div class="nav-links-inside">
             <ul>
             <?php
@@ -18,9 +66,9 @@
         </li>
             </ul>
         </div>
-    </div>     
+    </div>-->     
 
-    <section class="box-repository">
+    <!-- <section class="box-repository">
         <?php
             foreach($repositories as $repository) {
             ?>
@@ -71,4 +119,4 @@
         <?php
             }
         ?>
-    </section>
+    </section>  -->

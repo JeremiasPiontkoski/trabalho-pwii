@@ -11,9 +11,9 @@
             <div class="content">
                 <div class="circle">
                     <?php
-                        if(!empty($user["image"])):
+                        if(!empty($user["user"]["photo"])):
                     ?>
-                    <img src="<?= url($user["image"]); ?>" id="imgUser">
+                    <img src="<?= url($user["user"]["photo"]); ?>" id="imgUser">
                     <?php
                         endif;
                     ?>
@@ -25,14 +25,14 @@
             <div class="content">
                 <div class="text">
                     <p>Meu nome é: </p>
-                    <p><?=$user["name"];?></p>
-                    <p><?=$user["email"];?></p>
+                    <p><?=$user["user"]["name"];?></p>
+                    <p><?=$user["user"]["email"];?></p>
                     <p>
                         <?php
-                            if($user["description"] == "") {
+                            if($user["user"]["description"] == "") {
                                 echo "Eu não possui descrição ainda :(";
                             }else {
-                                echo $user["description"];
+                                echo $user["user"]["description"];
                             }
                         ?>
                     </p> 
@@ -49,7 +49,7 @@
         <div class="content">
             <?php if(!empty($repositories)){
                 foreach($repositories as $repository) { ?>
-                    <a href="<?= url("app/repositorio/id?id=" . $repository->idRepository)?>"><?=$repository->name?></a>
+                    <a href="<?= url("app/repositorio/id?id=" . $repository["repository"]["id"])?>"><?=$repository["repository"]["name"]?></a>
                <?php
                     }
                 }

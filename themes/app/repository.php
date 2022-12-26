@@ -1,7 +1,4 @@
 <?php
-//var_dump($repository);
-//var_dump($_GET["id"]);
-//var_dump($language);
 $this->layout("_theme");
 ?>
 <!doctype html>
@@ -21,19 +18,19 @@ $this->layout("_theme");
 <section>
     <div class="container">
         <div class="item">
-            <p>Nome: <?= $repository->name?></p>
+            <p>Nome: <?= $repository["repository"]["name"]?></p>
         </div>
 
         <div class="item">
-            <p>Descrição: <?= $repository->description?></p>
+            <p>Descrição: <?= $repository["repository"]["description"]?></p>
         </div>
 
         <div class="item">
-            <p>Linguagem: <?= $repository->language?></p>
+            <p>Linguagem: <?= $repository["repository"]["language"]?></p>
         </div>
 
         <div class="item">
-            <p><a href="<?= url("app/editarRepositorio/id?id=" . $repository->idRepository)?>">EDITAR</a></p>
+            <p><a href="<?= url("app/editarRepositorio/id?id=" . $repository["repository"]["id"])?>">EDITAR</a></p>
         </div>
     </div>
 </section>

@@ -1,5 +1,4 @@
 
-
 <!doctype html>
 <html lang="pt-br">
 <head>
@@ -22,15 +21,13 @@
 
                 <div class="container-inputs">
                     <label for="name">Name:</label>
-                    <input type="text" name="name" value="<?= $repository->name ?>">
+                    <input type="text" name="name" value="<?= $repository["repository"]["name"] ?>">
                 </div>
 
                 <div class="container-inputs">
                     <label for="description">Descrição:</label>
-                    <input type="text" name="description" value="<?= $repository->description ?>">
+                    <input type="text" name="description" value="<?= $repository["repository"]["description"]; ?>">
                 </div>
-                <?php
-                if(!empty($_SESSION["userPerson"])) {?>
                     <div class="container-inputs">
                         <label for="idLanguage">Linguagem:</label>
                         <select name="idLanguage" id="selectUser">
@@ -38,10 +35,10 @@
                             foreach($languages as $language) {
                                 ?>
                                 <?php
-                                if(($language->id == $repository->idLanguage)){
+                                if(($language->id == $repository["repository"]["idLanguage"])){
                                     ?>
-                                    <option value="<?= $repository->idLanguage; ?>">
-                                    <?= $language->language ?>
+                                    <option value="<?= $repository["repository"]["idLanguage"]; ?>">
+                                    <?= $repository["repository"]["language"] ?>
                                     <?php
                                 }
                                 ?>
@@ -53,7 +50,7 @@
                             foreach($languages as $language) {
                                 ?>
                                 <?php
-                                if(($language->id != $_SESSION["userPerson"]["idLanguage"])){
+                                if(($language->language != $repository["repository"]["language"])){
                                     ?>
                                     <option value="<?= $language->id?>">
                                     <?= $language->language ?>
@@ -63,12 +60,9 @@
                                 </option>
                                 <?php
                             }
-                            ?>
+                            ?> 
                         </select>
                     </div>
-                    <?php
-                }
-                ?>
                 <button type="submit" class="btn-register">EDITAR</button>
                 <div class="data-error">
                     <p id="message"></p>
@@ -83,7 +77,7 @@
         form.addEventListener("submit", async (e) => {
             e.preventDefault();
             const dataUser = new FormData(form);
-            const data = await fetch("<?= url("app/editarRepositorio/id?id=" . $repository->idRepository)?>",{
+            const data = await fetch("<?= url("app/editarRepositorio/id?id=" . $repository["repository"]["id"])?>",{
                 method: "POST",
                 body: dataUser,
             });
