@@ -18,19 +18,19 @@ $this->layout("_theme");
 <section>
     <div class="container">
         <div class="item">
-            <p>Nome: <?= $repository["repository"]["name"]?></p>
+            <p>Nome: <?= $repository["name"]?></p>
         </div>
 
         <div class="item">
-            <p>Descrição: <?= $repository["repository"]["description"]?></p>
+            <p>Descrição: <?= $repository["description"]?></p>
         </div>
 
         <div class="item">
-            <p>Linguagem: <?= $repository["repository"]["language"]?></p>
+            <p>Linguagem: <?= $repository["language"]?></p>
         </div>
 
         <div class="item">
-            <p><a href="<?= url("app/editarRepositorio/id?id=" . $repository["repository"]["id"])?>">EDITAR</a></p>
+            <p><a href="<?= url("app/editarRepositorio/id?id=" . $repository["id"])?>">EDITAR</a></p>
         </div>
     </div>
 </section>

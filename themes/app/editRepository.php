@@ -21,12 +21,12 @@
 
                 <div class="container-inputs">
                     <label for="name">Name:</label>
-                    <input type="text" name="name" value="<?= $repository["repository"]["name"] ?>">
+                    <input type="text" name="name" value="<?= $repository["name"] ?>">
                 </div>
 
                 <div class="container-inputs">
                     <label for="description">Descrição:</label>
-                    <input type="text" name="description" value="<?= $repository["repository"]["description"]; ?>">
+                    <input type="text" name="description" value="<?= $repository["description"]; ?>">
                 </div>
                     <div class="container-inputs">
                         <label for="idLanguage">Linguagem:</label>
@@ -35,10 +35,10 @@
                             foreach($languages as $language) {
                                 ?>
                                 <?php
-                                if(($language->id == $repository["repository"]["idLanguage"])){
+                                if(($language->id == $repository["idLanguage"])){
                                     ?>
-                                    <option value="<?= $repository["repository"]["idLanguage"]; ?>">
-                                    <?= $repository["repository"]["language"] ?>
+                                    <option value="<?= $repository["idLanguage"]; ?>">
+                                    <?= $repository["language"] ?>
                                     <?php
                                 }
                                 ?>
@@ -50,7 +50,7 @@
                             foreach($languages as $language) {
                                 ?>
                                 <?php
-                                if(($language->language != $repository["repository"]["language"])){
+                                if(($language->language != $repository["language"])){
                                     ?>
                                     <option value="<?= $language->id?>">
                                     <?= $language->language ?>

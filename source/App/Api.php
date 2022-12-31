@@ -64,7 +64,6 @@ class Api
                 $this->person->setIdUser($this->user->getId());
                 $dataPerson = $this->person->getDataPerson();
                 $response = [
-                    "user" => [
                         "id" => $this->person->getIdUser(),
                         "name" => $dataPerson->name,
                         "email" => $dataPerson->email,
@@ -76,7 +75,6 @@ class Api
                             "cpf" => $dataPerson->cpf,
                             "idLanguage" => $dataPerson->idLanguage
                             ]
-                    ]
                 ];
                 echo json_encode($response, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
                 return;
@@ -107,11 +105,11 @@ class Api
     public function getUsers(array $data)
     {
         if($this->user->getId() != null){
+            $arrayUsers = [];
             if($data["typeUser"] == 1) {
                 $dataPerson = $this->person->getAll();
                 foreach ($dataPerson as $person) {
                     $response = [
-                        "user" => [
                             "id" => $person->idUser,
                             "name" => $person->name,
                             "email" => $person->email,
@@ -123,9 +121,8 @@ class Api
                                 "cpf" => $person->cpf,
                                 "idLanguage" => $person->idLanguage
                             ]
-                        ]
                     ];
-                    echo json_encode($response, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+                    $arrayUsers[] = $response;
                 }
             }
 
@@ -133,7 +130,6 @@ class Api
                 $dataCompany = $this->company->getAll();
                 foreach ($dataCompany as $company) {
                     $response = [
-                        "user" => [
                             "id" => $company->idUser,
                             "name" => $company->name,
                             "email" => $company->email,
@@ -144,11 +140,12 @@ class Api
                             "company" => [
                                 "cnpj" => $company->cnpj
                             ]
-                        ]
                     ];
-                    echo json_encode($response, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+                    $arrayUsers[] = $response;
                 }
             }
+            echo json_encode($arrayUsers, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+            return;
         }
     }
 
@@ -261,7 +258,6 @@ class Api
                 $dataUser = $this->user->findByIdPerson();
 
                 $response = [
-                    "repository" => [
                         "id" => $dataRepository->id,
                         "idPerson" => $dataRepository->idPerson,
                         "name" => $dataRepository->name,
@@ -274,7 +270,6 @@ class Api
                             "email" => $dataUser->email,
                             "description" => $dataUser->description
                         ]
-                    ]
                 ];
 
                 echo json_encode($response, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
@@ -287,11 +282,12 @@ class Api
     {
         if($this->user->getId() != null){
             $dataRepository = $this->repository->selectAll();
+            $arrayRepositories = [];
+            $response = '';
             foreach ($dataRepository as $repo) {
                 $this->user->setIdPerson($repo->idPerson);
                 $dataUser = $this->user->findByIdPerson();
                 $response = [
-                    "repository" => [
                         "id" => $repo->idRepository,
                         "name" => $repo->name,
                         "description" => $repo->description,
@@ -303,10 +299,11 @@ class Api
                             "description" => $dataUser->description,
                             "photo" => $dataUser->profilePicture
                         ]
-                    ]
                 ];
-                echo json_encode($response, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+                $arrayRepositories[] = $response;
             }
+            echo json_encode($arrayRepositories, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+            return;
         }
     }
 
@@ -318,6 +315,8 @@ class Api
             $this->repository->setIdPerson($this->person->getId());
 
             $dataRepository = $this->repository->findByIdPerson();
+            $arrayRepositories = [];
+            $response = '';
 
             if($dataRepository == null) {
                 $response = [
@@ -331,32 +330,17 @@ class Api
 
             foreach ($dataRepository as $repository) {
                 $response = [
-                    "repository" => [
                         "id" => $repository->idRepository,
                         "name" => $repository->name,
                         "description" => $repository->description,
                         "idLanguage" => $repository->idLanguage,
                         "language" => $repository->language
-                    ]
                 ];
-
-                echo json_encode($response,  JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+                $arrayRepositories[] = $response;
             }
 
-//            $dataRepository = $repository->findByIdPerson();
-//
-//            if(!$dataRepository) {
-//                $response = [
-//                    "code" => 400,
-//                    "type" => "bad_request",
-//                    "message" => "Este usuário não possui projetos ainda"
-//                ];
-//                echo json_encode($response, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
-//                return;
-//            }
-//
-//            echo json_encode($dataRepository, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
-//            return;
+            echo json_encode($arrayRepositories,  JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+            return;
         }
     }
 
@@ -366,6 +350,8 @@ class Api
             $this->repository->setIdLanguage($data["idLanguage"]);
 
             $dataRepository = $this->repository->findByIdLanguage();
+            $response = '';
+            $arrayRepositories = [];
 
             if ($dataRepository == null) {
                 $response = [
@@ -379,17 +365,16 @@ class Api
 
             foreach ($dataRepository as $repository) {
                 $response = [
-                    "repository" => [
                         "id" => $repository->idRepository,
                         "name" => $repository->name,
                         "description" => $repository->description,
                         "idLanguage" => $repository->idLanguage,
                         "language" => $repository->language
-                    ]
                 ];
-
-                echo json_encode($response, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+                $arrayRepositories[] = $response;
             }
+            echo json_encode($arrayRepositories, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+            return;
         }
     }
 
@@ -501,7 +486,7 @@ class Api
         }
     }
 
-    public function uploadRepository(array $data)
+    public function updateRepository(array $data)
     {
         if($this->user->getId() != null){
             if($this->headers["Rule"] != "P") {

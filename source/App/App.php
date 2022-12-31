@@ -16,11 +16,10 @@ use Source\Models\typeUser;
 class App
 {
     private $view;
-    private $languages;
-    private $repositories;
-    private $projects;
-    private $postProjects;
-    private $postRepositories;
+    // private $languages;
+    // private $projects;
+    // private $postProjects;
+    // private $postRepositories;
     // private $typeUser;
 
     private $user;
@@ -42,14 +41,14 @@ class App
         $this->person = new Person();
         $this->repository = new Repository();
 
-        if(!empty($_SESSION["userCompany"])){
-            $postProjects = new Project();
-            $this->postProjects = $postProjects->findPostProjects($_SESSION["userCompany"]["id"]);
-        }
+        // if(!empty($_SESSION["userCompany"])){
+        //     $postProjects = new Project();
+        //     $this->postProjects = $postProjects->findPostProjects($_SESSION["userCompany"]["id"]);
+        // }
         
 
-        $postRepositories = new Repository();
-        $this->postRepositories = $postRepositories->findAllPostRepositories();
+        // $postRepositories = new Repository();
+        // $this->postRepositories = $postRepositories->findAllPostRepositories();
 
         $this->view = new Engine(CONF_VIEW_APP,'php');
         //$this->view = new Engine(__DIR__ . "/../../themes/web",'php');
@@ -61,7 +60,6 @@ class App
         $dataPerson = $this->person->getDataPerson();
 
         $responsePerson = [
-            "user" => [
                 "id" => $_SESSION["user"]["id"],
                 "name" => $dataPerson->name,
                 "email" => $dataPerson->email,
@@ -73,7 +71,6 @@ class App
                     "cpf" => $dataPerson->cpf,
                     "idLanguage" => $dataPerson->idLanguage
                 ]
-            ]
         ];
 
         return $responsePerson;
@@ -84,20 +81,20 @@ class App
         $this->person->getDataUser($_SESSION["user"]["id"]);
         $this->repository->setIdPerson($this->person->getId());
         $dataRepositories = $this->repository->findByIdPerson();
+        if(empty($dataRepositories)) {
+            return;
+        }
         $repositories = [];
 
         foreach($dataRepositories as $repository) {
             $response = [
-                "repository" => [
                     "id" => $repository->idRepository,
                     "idPerson" => $repository->idPerson,
                     "name" => $repository->name,
                     "description" => $repository->description,
                     "idLanguage" => $repository->idLanguage,
                     "language" => $repository->language
-                ]
             ];
-
             $repositories[] = $response;
         }
        
@@ -112,7 +109,6 @@ class App
             $dataUser = $this->user->findByIdPerson();
 
             $response = [
-                "repository" => [
                     "id" => $repository->idRepository,
                     "idPerson" => $repository->idPerson,
                     "name" => $repository->name,
@@ -126,9 +122,7 @@ class App
                         "description" => $dataUser->description,
                         "photo" => $dataUser->profilePicture
                     ]
-                ]
             ];
-
             $repositories[] = $response;            
         }
         return $repositories;
@@ -347,7 +341,7 @@ class App
         ]);
     }
 
-    public function repositories(?array $data) : void
+    public function filterRepositories(?array $data) : void
     {
         $this->repository->setIdLanguage($data["idLanguage"]);
         $dataRepositories = $this->repository->findByIdLanguage();
@@ -364,7 +358,7 @@ class App
         );
     }
 
-    public function showRepositories() : void
+    public function repositories() : void
     {
         $dataRepository = $this->repository->selectAll();
         $repositories = $this->getResponseRepositories($dataRepository);
@@ -414,7 +408,6 @@ class App
         $dataUser = $this->user->findByIdPerson();
 
         $response = [
-            "repository" => [
                 "id" => $repository->idRepository,
                 "idPerson" => $repository->idPerson,
                 "name" => $repository->name,
@@ -428,7 +421,6 @@ class App
                     "description" => $dataUser->description,
                     "photo" => $dataUser->profilePicture
                 ]
-            ]
         ];
         echo $this->view->render("repository", [
             "eventName" => CONF_SITE_NAME,
@@ -437,11 +429,6 @@ class App
     }
 
     public function renderEditRepository() {
-//        $repository = Repository::findById($_GET["id"]);
-        // $repository = new Repository();
-        // $language = new Language();
-
-
         $this->repository->setId($_GET["id"]);
         $repository = $this->repository->findById();
 
@@ -449,7 +436,6 @@ class App
         $dataUser = $this->user->findByIdPerson();
 
         $response = [
-            "repository" => [
                 "id" => $repository->idRepository,
                 "idPerson" => $repository->idPerson,
                 "name" => $repository->name,
@@ -463,7 +449,6 @@ class App
                     "description" => $dataUser->description,
                     "photo" => $dataUser->profilePicture
                 ]
-            ]
         ];
 
         echo $this->view->render("editRepository", [

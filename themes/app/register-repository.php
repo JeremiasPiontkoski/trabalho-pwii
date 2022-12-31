@@ -9,8 +9,6 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@200&display=swap');
     </style>
-    <!-- <link rel="stylesheet" href="<?= url("assets/web/css/style-cadastro.css") ?>"> -->
-    <!-- <link rel="stylesheet" href="<?= url("assets/web/css/style-message.css") ?>"> -->
     <link rel="stylesheet" href="<?= url("assets/app/style/style.css") ?>">
     <title>To Solve - Cadastro</title>
 </head>

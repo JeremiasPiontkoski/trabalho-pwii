@@ -70,23 +70,6 @@ class User
         }
     }
 
-//    /**
-//     * @param string $email
-//     * @return bool
-//     */
-//    public static function findByEmail(string $email) : bool
-//    {
-//        $query = "SELECT * FROM users WHERE email = :email";
-//        $stmt = Connect::getInstance()->prepare($query);
-//        $stmt->bindParam(":email", $email);
-//        $stmt->execute();
-//        if($stmt->rowCount() == 1){
-//            return true;
-//        } else {
-//            return false;
-//        }
-//    }
-
     public function findByEmail(String $email) : bool
     {
         $query = "SELECT * FROM users WHERE email = :email";

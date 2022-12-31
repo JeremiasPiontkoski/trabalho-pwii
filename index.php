@@ -43,8 +43,8 @@ $route->post("/cadastroProjeto", "App:registerProject");
 $route->get("/cadastroProjeto", "App:registerProject");
 
 /* SHOW REPOSITORIES */
-$route->get("/repositorios/{idLanguage}", "App:repositories");
-$route->get("/repositorios", "App:showRepositories");
+$route->get("/repositorios/{idLanguage}", "App:filterRepositories");
+$route->get("/repositorios", "App:repositories");
 
 /* SHOW PROJECTS */
 $route->get("/projetos/{idProject}", "App:projects");

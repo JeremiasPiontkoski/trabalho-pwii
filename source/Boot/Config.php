@@ -1,7 +1,4 @@
 <?php
-// Definição de todas as constantes do sistema
-// Esse script consta no composer.json para ser incluido automaticamente
-
 // DATABASE
 
 define("CONF_DB_HOST", "localhost");
@@ -26,3 +23,4 @@ define("CONF_SITE_NAME", "To Solve");
 
 define("CONF_UPLOAD_DIR", "storage");
 define("CONF_UPLOAD_IMAGE_DIR", "images");
+define("CONF_UPLOAD_FILE_DIR", "files");

@@ -26,13 +26,9 @@ class Web
     public function home() : void
     {
         $faq = new Faq();
-        $user = new User(2);
-        $user->findById();
-        //var_dump($user);
 
         echo $this->view->render(
             "home",[
-                "user" => $user,
                 "faqs" => $faq->getAll()
             ]);
     }
@@ -197,12 +193,6 @@ class Web
             }
         }
 
-       /*  $language = new Language();
-        $languages = $language->selectAll();
-
-        $type = new Type();
-        $types = $type->selectAll(); */
-
         $typeUser = new typeUser();
         $typeUsers = $typeUser->selectAll();
 
@@ -260,76 +250,4 @@ class Web
         }
         echo $this->view->render("login",["eventName" => CONF_SITE_NAME]);
     }
-
-    /* public function login(?array $data) : void
-    {
-        if(!empty($data)){
-
-            if(in_array("",$data)){
-                $json = [
-                    "message" => "Informe e-mail e senha para entrar!",
-                    "type" => "warning"
-                ];
-                echo json_encode($json);
-                return;
-            }
-
-            if($data["email"] != 14 || !is_email($data["email"])) {
-                $json = [
-                    "message" => "Este usuáiro não existe",
-                    "type" => "danger"
-                ];
-            }
-
-            if($data["email"] == 14) {
-                $json = [
-                    "type" => "Person"
-                ];
-
-                echo json_encode($json);
-                return;
-            }
-
-            if(is_email($data["email"])) {
-                $json = [
-                    "type" => "Company"
-                ];
-
-                echo json_encode($json);
-                return;
-            }
-
-            $user = new User();
-            $person = new Person();
-
-            if(!$user->validate($data["email"],$data["password"])){
-                $json = [
-                    "message" => $user->getMessage(),
-                    "type" => "error"
-                ];
-                echo json_encode($json);
-                return;
-            }else if(!$person->getDataUser($user->getId())) {
-                $json = [
-                    "message" => $user->getMessage(),
-                    "type" => "error"
-                ];
-                echo json_encode($json);
-                return;
-            }
-
-            $json = [
-                "name" => $user->getName(),
-                "email" => $user->getEmail(),
-                "idUser" => $person->getIdUser(),
-                "message" => $user->getMessage(),
-                "type" => "success"
-            ];
-            echo json_encode($json);
-            return;
-
-        }
-
-        echo $this->view->render("login",["eventName" => CONF_SITE_NAME]);
-    } */
 }

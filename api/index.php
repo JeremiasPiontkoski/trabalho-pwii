@@ -25,7 +25,12 @@ $route->post("/user/name/{name}/email/{email}/password/{password}/typeUser/{type
 $route->get("/repository/{idRepository}", "Api:getRepository");
 $route->get("/repositories/{idLanguage}", "Api:getReposotiesByIdLanguage");
 $route->get("/repositoriesByPerson", "Api:getRepositoriesByPerson");
+
 $route->get("/repositories", "Api:getRepositories");
+
+$route->get("/getRepo", "ApiTest:getRepositories");
+$route->get("/getRepository/{idRepository}", "ApiTest:getRepository");
+
 $route->post("/createRepository/name/{name}/description/{description}/idLanguage/{idLanguage}", "Api:createRepository");
 $route->put("/uploadRepository/name/{name}/description/{description}/idLanguage/{idLanguage}/idRepository/{idRepository}", "Api:uploadRepository");
 

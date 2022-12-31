@@ -1,9 +1,9 @@
 
 <?php
 $this->layout("_theme");
-foreach($repositories as $repo) {
-    var_dump($repo);
-}
+// foreach($repositories as $repo) {
+//     var_dump($repo);
+// }
 ?>
 
 <?php $this->start("css"); ?>
@@ -31,7 +31,7 @@ foreach($repositories as $repo) {
     <?php
         foreach($repositories as $repository) { ?>
 
-            <p><?= $repository["repository"]["language"]; ?></p>
+            <p><?= $repository["language"]; ?></p>
     <?php
         }
     ?>

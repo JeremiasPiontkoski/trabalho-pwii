@@ -21,41 +21,20 @@
         <form enctype="multipart/form-data" method="post" id="form">
             <div class="box">
                 <label for="name">Nome:</label>
-                <input type="text" name="name" id="name" value="<?=$user["user"]["name"]?>
-">
+                <input type="text" name="name" placeholder="Nome" id="name" value="<?=$user["name"]?>">
             </div>
             <div class="box">
                 <label for="email">Email:</label>
-                <input type="email" name="email" id="email" value="<?=$user["user"]["email"]?>">
+                <input type="email" name="email" placeholder="Email" id="email" value="<?=$user["email"]?>">
             </div>
             <div class="box">
                 <label for="description">Descrição:</label>
-                <input type="text" name="description" id="description" value="<?=$user["user"]["description"]?>">
+                <input type="text" name="description" placeholder="Descrição" id="description" value="<?=$user["description"] == "" ? "" : $user["description"]; ?>">
             </div>
             <div class="box">
                 <label for="cpf">Cpf</label>
-                <input type="number" name="cpf" value="<?=$user["user"]["person"]["cpf"];?>">
+                <input type="number" name="cpf" placeholder="Cpf" value="<?=$user["person"]["cpf"];?>">
             </div>
-
-            <!-- <?php
-                if(!empty($_SESSION["userPerson"])) {?>
-                    <div class="box">
-                        <label for="cpf">Cpf:</label>
-                        <input type="number" name="cpf" namespace="Cpf" value="<?= $_SESSION["userPerson"]["cpf"]?>">
-                    </div>
-            <?php
-                }
-            ?> -->
-
-            <!-- <?php
-                if(!empty($_SESSION["userCompany"])) {?>
-                    <div class="box">
-                        <label for="cnpj">Cnpj:</label>
-                        <input type="number" name="cnpj" namespace="cnpj">
-                    </div>
-            <?php
-                }
-            ?> -->
 
             <?php
             if(!empty($_SESSION["userPerson"])) {?>
@@ -66,9 +45,9 @@
                         foreach($languages as $language) {
                     ?>
                     <?php
-                        if(($language->id == $user["user"]["person"]["idLanguage"])){
+                        if(($language->id == $user["person"]["idLanguage"])){
                     ?>
-                        <option value="<?= $user["user"]["person"]["idLanguage"]; ?>">
+                        <option value="<?= $user["person"]["idLanguage"]; ?>">
                             <?= $language->language ?>
                     <?php
                         }
@@ -81,7 +60,7 @@
                         foreach($languages as $language) {
                     ?>
                     <?php
-                        if(($language->id != $user["user"]["person"]["idLanguage"])){
+                        if(($language->id != $user["person"]["idLanguage"])){
                     ?>
                         <option value="<?= $language->id?>">
                         <?= $language->language ?>
@@ -98,52 +77,12 @@
                 }
             ?>
 
-            <!-- <?php
-            if(!empty($_SESSION["userCompany"])) {?>
-            <div class="box">
-                <label for="typeDelopment">Desenvolvimento:</label>
-                <select name="typeDevelopment" id="typeDevelopment">
-                <?php
-                        foreach($typeUser as $type) {
-                    ?>
-                    <?php
-                        if(($type->id == $userCompany["type"])){
-                    ?>
-                        <option value="<?= $userCompany["type"]; ?>">
-                            <?= $type->type ?>
-                    <?php
-                        }
-                    ?>
-                        </option>
-                    <?php
-                        }
-                    ?>
-                    <?php
-                        foreach($typeUser as $type) {
-                    ?>
-                    <?php
-                        if(($type->id != $userCompany["type"])){
-                    ?>
-                        <option value="<?= $type->id?>">
-                        <?= $type->type ?>
-                    <?php
-                        }
-                    ?>
-                    </option>
-                    <?php
-                        }
-                    ?>
-                </select>
-            </div>
-            <?php
-                }
-            ?> -->
         
-           <div class="box-image">
+          <div class="box-image">
            <?php
-                if(!empty($user["user"]["photo"])):
+                if(!empty($_SESSION["user"]["image"])):
             ?>
-                <img src="<?= url($user["user"]["photo"]); ?>" id="imgUser">
+                <img src="<?= url($_SESSION["user"]["image"]); ?>" id="imgUser">
             <?php
                 endif;
             ?>

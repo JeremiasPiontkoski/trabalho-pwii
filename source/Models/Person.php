@@ -41,8 +41,6 @@ class Person
         if($stmt->rowCount() == 0) {
             return false;
         }
-//        $dataPerson = $stmt->fetch();
-//        $this->id = $dataPerson->id;
         return $stmt->fetch();
     }
 

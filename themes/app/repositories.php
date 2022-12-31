@@ -26,27 +26,27 @@
 
         <div class="repositories">
             <?php foreach($repositories as $repository) {?>
-                <a href="<?= url("app/repositorio/id?id=" . $repository["repository"]["id"])?>" class="line">
-                    <p id="first">Proprietário: <span><?= $repository["repository"]["user"]["name"] ?></span></p>
+                <a href="<?= url("app/repositorio/id?id=" . $repository["id"])?>" class="line">
+                    <p id="first">Proprietário: <span><?= $repository["user"]["name"] ?></span></p>
                         <div class="data">
-                            <p><?= $repository["repository"]["name"] ?></p>
-                            <p><?= $repository["repository"]["language"] ?></p>
+                            <p><?= $repository["name"] ?></p>
+                            <p><?= $repository["language"] ?></p>
                         </div>
-                    <p id="last"><?= $repository["repository"]["description"] ?></p>
+                    <p id="last"><?= $repository["description"] ?></p>
                 </a>
 
                 <?php
                     }
                 ?>
-             <!-- <div class="line">
+          <!--  <div class="line">
                 <p id="first">Proprietário: <span>Usuário tal</span></p>
                 <div class="data">
                     <p>Nome</p>
                     <p>Language</p>
                 </div>
                 <p id="last">Descrição</p>
-            </div>  -->
-        </div>
+            </div>  
+        </div> -->
     </section>
 
 
