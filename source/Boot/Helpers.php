@@ -1,6 +1,7 @@
 <?php
 
 use CoffeeCode\Uploader\Image;
+use CoffeeCode\Uploader\File;
 use League\Plates\Template\Func;
 
 /**
@@ -52,8 +53,8 @@ function uploadImage ($img) : string
     return $image->upload($img,md5(time()));
 }
 
-function uploadFile($file) : string
+function uploadFile($userFile)
 {
-    $file = new \CoffeeCode\Uploader\File(CONF_UPLOAD_DIR, CONF_UPLOAD_FILE_DIR);
-    return $file->upload($file,md5(time()));
+    $file = new File(CONF_UPLOAD_DIR, CONF_UPLOAD_FILE_DIR);
+    return $file->upload($userFile, md5(time()));
 }

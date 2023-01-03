@@ -22,5 +22,7 @@ define("CONF_VIEW_ADMIN", __DIR__ . "/../../themes/adm");
 define("CONF_SITE_NAME", "To Solve");
 
 define("CONF_UPLOAD_DIR", "storage");
+
 define("CONF_UPLOAD_IMAGE_DIR", "images");
+
 define("CONF_UPLOAD_FILE_DIR", "files");

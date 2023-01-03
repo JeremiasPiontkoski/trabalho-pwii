@@ -30,10 +30,15 @@ $this->layout("_theme");
         </div>
 
         <div class="item">
+            <p>
+                <a href="<?= url($repository["file"])?>" target="_blank">Arquivo</a>
+            </p>
+        </div>
+
+        <div class="item">
             <p><a href="<?= url("app/editarRepositorio/id?id=" . $repository["id"])?>">EDITAR</a></p>
         </div>
     </div>
 </section>
 </body>
 </html>
-

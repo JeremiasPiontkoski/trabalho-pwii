@@ -16,7 +16,7 @@
     <section class="container">
         <div class="content">
             <header><h1>Cadastro de Repositório</h1></header>
-            <form action="" id="form">
+            <form enctype="multipart/form-data" method="post" id="form">
                 <div class="line">
                     <label for="name">Nome:</label>
                     <input type="text" placeholder="Nome" name="name" id="name">
@@ -39,6 +39,11 @@
                 <div class="line">
                     <label for="description">Descrição:</label>
                     <input type="text" name="description" placeholder="Descrição" id="description">
+                </div>
+
+                <div class="line">
+                    <label for="file">Arquivo:</label>
+                    <input class="form-control" type="file" name="file" id="file">
                 </div>
 
                 <button>Cadastrar</button>

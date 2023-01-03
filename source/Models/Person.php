@@ -19,7 +19,7 @@ class Person
         int $idUser = NULL,
         string $cpf = NULL,
         int $idLanguage = NULL,
-        string $repositories = NULL
+        string $repositories = NULL,
     )
     {
         $this->id = $id;
@@ -48,17 +48,6 @@ class Person
         $query = "SELECT * FROM person 
         JOIN users ON person.idUser = users.id 
         JOIN typeUsers ON users.typeUser = typeUsers.id";
-        $stmt = Connect::getInstance()->prepare($query);
-        $stmt->execute();
-        if($stmt->rowCount() == 0) {
-            return false;
-        }
-        return  $stmt->fetchAll();
-    }
-
-    public function getAll2(){
-        $query = "SELECT * FROM person 
-        JOIN users ON person.idUser = users.id";
         $stmt = Connect::getInstance()->prepare($query);
         $stmt->execute();
         if($stmt->rowCount() == 0) {
@@ -105,7 +94,6 @@ class Person
         $stmt->bindParam(":idUser", $this->idUser);
         $stmt->execute();
 
-        $this->message = "Usuário cadastrado com sucesso!";
         return true;
     }
 
@@ -127,20 +115,6 @@ class Person
 
         $_SESSION["userPerson"] = $arrayUser; 
         
-        return true;
-    }
-
-    public function getReposity($idUser) {
-        $query = "SELECT repositories FROM person WHERE idUser LIKE :idUser";
-        $stmt = Connect::getInstance()->prepare($query);
-
-        $stmt->bindParam(":idUser", $idUser);
-        $stmt->execute();
-
-        $person = $stmt->fetch();
-
-        $this->repositories = $person->repositories;
-
         return true;
     }
 

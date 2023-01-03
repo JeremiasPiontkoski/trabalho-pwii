@@ -16,7 +16,7 @@
 <body>
     <section>
         <div class="card-register">
-            <form action="post" id="formRepository">
+            <form enctype="multipart/form-data" method="post" id="form">
                 <h1>EDIÇÃO DE REPOSITÓRIO</h1>
 
                 <div class="container-inputs">
@@ -63,6 +63,10 @@
                             ?> 
                         </select>
                     </div>
+                <div class="container-inputs">
+                    <label for="file">Arquivo:</label>
+                    <input class="form-control" type="file" name="file" id="file">
+                </div>
                 <button type="submit" class="btn-register">EDITAR</button>
                 <div class="data-error">
                     <p id="message"></p>
@@ -72,22 +76,27 @@
     </section>
 
     <script type="text/javascript" async>
-        const form = document.querySelector("#formRepository");
+        const form = document.querySelector("#form");
         const message = document.querySelector("#message");
         form.addEventListener("submit", async (e) => {
             e.preventDefault();
             const dataUser = new FormData(form);
-            const data = await fetch("<?= url("app/editarRepositorio/id?id=" . $repository["repository"]["id"])?>",{
+            const data = await fetch("<?= url("app/editarRepositorio/id?id=" . $repository["id"])?>",{
                 method: "POST",
                 body: dataUser,
             });
             const user = await data.json();
             console.log(user);
-            message.classList.add("message");
-            message.classList.remove("success", "warning", "error");
-            message.classList.add(`${user.type}`);
-            message.innerHTML = user.message;
-            window.location.href = "<?= url("app/repositorio/id?id=" . $_GET["id"])?>";
+            if(user) {
+                if(user.type == "success") {
+                    window.location.href = "<?= url("app/repositorio/id?id=" . $_GET["id"]); ?>";
+                }else {
+                    message.innerHTML = user.message;
+                    message.classList.remove("warning", "error");
+                    message.classList.add("message");
+                    message.classList.add(`${user.type}`);
+                }
+            }
         });
     </script>
 

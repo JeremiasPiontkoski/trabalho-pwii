@@ -14,12 +14,15 @@ class Repository
     private $idLanguage;
     private $idPerson;
 
+    private $file;
+
     public function __construct(
         int $id = NULL,
         string $name = NULL,
         string $description = NULL,
         int $idLanguage = NULL,
-        int $idPerson = NULL
+        int $idPerson = NULL,
+        string $file = NULL
     )
     {
         $this->id = $id;
@@ -27,14 +30,16 @@ class Repository
         $this->description = $description;
         $this->idLanguage = $idLanguage;
         $this->idPerson = $idPerson;
+        $this->file = $file;
     }
 
     public function insert(){
-        $query = "INSERT INTO repositories (name, description, idLanguage) VALUES (:name, :description, :idLanguage)";
+        $query = "INSERT INTO repositories (name, description, idLanguage, file) VALUES (:name, :description, :idLanguage, :file)";
         $stmt = Connect::getInstance()->prepare($query);
         $stmt->bindParam(":name", $this->name);
         $stmt->bindParam(":description", $this->description);
         $stmt->bindParam(":idLanguage", $this->idLanguage);
+        $stmt->bindParam(":file", $this->file);
         $stmt->execute();
 
         return Connect::getInstance()->lastInsertId();
@@ -50,29 +55,6 @@ class Repository
 
         return true;
     }
-
-//    public function insertPostRepositories($idRepository) {
-//        $query = "INSERT INTO post_repositories (idPerson, idRepository) VALUES (:idPerson, :idRepository)";
-//        $stmt = Connect::getInstance()->prepare($query);
-//        $stmt->bindParam(":idPerson", $this->idPerson);
-//        $stmt->bindParam(":idRepository", $idRepository);
-//        $stmt->execute();
-//
-//        return true;
-//    }
-
-    // public function findByIdLanguage(int $idLanguage)
-    // {
-    //     $query = "SELECT * FROM repositories WHERE idLanguage = :idLanguage";
-    //     $stmt = Connect::getInstance()->prepare($query);
-    //     $stmt->bindParam(":idLanguage",$idLanguage);
-    //     $stmt->execute();
-    //     if($stmt->rowCount() == 0){
-    //         return false;
-    //     } else {
-    //         return $stmt->fetchAll();
-    //     }
-    // }
 
     public function selectAll(){
 //        $query = "SELECT * FROM post_repositories
@@ -92,21 +74,6 @@ class Repository
         }
     }
 
-    // public function selectWithPerson() 
-    // {
-    //     $query = "SELECT * FROM post_repositories
-    //     JOIN person ON post_repositories.idPerson = person.id
-    //     JOIN users ON person.idUser = users.id";
-    //     $stmt = Connect::getInstance()->prepare($query);
-    //     $stmt->execute();
-
-    //     if($stmt->rowCount() == 0) {
-    //         return false;
-    //     }else {
-    //         return $stmt->fetchAll();
-    //     }
-    // }
-
     public function findById() {
         /* $query = "SELECT * FROM post_repositories
         JOIN repositories ON post_repositories.idRepository = repositories.id
@@ -120,7 +87,6 @@ class Repository
         JOIN person ON post_repositories.idPerson = person.id
         JOIN languages ON repositories.idLanguage = languages.id
         WHERE repositories.id = :id";
-
         $stmt = Connect::getInstance()->prepare($query);
         $stmt->bindParam(":id", $this->id);
         $stmt->execute();
@@ -176,69 +142,15 @@ class Repository
         return $stmt->fetchAll();
     }
 
-//    public static function findByIdPerson()
-//    {
-//        $query = "SELECT * FROM repositories WHERE idPerson = :idPerson";
-//        $stmt = Connect::getInstance()->prepare($query);
-//        $stmt->bindParam(":idPerson", $_SESSION["userPerson"]["id"]);
-//        $stmt->execute();
-//
-//        if($stmt->rowCount() == 0){
-//            return false;
-//        }
-//        return $stmt->fetchAll();
-//    }
-
-//    public static function findByIdPersonPostRepositories() {
-//        $query = "SELECT * FROM post_repositories";
-//        $stmt = Connect::getInstance()->prepare($query);
-//        // $stmt->bindParam(":idPerson", $_SESSION['userPerson']['id']);
-//
-//        $stmt->execute();
-//
-//        if($stmt->rowCount() == 0) {
-//            return false;
-//        }
-//
-//        return $stmt->fetchAll();
-//    }
-
-    public function findAllPostRepositories() 
-    {
-        $query = "SELECT * FROM post_repositories";
-        $stmt = Connect::getInstance()->prepare($query);
-        $stmt->execute();
-
-        if($stmt->rowCount() == 0){
-            return false;
-        } else {
-            return $stmt->fetchAll();
-        }
-    }
-
-//    public static function findById($id) {
-//        $query = "SELECT * FROM repositories WHERE id = :id";
-//        $stmt = Connect::getInstance()->prepare($query);
-//        $stmt->bindParam(":id", $id);
-//        $stmt->execute();
-//
-//        if($stmt->rowCount() == 0) {
-//            return false;
-//        }
-//
-//        return $stmt->fetch();
-//    }
-
-    
-
     public function update()
     {
-        $query = "UPDATE repositories SET name = :name, description = :description, idLanguage = :idLanguage WHERE id = :id";
+        $query = "UPDATE repositories SET name = :name, description = :description, idLanguage = :idLanguage, file = :file WHERE id = :id";
         $stmt = Connect::getInstance()->prepare($query);
+        $stmt->bindParam(":id", $this->id);
         $stmt->bindParam(":name", $this->name);
         $stmt->bindParam(":description", $this->description);
         $stmt->bindParam(":idLanguage", $this->idLanguage);
-        $stmt->bindParam(":id", $this->id);
+        $stmt->bindParam(":file", $this->file);
         $stmt->execute();
         return true;
     }
@@ -313,5 +225,21 @@ class Repository
 
     public function setIdPerson($idPerson) {
         $this->idPerson = $idPerson;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getFile(): ?string
+    {
+        return $this->file;
+    }
+
+    /**
+     * @param string|null $file
+     */
+    public function setFile(?string $file): void
+    {
+        $this->file = $file;
     }
 }

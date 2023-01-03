@@ -171,7 +171,7 @@ class App
                 unlink($_SESSION["user"]["image"]);
             }else {
                 $upload = $_SESSION["user"]["image"];
-            } 
+            }
 
            $user = new User(
                 $_SESSION["user"]["id"],
@@ -206,31 +206,9 @@ class App
                     "type" => "success"
                 ];
 
-//                 $json = [
-//                     "id" => $user->getId(),
-//                     "name" => $user->getName(),
-//                     "email" => $user->getEmail(),
-//                     "description" => $user->getDescription(),
-//                     "language" => $person->getIdLanguage(),
-//                     "image" => url($user->getImage()),
-//                     "type" => "success",
-//                     "message" => "Dados Alteradoso como sucesso!"
-//                 ];
-
                 echo json_encode($json);
                 return;
             }
-            // $json = [
-            //     "id" => $user->getId(),
-            //     "name" => $user->getName(),
-            //     "email" => $user->getEmail(),
-            //     "description" => $user->getDescription(),
-            //     "language" => $person->getIdLanguage(),
-            //     "image" => url($user->getImage()),
-            //     "type" => "success",
-            //     "message" => "Dados Alteradoso como sucesso!"
-            // ];
-            
         }
     }
 
@@ -255,13 +233,25 @@ class App
                 echo json_encode($json);
                 return;
             }
-        
+
+            if(!empty($_FILES['file']['tmp_name'])) {
+                $upload = uploadFile($_FILES['file']);
+            }else {
+                $response = [
+                    "message" => "Você deve adicionar um arquivo para o seu repositório",
+                    "type" => "danger"
+                ];
+                echo json_encode($response);
+                return;
+            }
+
             $repository = new Repository(
                 null,
                 $data["name"],
                 $data["description"],
                 $data["language"],
-                $_SESSION['userPerson']['id']
+                $_SESSION['userPerson']['id'],
+                $upload
             );
 
             $postRepo = new Repository(
@@ -414,6 +404,7 @@ class App
                 "description" => $repository->description,
                 "idLanguage" => $repository->idLanguage,
                 "language" => $repository->language,
+                "file" => $repository->file,
                 "user" => [
                     "id" => $dataUser->id,
                     "name" => $dataUser->name,
@@ -454,7 +445,6 @@ class App
         echo $this->view->render("editRepository", [
             "eventName" => CONF_SITE_NAME,
             "repository" => $response,
-//            "language" => Language::findById($repository->idLanguage)
             "languages" => $this->language->selectAll()
         ]);
     }
@@ -470,18 +460,34 @@ class App
                 return;
             }
 
-            $repository = new Repository(
-                $_GET["id"],
-                $data["name"],
-                $data["description"],
-                $data["idLanguage"]
-            );
+            $repository = new Repository();
+            $repository->setId($_GET["id"]);
+            $dataRepository = $repository->findById();
 
+            if(!empty($_FILES['file']['tmp_name'])) {
+                $upload = uploadFile($_FILES['file']);
+            }else {
+                $upload = $dataRepository->file;
+            }
+
+            $repository->setId($_GET['id']);
+            $repository->setName($data['name']);
+            $repository->setDescription($data['description']);
+            $repository->setIdLanguage($data['idLanguage']);
+            $repository->setFile($upload);
+
+//            $repository = new Repository(
+//                $_GET["id"],
+//                $data["name"],
+//                $data["description"],
+//                $data["idLanguage"],
+//                $upload
+//            );
             $repository->update();
 
             $json = [
                 "message" => "Repositório alterado com sucesso!",
-                "type" => "success"
+                "type" => "warning"
             ];
             echo json_encode($json);
             return;
