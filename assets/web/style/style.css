@@ -441,6 +441,26 @@ section#formFaq form button {
     border-radius: 1rem;
   }
 }
+/* MESSAGE ERROR */
+.data-error > p {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 600;
+  padding-block: 0.8rem;
+}
+
+.message.warning {
+  color: var(--primary-color);
+}
+
+.message.error {
+  color: red;
+}
+
+.message.success {
+  color: lightblue;
+}
+
 /* FOOTER */
 footer#footer {
   width: 100vw;
@@ -496,26 +516,6 @@ footer#footer .box ul li path[fill] {
     fill: #bbf7d0;
   }
 }
-/* MESSAGE ERROR */
-.data-error > p {
-  text-align: center;
-  font-size: 2rem;
-  font-weight: 600;
-  padding-block: 0.8rem;
-}
-
-.message.warning {
-  color: var(--primary-color);
-}
-
-.message.error {
-  color: red;
-}
-
-.message.success {
-  color: lightblue;
-}
-
 /* LOGIN */
 section.container {
   width: 100vw;

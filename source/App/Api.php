@@ -64,6 +64,7 @@ class Api
                 $this->person->setIdUser($this->user->getId());
                 $dataPerson = $this->person->getDataPerson();
                 $response = [
+                        "code" => 200,
                         "id" => $this->person->getIdUser(),
                         "name" => $dataPerson->name,
                         "email" => $dataPerson->email,

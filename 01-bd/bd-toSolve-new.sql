@@ -100,8 +100,15 @@ CREATE TABLE IF NOT EXISTS `post_projects` (
 CREATE TABLE IF NOT EXISTS `faqs` (
     `id` int(11) NOT NULL AUTO_INCREMENT,
     `question` VARCHAR(250) NOT NULL,
-    `answer` VARCHAR(250) NOT NULL,
+    `answer` VARCHAR(250),
     PRIMARY KEY(`id`)
+)ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `answered_faqs` (
+    `id` int(11) NOT NULL AUTO_INCREMENT,
+    `idFaq` int(11) NOT NULL,
+    PRIMARY KEY(`id`),
+    FOREIGN KEY (`idFaq`) REFERENCES `faqs` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 )ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 INSERT INTO languages (language) VALUES ("JavaScript"), ("Java"), ("Php"), ("Python");

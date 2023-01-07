@@ -26,10 +26,9 @@ class Web
     public function home() : void
     {
         $faq = new Faq();
-
         echo $this->view->render(
             "home",[
-                "faqs" => $faq->getAll()
+                "faqs" => $faq->getAllAnswered()
             ]);
     }
 
@@ -249,5 +248,44 @@ class Web
             }
         }
         echo $this->view->render("login",["eventName" => CONF_SITE_NAME]);
+    }
+
+    public function registerFaq(array $data) {
+        if(!empty($data)) {
+            if(in_array("", $data)) {
+                $json = [
+                    "message" => "Preencha todos os campos!",
+                    "type" => "warning"
+                ];
+                echo json_encode($json);
+                return;
+            }
+
+            if(!is_email($data["email"])) {
+                $json = [
+                    "message" => "Informe um email válido!",
+                    "type" => "warning"
+                ];
+                echo json_encode($json);
+                return;
+            }
+
+            $faq = new Faq(
+                null,
+                $data["name"],
+                $data["email"],
+                $data["question"],
+                null
+            );
+
+            $faq->insert();
+
+            $json = [
+                "message" => "Faq cadastrada com sucesso!",
+                "type" => "success"
+            ];
+            echo json_encode($json);
+            return;
+        }
     }
 }

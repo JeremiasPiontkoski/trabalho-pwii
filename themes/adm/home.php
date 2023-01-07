@@ -18,12 +18,11 @@ $this->layout("_theme");
     <section class="container-content">
         <div class="inside">
             <h1>FAQ</h1>
-
             <?php
-
-            foreach ($faqs as $faq) {?>
+            foreach ($allFaqs as $faq) {?>
             <div class="content">
                 <a href="<?= url("admin/editarFaq/id?id=" . $faq->id)?>"><?=$faq->question?></a>
+                <a href="<?= url("admin/removerFaq/id?id=" . $faq->id)?>">DELETE</a>
             </div>
             <?php
             }
@@ -34,5 +33,6 @@ $this->layout("_theme");
             </div>
         </div>
     </section>
+
 </body>
 </html>

@@ -5,7 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="<?= url("assets/web/style/style.css") ?>">
-    <!-- CSS only -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&family=Montserrat&display=swap');
@@ -200,7 +199,7 @@
 
     <section id="formFaq">
         <h1>Faça sua dúvida!</h1>
-        <form action="" id="formUsers">
+        <form action="" id="formUsers" novalidate>
             <div class="line">
                 <label for="name">Nome:</label>
                 <input type="text" name="name" id="name" placeholder="Nome">
@@ -215,6 +214,11 @@
                 <label for="question">Pergunta:</label>
                 <input type="text" name="question" id="question"
                 placeholder="Pergunta">
+            </div>
+
+            <div class="data-error">
+                <p id="message">
+                </p>
             </div>
 
             <button>Enviar</button>
@@ -253,6 +257,27 @@
           </ul>
         </div>
     </footer>
+
+    <script type="text/javascript" async>
+        const form = document.querySelector("#formUsers");
+        const message = document.querySelector("#message");
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const dataUser = new FormData(form);
+            const data = await fetch("<?= url("registroFaq"); ?>",{
+                method: "POST",
+                body: dataUser,
+            });
+            const faq = await data.json();
+            console.log(faq);
+            if(faq) {
+                    message.innerHTML = faq.message;
+                    message.classList.remove("warning", "error");
+                    message.classList.add("message");
+                    message.classList.add(`${faq.type}`);
+                }
+        });
+    </script>
 
 
    <!-- JavaScript Bundle with Popper -->

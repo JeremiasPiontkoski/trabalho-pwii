@@ -487,7 +487,7 @@ class App
 
             $json = [
                 "message" => "Repositório alterado com sucesso!",
-                "type" => "warning"
+                "type" => "success"
             ];
             echo json_encode($json);
             return;

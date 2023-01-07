@@ -24,6 +24,9 @@ $route->get("/login", "Web:login");
 $route->post("/registro", "Web:register");
 $route->get("/registro", "Web:register");
 
+/* REGISTER FAQ */
+$route->post("/registroFaq", "Web:registerFaq");
+
 /* RANDOM */
 $route->get("/contato","Web:contact");
 $route->post("/contato","Web:contact");
@@ -71,6 +74,15 @@ $route->post("/registroFaq", "Adm:registerFaq");
 
 $route->get("/editarFaq/{idFaq}", "Adm:editFaq");
 $route->post("/editarFaq/{idFaq}", "Adm:postEditFaq");
+
+$route->get("/responderFaq", "Adm:notAnswerFaq");
+
+$route->get("/responderFaq/{idFaq}", "Adm:answerFaq");
+$route->post("/responderFaq/{idFaq}", "Adm:postAnswerFaq");
+
+//$route->post("/{idFaq}", "Adm:deleteFaq");
+$route->get("/removerFaq/{idFaq}", "Adm:deleteFaq");
+
 $route->group(null);
 
 
