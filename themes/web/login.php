@@ -2,6 +2,8 @@
     session_start();
     if(!empty($_SESSION["user"])) {
         header("Location:http://www.localhost/trabalho-pwii/app");
+    }else if(!empty($_SESSION["admin"])) {
+        header("Location:http://www.localhost/trabalho-pwii/admin");
     }
 ?>
 
@@ -63,12 +65,15 @@
                                 
                                 if(user.type == "success") {
                                     window.location.href = "<?= url("app"); ?>";
-                                }else {
-                                    message.classList.add("message");
-                                    message.classList.remove("success", "warning", "error");
-                                    message.classList.add(`${user.type}`);
-                                    message.innerHTML = user.message;
-                                }                       
+                                }else if (user.type == "admin") {
+                                    window.location.href = "<?= url("admin"); ?>";
+                                }
+                                // else {
+                                //    message.classList.add("message");
+                                //    message.classList.remove("success", "warning", "error");
+                                //    message.classList.add(`${user.type}`);
+                                //    message.innerHTML = user.message;
+                                //}
                             });
                         </script>
 

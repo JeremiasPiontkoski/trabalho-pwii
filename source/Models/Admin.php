@@ -2,6 +2,8 @@
 
 namespace Source\Models;
 
+use Source\Core\Connect;
+
 class Admin
 {
     private $id;
@@ -15,7 +17,7 @@ class Admin
      * @param $email
      * @param $password
      */
-    public function __construct($id = 1, $name = "Administração", $email = "administracaoToSolve@gmail.com", $password = "administracao123")
+    public function __construct($id = null, $name = null, $email = null, $password = null)
     {
         $this->id = $id;
         $this->name = $name;
@@ -23,6 +25,58 @@ class Admin
         $this->password = $password;
     }
 
+    public function insert() {
+        $query = "INSERT INTO admins (name, email, password) VALUES (:name, :email, :password)";
+        $stmt = Connect::getInstance()->prepare($query);
+        $stmt->bindParam(":name", $this->name);
+        $stmt->bindParam(":email", $this->email);
+        $stmt->bindValue(":password", password_hash($this->password, PASSWORD_DEFAULT));
+        $stmt->execute();
+        return true;
+    }
+
+    public function validate (string $email, string $password) : bool
+    {
+        $query = "SELECT * FROM admins WHERE email LIKE :email";
+        $stmt = Connect::getInstance()->prepare($query);
+        $stmt->bindParam(":email", $email);
+        $stmt->execute();
+
+        if($stmt->rowCount() == 0){
+            return false;
+        }else {
+            $adm = $stmt->fetch();
+            if(!password_verify($password, $adm->password)){
+                return false;
+            }
+        }
+
+        $this->id = $adm->id;
+        $this->name = $adm->name;
+        $this->email = $adm->email;
+
+        $arrayAdmin = [
+            "id" => $this->id,
+            "name" => $this->name,
+            "email" => $this->email,
+        ];
+
+//        session_start();
+        $_SESSION["admin"] = $arrayAdmin;
+        return true;
+    }
+
+    public function findByEmail() {
+        $query = "SELECT * FROM admins WHERE email = :email";
+        $stmt = Connect::getInstance()->prepare($query);
+        $stmt->bindParam(":email", $this->email);
+        $stmt->execute();
+
+        if($stmt->rowCount() == 0) {
+            return false;
+        }
+        return true;
+    }
 
     /**
      * @return mixed

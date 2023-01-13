@@ -13,6 +13,11 @@ class Adm
 
     public function __construct()
     {
+        session_start();
+        if(empty($_SESSION["admin"])) {
+            header("Location:http://www.localhost/trabalho-pwii/login");
+        }
+
         $this->view = new Engine(CONF_VIEW_ADMIN, 'php');
     }
 
@@ -145,5 +150,71 @@ class Adm
         $faq->delete();
 
         header("Location:http://www.localhost/trabalho-pwii/admin");
+    }
+
+    public function registerAdm(array $data) {
+        if(!empty($data)) {
+            if(in_array("", $data)) {
+                $json = [
+                    "message" => "Preencha todos os campos!",
+                    "type" => "warning"
+                ];
+                echo json_encode($json);
+                return;
+            }
+
+            if(!is_email($data["email"])) {
+                $json = [
+                    "message" => "Informe um email válido!",
+                    "type" => "warning"
+                ];
+                echo json_encode($json);
+                return;
+            }
+
+            $adm = new Admin();
+            $adm->setName($data["name"]);
+            $adm->setEmail($data["email"]);
+            $adm->setPassword($data["password"]);
+
+            if($adm->findByEmail()) {
+                $json = [
+                    "message" => "Email já cadastrado",
+                    "type" => "warning"
+                ];
+                echo json_encode($json);
+                return;
+            }
+
+            if(strlen($adm->getPassword()) < 10) {
+                $json = [
+                    "message" => "A senha deve conter no mínimo 10 caracteres!",
+                    "type" => "warning"
+                ];
+                echo json_encode($json);
+                return;
+            }
+
+            if($adm->getPassword() != $data["confirmPassword"]) {
+                $json = [
+                    "message" => "As senhas devem ser identicas!",
+                    "type" => "warning"
+                ];
+                echo json_encode($json);
+                return;
+            }
+
+            $adm->insert();
+
+            $json = [
+                "message" => "Administrador cadastrado com sucesso",
+                "type" => "success"
+            ];
+
+            echo json_encode($json);
+            return;
+        }
+
+        echo $this->view->render("registerAdm");
     }
 }

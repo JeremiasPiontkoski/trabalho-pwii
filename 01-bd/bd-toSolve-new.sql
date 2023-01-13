@@ -111,6 +111,14 @@ CREATE TABLE IF NOT EXISTS `answered_faqs` (
     FOREIGN KEY (`idFaq`) REFERENCES `faqs` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 )ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
+CREATE TABLE IF NOT EXISTS `admins` (
+    `id` int(11) NOT NULL AUTO_INCREMENT,
+    `name` VARCHAR(100) NOT NULL,
+    `email` VARCHAR(100) NOT NULL,
+    `password` VARCHAR(250) NOT NULL,
+    PRIMARY KEY (`id`)
+)ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
 INSERT INTO languages (language) VALUES ("JavaScript"), ("Java"), ("Php"), ("Python");
 
 INSERT INTO type (type) VALUES ("Criação de software"), ("Programação Web"), ("Programação Mobile");

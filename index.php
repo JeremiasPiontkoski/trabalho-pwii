@@ -80,6 +80,9 @@ $route->get("/responderFaq", "Adm:notAnswerFaq");
 $route->get("/responderFaq/{idFaq}", "Adm:answerFaq");
 $route->post("/responderFaq/{idFaq}", "Adm:postAnswerFaq");
 
+$route->get("/registrarAdm", "Adm:registerAdm");
+$route->post("/registrarAdm", "Adm:registerAdm");
+
 //$route->post("/{idFaq}", "Adm:deleteFaq");
 $route->get("/removerFaq/{idFaq}", "Adm:deleteFaq");
 

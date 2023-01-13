@@ -31,6 +31,8 @@ $route->get("/repositories", "Api:getRepositories");
 $route->get("/getRepo", "ApiTest:getRepositories");
 $route->get("/getRepository/{idRepository}", "ApiTest:getRepository");
 
+$route->get("/getLanguage/{idLanguage}", "Api:getLanguage");
+
 $route->post("/createRepository/name/{name}/description/{description}/idLanguage/{idLanguage}", "Api:createRepository");
 $route->put("/uploadRepository/name/{name}/description/{description}/idLanguage/{idLanguage}/idRepository/{idRepository}", "Api:uploadRepository");
 

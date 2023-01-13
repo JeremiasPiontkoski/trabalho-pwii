@@ -74,7 +74,7 @@ class Api
                         "typeUser" => $dataPerson->type,
                         "person" => [
                             "cpf" => $dataPerson->cpf,
-                            "idLanguage" => $dataPerson->idLanguage
+                            "idLanguage" => $dataPerson->idLanguage,
                             ]
                 ];
                 echo json_encode($response, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
@@ -510,6 +510,20 @@ class Api
                 "message" => "Repositório alterado com sucesso"
             ];
             echo json_encode($response, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+            return;
+        }
+    }
+
+    public function getLanguage(array $data) {
+        if($this->user->getId() != null) {
+            $this->language->setId($data["idLanguage"]);
+            $language = $this->language->findById();
+
+            $response = [
+                "id" => $language->id,
+                "language" => $language->language
+            ];
+            echo json_encode($response);
             return;
         }
     }

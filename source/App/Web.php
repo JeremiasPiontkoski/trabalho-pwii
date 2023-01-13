@@ -5,6 +5,7 @@ namespace Source\App;
 use JsonException;
 use LDAP\Result;
 use League\Plates\Engine;
+use Source\Models\Admin;
 use Source\Models\Company;
 use Source\Models\Faq;
 use Source\Models\Language;
@@ -216,8 +217,9 @@ class Web
             $user = new User();
             $person = new Person();
             $company = new Company();
+            $adm = new Admin();
 
-            if(!$user->validate($data["email"], $data["password"])) {
+            if(!$user->validate($data["email"], $data["password"]) && !$adm->validate($data["email"], $data["password"])) {
                 $json = [
                 "message" => "Usuário e/ou senha inválidos",
                 "type" => "warning"
@@ -242,6 +244,15 @@ class Web
                     "message" => "Acesso disponível",
                     "type" => "success",
                     "typeUser" => "company"
+                ];
+                echo json_encode($json);
+                return;
+            }
+
+            if($adm->validate($data["email"], $data["password"])) {
+                $json = [
+                    "message" => "Administração disponível",
+                    "type" => "admin"
                 ];
                 echo json_encode($json);
                 return;

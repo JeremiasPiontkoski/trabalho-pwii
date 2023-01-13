@@ -42,10 +42,10 @@ class Language
         }
     }
 
-    public function findById($id) {
+    public function findById() {
         $query = "SELECT * FROM languages WHERE id = :id";
         $stmt = Connect::getInstance()->prepare($query);
-        $stmt->bindParam(":id", $id);
+        $stmt->bindParam(":id", $this->id);
         $stmt->execute();
 
         if($stmt->rowCount() == 0) {

@@ -32,9 +32,14 @@ class Person
     public function getDataPerson()
     {
         $query = "SELECT * FROM person
-        JOIN users ON person.idUser = users.id 
+        JOIN users ON person.idUser = users.id
         JOIN typeUsers on users.typeUser = typeUsers.id
         WHERE idUser = :idUser";
+//        $query = "SELECT * FROM person
+//        JOIN users ON person.idUser = users.id
+//        JOIN languages on person.idLanguage = languages.id
+//        JOIN typeUsers on users.typeUser = typeUsers.id
+//        WHERE idUser = :idUser";
         $stmt = Connect::getInstance()->prepare($query);
         $stmt->bindParam(":idUser", $this->idUser);
         $stmt->execute();
