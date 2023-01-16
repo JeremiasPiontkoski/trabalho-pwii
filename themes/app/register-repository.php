@@ -104,7 +104,7 @@
                                     body: dataUser,
                                 });
                                 const user = await data.json();
-                                console.log(user);
+                                // console.log(user);
                                 if(user) {
                                     if(user.type == "success") {
                                         window.location.href = "<?= url("app"); ?>";

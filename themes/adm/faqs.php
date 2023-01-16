@@ -1,11 +1,3 @@
-<!-- <?php
-
-foreach ($faqs as $faq) {?>
-<a href="<?= url("admin/responderFaq/id?id=" . $faq->id)?>"><?=$faq->question?></a>
-<?php
-}?> -->
-
-
 <?php
 $this->layout("_theme");
 // var_dump($faqs);
@@ -24,13 +16,13 @@ $this->layout("_theme");
         <table class="content-table">
             <thead>
               <tr>
-                <th>Id</th>
-                <th>Pergunta</th>
-                <th>Resposta</th>
+                <th>Id:</th>
+                <th>Pergunta:</th>
+                <th>Resposta:</th>
                 <th>Nome do usuário:</th>
                 <th>Email do usuário:</th>
-                <th>Responder</th>
-                <th>Excluir</th>
+                <th>Editar:</th>
+                <th>Excluir:</th>
               </tr>
             </thead>
             <tbody>
@@ -42,7 +34,7 @@ $this->layout("_theme");
                 <td><?= $faq->answer == "" ? "NÃO RESPONDIDA" : $faq->answer?></td>
                 <td><?= $faq->userName?></td>
                 <td><?= $faq->userEmail?></td>
-                <td><a href="<?= url("admin/responderFaq/id?id=" . $faq->id)?>">Responder</a></td>
+                <td><a href="<?= url("admin/editarFaq/id?id=" . $faq->id)?>">Editar</a></td>
                 <td><a href="<?= url("admin/removerFaq/id?id=" . $faq->id)?>">Excluir</a></td>
               </tr>
               <?php

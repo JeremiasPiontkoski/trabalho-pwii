@@ -55,14 +55,14 @@ class Admin
         $this->name = $adm->name;
         $this->email = $adm->email;
 
-        $arrayAdmin = [
-            "id" => $this->id,
-            "name" => $this->name,
-            "email" => $this->email,
-        ];
+    //     $arrayAdmin = [
+    //         "id" => $this->id,
+    //         "name" => $this->name,
+    //         "email" => $this->email,
+    //     ];
 
-//        session_start();
-        $_SESSION["admin"] = $arrayAdmin;
+    // //    session_start();
+    //     $_SESSION["admin"] = $arrayAdmin;
         return true;
     }
 

@@ -55,6 +55,7 @@ $route->get("/projetos", "App:showProjects");
 
 /* SPECIFIC REPOSITORY */
 $route->get("/repositorio/{idRepositorio}", "App:showRepository");
+$route->get("/userRepositorio/{idRepositorio}", "App:showUserRepository");
 
 /* EDIT REPOSITORY */
 $route->get("/editarRepositorio/{idRepository}", "App:renderEditRepository");
@@ -66,8 +67,14 @@ $route->get("/sair", "App:logout");
 $route->get("/profile","App:profile");
 $route->post("/profile", "App:editProfile");
 
+/* ADMIN */
+
 $route->group("/admin");
 $route->get("/","Adm:home");
+
+$route->get("/faqs", "Adm:faqs");
+
+$route->get("/faqsRepondidas", "Adm:answeredFaqs");
 
 $route->get("/registroFaq", "Adm:registerFaq");
 $route->post("/registroFaq", "Adm:registerFaq");
@@ -85,6 +92,11 @@ $route->post("/registrarAdm", "Adm:registerAdm");
 
 //$route->post("/{idFaq}", "Adm:deleteFaq");
 $route->get("/removerFaq/{idFaq}", "Adm:deleteFaq");
+
+$route->get("/repositorios", "Adm:repositories");
+$route->get("/repositorios/{idLanguage}", "Adm:filterRepositories");
+
+$route->get("/usuarios", "Adm:users");
 
 $route->group(null);
 

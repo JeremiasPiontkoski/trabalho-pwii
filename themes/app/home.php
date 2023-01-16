@@ -39,7 +39,7 @@
         <div class="content">
             <?php if(!empty($repositories)){
                 foreach($repositories as $repository) { ?>
-                    <a href="<?= url("app/repositorio/id?id=" . $repository["id"])?>"><?=$repository["name"]?></a>
+                    <a href="<?= url("app/userRepositorio/id?id=" . $repository["id"])?>"><?=$repository["name"]?></a>
                <?php
                     }
                 }

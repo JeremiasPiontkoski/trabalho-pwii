@@ -15,8 +15,94 @@
     <title>Edição de Perfil</title>
 </head>
 <body>
+<section class="container">
+    <div class="content">
+        <header><h1>Edição de Perfil</h1></header>
+        <form enctype="multipart/form-data" method="post" id="form">
+            <div class="line">
+                <label for="name">Nome:</label>
+                <input type="text" name="name" placeholder="Nome" id="name" value="<?=$user["name"]?>">
+            </div>
+            <div class="line">
+            <label for="email">Email:</label>
+                <input type="email" name="email" placeholder="Email" id="email" value="<?=$user["email"]?>">
+            </div>
+            <div class="line">
+            <label for="description">Descrição:</label>
+                <input type="text" name="description" placeholder="Descrição" id="description" value="<?=$user["description"] == "" ? "" : $user["description"]; ?>">
+            </div>
+            <div class="line">
+            <label for="cpf">Cpf</label>
+                <input type="number" name="cpf" placeholder="Cpf" value="<?=$user["person"]["cpf"];?>">
+            </div>
+            <?php
+            if(!empty($_SESSION["userPerson"])) {?>
+            <div class="line">
+                <label for="language">Linguagem:</label>
+                <select name="language" id="selectUser">
+                    <?php
+                        foreach($languages as $language) {
+                    ?>
+                    <?php
+                        if(($language->id == $user["person"]["idLanguage"])){
+                    ?>
+                        <option value="<?= $user["person"]["idLanguage"]; ?>">
+                            <?= $language->language ?>
+                    <?php
+                        }
+                    ?>
+                        </option>
+                    <?php
+                        }
+                    ?>
+                    <?php
+                        foreach($languages as $language) {
+                    ?>
+                    <?php
+                        if(($language->id != $user["person"]["idLanguage"])){
+                    ?>
+                        <option value="<?= $language->id?>">
+                        <?= $language->language ?>
+                    <?php
+                        }
+                    ?>
+                    </option>
+                    <?php
+                        }
+                    ?>
+                </select>
+            </div>
+            <?php
+                }
+            ?>
 
-    <div class="container-form">
+        <div class="box-image">
+           <?php
+                if(!empty($_SESSION["user"]["image"])):
+            ?>
+                <img src="<?= url($_SESSION["user"]["image"]); ?>" id="imgUser">
+            <?php
+                endif;
+            ?>
+           </div>
+            
+            <div class="box">
+                <label for="image">Foto de perfil:</label>
+                <input class="form-control" type="file" name="image" id="image">
+            </div>
+
+            <div class="data-error">
+                <p id="message"></p>
+            </div>
+
+            <button type="submit">Enviar</button>
+
+            <p id="message"></p>
+        </form>
+    </div>
+</section>
+
+    <!-- <div class="container-form">
         <h1>Edição de perfil</h1>
         <form enctype="multipart/form-data" method="post" id="form">
             <div class="box">
@@ -103,7 +189,7 @@
 
             <a href="<?= url("app") ?>">Menu Principal</a>
         </form>
-    </div>
+    </div> -->
 
 
     <script type="text/javascript" async>

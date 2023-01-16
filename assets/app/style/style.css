@@ -299,7 +299,7 @@ section.container-repositories .footer a {
   background-color: #d1d5db;
   color: black;
   transition: 0.5s ease;
-  margin-top: 0.8rem;
+  margin-block: 0.8rem;
 }
 
 @media (min-width: 600px) {
@@ -333,75 +333,97 @@ section.container-repositories {
 section.container-repositories .head {
   width: 100%;
   min-height: 6rem;
-  display: flex;
-  background-color: orange;
-  justify-content: center;
-  align-items: center;
-  flex-direction: row;
-  gap: 1.2rem;
+  flex-direction: column;
+  margin-block: 1.4rem;
 }
-section.container-repositories .head .options {
-  width: 100%;
-  height: auto;
+section.container-repositories .head p {
+  font-size: 2rem;
+  font-weight: 500;
+  color: black;
 }
-
-section.container-repositories div.repositories {
-  width: 100%;
-  height: auto;
+section.container-repositories .head ul {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin-block: 1.6rem;
+  gap: 0.8rem;
 }
-section.container-repositories div.repositories .line {
+section.container-repositories .head ul li {
+  list-style: none;
+}
+section.container-repositories .head ul li a {
   text-decoration: none;
-  width: 90%;
-  height: auto;
-  margin-bottom: 1.6rem;
-  background-color: #f3f4f6;
-  border-radius: 5px;
-}
-section.container-repositories div.repositories .line p#first {
-  background-color: #d1d5db;
   color: #6b7280;
   font-size: 1.6rem;
-  font-weight: 500;
-  padding: 0.8rem 1.2rem;
-  text-align: center;
-}
-section.container-repositories div.repositories .line p#first span {
-  color: #f3f4f6;
-  font-weight: 700;
-}
-section.container-repositories div.repositories .line .data {
-  width: 100%;
-  height: 100%;
-  background-color: #6b7280;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  flex-direction: row;
-}
-section.container-repositories div.repositories .line .data p {
-  font-size: 1.2rem;
-  font-weight: 500;
-  color: #f3f4f6;
-  padding: 0.4rem 0.8rem;
-}
-section.container-repositories div.repositories .line p#last {
-  text-align: center;
-  font-size: 1.2rem;
-  font-weight: 500;
-  color: #6b7280;
-  padding: 0.4rem 0.8rem;
+  transition: 0.3s ease;
 }
 
-@media (min-width: 500px) {
-  section.container-repositories div.repositories .line {
-    width: 45rem;
+@media (min-width: 992px) {
+  section.container-repositories .head ul {
+    flex-direction: row;
+    gap: 5.6rem;
+  }
+  section.container-repositories .head ul li a {
+    font-size: 2rem;
+  }
+  section.container-repositories .head ul li a:hover {
+    background-color: transparent;
+    border-bottom: 1px solid #6b7280;
+    font-weight: 700;
+    color: #d1d5db;
+    overflow: hidden;
   }
 }
+section.container-repositories a.data {
+  width: 30rem;
+  margin-bottom: 1.2rem;
+  text-decoration: none;
+  border-radius: 0.8rem;
+}
+section.container-repositories a.data div.user-data {
+  width: 100%;
+  min-height: 10rem;
+  background-color: #57a78f;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding-inline: 0.8rem;
+  padding-block: 1.2rem;
+}
+section.container-repositories a.data div.user-data div.user-photo {
+  width: 20rem;
+  height: 20rem;
+  background-color: white;
+  border-radius: 100%;
+}
+section.container-repositories a.data div.user-data div.user-photo img {
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+section.container-repositories a.data div.user-data p {
+  color: white;
+  font-size: 1.6rem;
+  font-weight: 500;
+  padding-top: 1.2rem;
+}
+section.container-repositories a.data div.repository-data {
+  width: 100%;
+  min-height: 10rem;
+  background-color: #d1d5db;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+section.container-repositories a.data div.repository-data p {
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: #f3f4f6;
+}
+
 section.container {
   width: 100vw;
   min-height: 100vh;
@@ -576,118 +598,115 @@ select option {
   transition: 0.5s ease;
 }
 
-.container-form {
-  width: 100vw;
-  min-height: 100vh;
-  background-color: #57a78f;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-.container-form h1 {
-  font-size: 2rem;
-  text-transform: uppercase;
-  color: #6b7280;
-  padding: 1rem;
-}
-.container-form form {
-  width: 90%;
-  height: 100%;
-  margin-bottom: 4rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  border-radius: 10px;
-}
-.container-form form .box {
-  width: 100%;
-  height: auto;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  margin-top: 0.5rem;
-}
-.container-form form .box label {
-  font-size: 2rem;
-  font-weight: 700;
-  padding-block: 0.8rem;
-  color: #f3f4f6;
-}
-.container-form form .box input {
-  height: 3.2rem;
-  border: none;
-  outline: none;
-  color: #6b7280;
-  padding: 0.4rem;
-  font-size: 1.6rem;
-  border-radius: 5px;
-}
-.container-form form .box select {
-  width: 100%;
-  min-width: 15ch;
-  border: 1px solid var(--select-border);
-  border-radius: 0.25em;
-  padding: 0.25em 0.5em;
-  font-size: 1.6rem;
-  cursor: pointer;
-  line-height: 1.1;
-  background-color: #fff;
-}
-.container-form form .data-error {
-  width: 50%;
-  height: auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-block: 1.2rem;
-}
-.container-form form .data-error p {
-  font-size: 1.6rem;
-  font-weight: 700;
-  color: red;
-}
-.container-form form .box-image {
-  width: 15rem;
-  height: 15rem;
+section.container div.content div.box-image {
+  width: 20rem;
+  height: 20rem;
   background-color: white;
-  margin-top: 1rem;
   border-radius: 100%;
+  padding-inline: 2rem;
   overflow: hidden;
-}
-.container-form form button {
-  width: 75%;
-  height: 4rem;
-  outline: none;
-  border: none;
-  border-radius: 1rem;
-  font-size: 2rem;
-  font-weight: 700;
-  text-transform: uppercase;
   margin-block: 1.2rem;
-  background-color: #d1d5db;
-  color: #6b7280;
-  transition: 0.5s ease;
 }
-.container-form a {
-  text-decoration: none;
-  font-size: 2rem;
-  color: #1f2937;
-  transition: 0.5s ease;
-}
-.container-form a:hover {
-  color: #6b7280;
+section.container div.content div.box-image img {
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
-@media (min-width: 992px) {
-  .container-form form {
-    width: 50%;
-    background-color: #198557;
-    padding: 5rem;
-  }
-  .container-form .box label {
-    color: #f3f4f6;
+section {
+  min-width: 100vw;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+section div.repository {
+  width: 95%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 0.8rem;
+  margin-top: 1.2rem;
+}
+section div.repository div.user {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: #57a78f;
+  padding-block: 1.2rem;
+}
+section div.repository div.user div.user-photo {
+  width: 20rem;
+  height: 20rem;
+  background-color: white;
+  border-radius: 100%;
+  padding-inline: 2rem;
+}
+section div.repository div.user div.user-photo img {
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+section div.repository div.user p {
+  color: white;
+  font-size: 2rem;
+  font-weight: 500;
+  padding-top: 1.2rem;
+  overflow: hidden;
+}
+section div.repository div.user a {
+  text-decoration: none;
+  font-size: 1.6rem;
+  font-weight: 700;
+  background-color: #d1d5db;
+  color: #6b7280;
+  padding-inline: 3.2rem;
+  padding-block: 0.4rem;
+  border-radius: 0.4rem;
+  transition: 0.5s ease;
+  border: none;
+  overflow: hidden;
+}
+section div.repository div.user a:hover {
+  color: #1f2937;
+  background-color: white;
+}
+section div.repository div.repository-infos {
+  width: 100%;
+  background-color: #d1d5db;
+  overflow: hidden;
+}
+section div.repository div.repository-infos div.repo-infos {
+  padding: 1.2rem;
+}
+section div.repository div.repository-infos div.repo-infos p {
+  font-size: 1.6rem;
+  color: #f3f4f6;
+}
+section div.repository div.repository-infos div.repo-file {
+  width: 100%;
+  text-align: center;
+}
+section div.repository div.repository-infos div.repo-file a {
+  overflow: hidden;
+  text-decoration: none;
+  font-size: 1.6rem;
+  color: #1f2937;
+}
+section div.repository div.repository-infos div.repo-file a:hover {
+  cursor: pointer;
+}
+
+@media (min-width: 500px) {
+  section div.repository {
+    width: 50rem;
   }
 }
 

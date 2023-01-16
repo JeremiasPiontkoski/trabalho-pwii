@@ -123,6 +123,17 @@ class Person
         return true;
     }
 
+    public function selectAll() {
+        $query = "SELECT * FROM person
+        JOIN users WHERE users.id = person.idUser";
+        $stmt = Connect::getInstance()->prepare($query);
+        $stmt->execute();
+        if($stmt->rowCount() == 0) {
+            return false;
+        }
+        return $stmt->fetchAll();
+    }
+
     public function getId()
     {
         return $this->id;

@@ -5,32 +5,31 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="<?= url("assets/web/css/style-cadastro.css") ?>">
-    <link rel="stylesheet" href="<?= url("assets/web/css/style-message.css") ?>">
+    <link rel="stylesheet" href="<?= url("assets/adm/style/style.css") ?>">
     <title>Editar FAQ</title>
 </head>
 <body>
-<section>
-    <div class="card-register">
-        <form action="post" id="form">
-            <h1>EDIÇÃO DE FAQ</h1>
-
-            <div class="container-inputs">
-                <label for="question">Pergunta:</label>
+<section class="container">
+    <div class="content">
+        <header><h1>EDIÇÃO DE FAQ</h1></header>
+        <form id="form">
+            <div class="line">
+            <label for="question">Pergunta:</label>
                 <input type="text" name="question" value="<?= $faq->question ?>">
             </div>
-
-            <div class="container-inputs">
-                <label for="answer">Resposta:</label>
+            <div class="line">
+            <label for="answer">Resposta:</label>
                 <input type="text" name="answer" value="<?= $faq->answer ?>">
             </div>
-
-            <button type="submit" class="btn-register">EDITAR</button>
             <div class="data-error">
                 <p id="message"></p>
             </div>
+            <button>EDITAR</button>
         </form>
-        <script type="text/javascript" async>
+    </div>
+</section>
+
+<script type="text/javascript" async>
             const form = document.querySelector("#form");
             const message = document.querySelector("#message");
             form.addEventListener("submit", async (e) => {
@@ -40,15 +39,17 @@
                     method: "POST",
                     body: dataUser,
                 });
-                const user = await data.json();
-                console.log(user);
-                // message.classList.add("message");
-                // message.classList.remove("success", "warning", "error");
-                // message.classList.add(`${user.type}`);
-                // message.innerHTML = user.message;
+                const faq = await data.json();
+                console.log(faq);
+                if(faq.type == "success") {
+                                        window.location.href = "<?= url("admin/faqs") ?>";
+                                    }else {
+                                        message.innerHTML = faq.message;
+                                        message.classList.remove("warning", "error");
+                                        message.classList.add("message");
+                                        message.classList.add(`${faq.type}`);
+                                    }
             });
         </script>
-    </div>
-</section>
 </body>
 </html>

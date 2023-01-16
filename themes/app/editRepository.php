@@ -10,11 +10,70 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@200&display=swap');
     </style>
-    <link rel="stylesheet" href="<?= url("assets/web/css/style-cadastro.css") ?>">
-    <link rel="stylesheet" href="<?= url("assets/web/css/style-message.css") ?>">
+    <link rel="stylesheet" href="<?= url("assets/app/style/style.css") ?>">
 </head>
 <body>
-    <section>
+<section class="container">
+    <div class="content">
+        <header><h1>Edição de repositorio</h1></header>
+        <form enctype="multipart/form-data" method="post" id="form">
+            <div class="line">
+            <label for="name">Name:</label>
+                    <input type="text" name="name" value="<?= $repository["name"] ?>">
+            </div>
+            <div class="line">
+            <label for="description">Descrição:</label>
+                    <input type="text" name="description" value="<?= $repository["description"]; ?>">
+            </div>
+            <div class="line">
+            <label for="idLanguage">Linguagem:</label>
+                        <select name="idLanguage" id="selectUser">
+                            <?php
+                            foreach($languages as $language) {
+                                ?>
+                                <?php
+                                if(($language->id == $repository["idLanguage"])){
+                                    ?>
+                                    <option value="<?= $repository["idLanguage"]; ?>">
+                                    <?= $repository["language"] ?>
+                                    <?php
+                                }
+                                ?>
+                                </option>
+                                <?php
+                            }
+                            ?>
+                            <?php
+                            foreach($languages as $language) {
+                                ?>
+                                <?php
+                                if(($language->language != $repository["language"])){
+                                    ?>
+                                    <option value="<?= $language->id?>">
+                                    <?= $language->language ?>
+                                    <?php
+                                }
+                                ?>
+                                </option>
+                                <?php
+                            }
+                            ?> 
+                        </select>
+            </div>
+            <div class="line">
+            <label for="file">Arquivo:</label>
+                    <input class="form-control" type="file" name="file" id="file">
+            </div>
+            <button>Editar</button>
+
+                <div class="data-error">
+                    <p id="message"></p>
+                </div>
+        </form>
+    </div>
+</section>
+
+    <!-- <section>
         <div class="card-register">
             <form enctype="multipart/form-data" method="post" id="form">
                 <h1>EDIÇÃO DE REPOSITÓRIO</h1>
@@ -73,7 +132,7 @@
                 </div>
             </form>
         </div>
-    </section>
+    </section> -->
 
     <script type="text/javascript" async>
         const form = document.querySelector("#form");

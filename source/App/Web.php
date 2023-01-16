@@ -250,6 +250,13 @@ class Web
             }
 
             if($adm->validate($data["email"], $data["password"])) {
+                $arrayAdm = [
+                    "id" => $adm->getId(),
+                    "name" => $adm->getName(),
+                    "email" => $adm->getEmail()
+                ];
+                session_start();
+                $_SESSION["admin"] = $arrayAdm;
                 $json = [
                     "message" => "Administração disponível",
                     "type" => "admin"
@@ -290,6 +297,7 @@ class Web
             );
 
             $faq->insert();
+        
 
             $json = [
                 "message" => "Faq cadastrada com sucesso!",

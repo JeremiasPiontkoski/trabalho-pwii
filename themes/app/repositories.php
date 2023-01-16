@@ -1,13 +1,10 @@
 <?php
   $this->layout("_theme");
 ?>
-
     <section class="container-repositories">
         <div class="head">
-            <div class="options">
+            <p>Filtrar por:</p>
                 <ul>
-                    <li><a href="">Filtrar por:</a></li>
-                    <ul>
                         <?php
                             foreach($languages as $language) {
                         ?>
@@ -19,12 +16,35 @@
                         <?php
                             }
                         ?>
-                    </ul>
                 </ul>
-            </div>
         </div>
 
-        <div class="repositories">
+        <?php
+            foreach($repositories as $repository) {?>
+                <a href="<?= url("app/repositorio/id?id=" . $repository["id"])?>" class="data">
+                    <div class="user-data">
+                        <div class="user-photo">
+                            <?php
+                                if(!empty($repository["user"]["photo"])):
+                            ?>
+                            <img src="<?= url($repository["user"]["photo"]); ?>" id="imgUser">
+                            <?php
+                                endif;
+                            ?>
+                        </div>
+                        <p>Proprietário: <?= $repository["user"]["name"]?></p>
+                    </div>
+
+                    <div class="repository-data">
+                        <p><?= $repository["name"]?></p>
+                        <p>Linguagem: <?= $repository["language"]?></p>
+                    </div>
+                </a>
+            <?php
+                }
+             ?>
+
+       <!-- <div class="repositories">
             <?php foreach($repositories as $repository) {?>
                 <a href="<?= url("app/repositorio/id?id=" . $repository["id"])?>" class="line">
                     <p id="first">Proprietário: <span><?= $repository["user"]["name"] ?></span></p>
@@ -37,7 +57,7 @@
 
                 <?php
                     }
-                ?>
+                ?> -->
           <!--  <div class="line">
                 <p id="first">Proprietário: <span>Usuário tal</span></p>
                 <div class="data">
@@ -47,7 +67,7 @@
                 <p id="last">Descrição</p>
             </div>  
         </div> -->
-    </section>
+    <!--</section>-->
 
 
     <!-- <div class="nav-links">

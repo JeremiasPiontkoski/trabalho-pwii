@@ -29,8 +29,7 @@ $this->layout("_theme");
             ?>  
             </div>
             <p><?=$repository["user"]["name"]?></p>
-            <p><?=$repository["user"]["email"]?></p>
-            <a href="#">Perfil</a>
+            <a href="<?= url("app/editarRepositorio/id?id=" . $repository["id"])?>">Editar</a>
         </div>
 
         <div class="repository-infos">

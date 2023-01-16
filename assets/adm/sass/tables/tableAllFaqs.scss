@@ -1,0 +1,55 @@
+section.table {
+    width: 100vw;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .content-table {
+        border-collapse: collapse;
+        margin: 3.2rem 0;
+
+        font-size: map-get($font-sizes, normal);
+        font-weight: map-get($font-weights, medium);
+
+        border-radius: .4rem;
+
+        overflow: hidden;
+
+        thead {
+            tr {
+                background-color: $secundary-color;
+                color: $text-color-light;
+                text-align: left;
+                font-weight: bold;
+            }
+        }
+
+        tbody {
+            td {
+                background-color: $gray-300;
+
+                a {
+                    text-decoration: none;
+
+                    color: $text-color-strong;
+
+                    transition: .3s ease;
+
+                    &:hover {
+                        color: $text-color-light;
+                    }
+                }
+            }
+
+            tr {
+                border-bottom: 1px solid $text-color-light;
+            }
+        }
+    }
+    
+    .content-table th,
+    .content-table td {
+        padding: .8rem 1.2rem;
+    }
+}

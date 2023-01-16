@@ -419,6 +419,35 @@ class App
         ]);
     }
 
+    public function showUserRepository() {
+        $this->repository->setId($_GET["id"]);
+        $repository = $this->repository->findById();
+
+        $this->user->setIdPerson($repository->idPerson);
+        $dataUser = $this->user->findByIdPerson();
+
+        $response = [
+                "id" => $repository->idRepository,
+                "idPerson" => $repository->idPerson,
+                "name" => $repository->name,
+                "description" => $repository->description,
+                "idLanguage" => $repository->idLanguage,
+                "language" => $repository->language,
+                "file" => $repository->file,
+                "user" => [
+                    "id" => $dataUser->id,
+                    "name" => $dataUser->name,
+                    "email" => $dataUser->email,
+                    "description" => $dataUser->description,
+                    "photo" => $dataUser->profilePicture
+                ]
+        ];
+        echo $this->view->render("repositoryUser", [
+            "eventName" => CONF_SITE_NAME,
+            "repository" => $response
+        ]);
+    }
+
     public function renderEditRepository() {
         $this->repository->setId($_GET["id"]);
         $repository = $this->repository->findById();

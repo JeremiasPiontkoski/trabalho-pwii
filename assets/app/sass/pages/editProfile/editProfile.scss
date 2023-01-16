@@ -4,166 +4,26 @@
     transition: .5s ease;
 }
 
-.container-form {
-    width: 100vw;
-    min-height: 100vh;
+section.container {
+    div.content {
+        div.box-image {
+            width: 20rem;
+            height: 20rem;
 
-    background-color: $secundary-color;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-
-    h1 {
-        font-size: map-get($font-sizes, large);
-
-        text-transform: uppercase;
-
-        color: $text-color-medium;
-
-        padding: 1rem;
-    }
-
-    form{
-        width: 90%;
-        height: 100%;
-
-        margin-bottom: 4rem;
-
-
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-
-        border-radius: 10px;
-
-        .box {
-            width: 100%;
-            height: auto;
-
-            display: flex;
-            justify-content: center;
-            flex-direction: column;
-
-            margin-top: .5rem;
-
-            label {
-                font-size: map-get($font-sizes, large);
-                font-weight: map-get($font-weights, bold);
-
-                padding-block: .8rem;
-
-                color: $text-color-light;
-            }
-
-            input {
-                height: 3.2rem;
-                border: none;
-                outline: none;
-
-                color: $text-color-medium;
-
-                padding: .4rem;
-
-                font-size: map-get($font-sizes, normal);
-
-                border-radius: 5px;
-            }
-
-            select {
-                width: 100%;
-                min-width: 15ch;
-                border: 1px solid var(--select-border);
-                border-radius: 0.25em;
-                padding: 0.25em 0.5em;
-                font-size: map-get($font-sizes, normal);
-                cursor: pointer;
-                line-height: 1.1;
-                background-color: #fff;
-            }   
-        }
-
-        .data-error {
-            width: 50%;
-            height: auto;
-
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
-            margin-block: 1.2rem;
-
-            p {
-                font-size: map-get($font-sizes, normal);
-                font-weight: map-get($font-weights, bold);
-                color: red;
-            }
-        } 
-
-        .box-image {
-            width: 15rem;
-            height: 15rem;
             background-color: white;
 
-            margin-top: 1rem;
-
             border-radius: 100%;
-
+            padding-inline: 2rem;
             overflow: hidden;
-        }
-
-        button {
-            width: 75%;
-            height: 4rem;
-
-            outline: none;
-            border: none;
-            border-radius: 1rem;
-
-            font-size: map-get($font-sizes, large);
-            font-weight: map-get($font-weights, bold);
-
-            text-transform: uppercase;
 
             margin-block: 1.2rem;
 
-            background-color: $btn-color-medium;
-            color: $text-color-medium;
+            img {
+                width: 100%;
+                height: 100%;
+                background-repeat: no-repeat;
+                background-size: cover;
 
-            transition: .5s ease;
-        }
-    }
-
-    a {
-        text-decoration: none;
-
-        font-size: map-get($font-sizes, large);
-
-        color: $text-color-strong;
-
-        transition: .5s ease;
-
-        &:hover {
-            color: $text-color-medium;
-        }
-    }
-}
-
-@media(min-width: 992px) {
-    .container-form {
-        form {
-            width: 50%;
-
-            background-color: $primary-color;
-
-            padding: 5rem;
-        }
-
-        .box {
-            label {
-                color: $text-color-light;
             }
         }
     }

@@ -3,9 +3,14 @@
 namespace Source\App;
 
 use http\Encoding\Stream\Enbrotli;
+use JsonException;
 use League\Plates\Engine;
 use Source\Models\Admin;
 use Source\Models\Faq;
+use Source\Models\Language;
+use Source\Models\Person;
+use Source\Models\Repository;
+use Source\Models\User;
 
 class Adm
 {
@@ -13,19 +18,61 @@ class Adm
 
     public function __construct()
     {
-        session_start();
-        if(empty($_SESSION["admin"])) {
-            header("Location:http://www.localhost/trabalho-pwii/login");
-        }
+       session_start();
+       if(empty($_SESSION["admin"])) {
+           header("Location:http://www.localhost/trabalho-pwii/login");
+       }
 
         $this->view = new Engine(CONF_VIEW_ADMIN, 'php');
     }
 
+    public function getResponseRepositories($dataRepository)
+    {
+        $user = new User();
+        $repositories = [];
+        foreach($dataRepository as $repository) {
+            $user->setIdPerson($repository->idPerson);
+            $dataUser = $user->findByIdPerson();
+
+            $response = [
+                    "id" => $repository->idRepository,
+                    "idPerson" => $repository->idPerson,
+                    "name" => $repository->name,
+                    "description" => $repository->description,
+                    "idLanguage" => $repository->idLanguage,
+                    "language" => $repository->language,
+                    "user" => [
+                        "id" => $dataUser->id,
+                        "name" => $dataUser->name,
+                        "email" => $dataUser->email,
+                        "description" => $dataUser->description,
+                        "photo" => $dataUser->profilePicture
+                    ]
+            ];
+            $repositories[] = $response;            
+        }
+        return $repositories;
+    }
+
     public function home () : void
     {
-        $faq = new Faq();
+        $language = new Language();
         echo $this->view->render("home",[
-            "allFaqs" => $faq->getAll()
+            "languages" => $language->selectAll()
+        ]);
+    }
+
+    public function faqs() {
+        $faq = new Faq();
+        echo $this->view->render("faqs",[
+            "faqs" => $faq->getAll()
+        ]);
+    }
+
+    public function answeredFaqs() {
+        $faq = new Faq();
+        echo $this->view->render("answeredFaqs",[
+            "faqs" => $faq->getAllAnswered()
         ]);
     }
 
@@ -44,8 +91,8 @@ class Adm
             $adm = new Admin();
             $faq = new Faq(
                 null,
-                $adm->getName(),
-                $adm->getEmail(),
+                $_SESSION["admin"]["name"],
+                $_SESSION["admin"]["email"],
                 $data["question"],
                 $data["answer"]
             );
@@ -81,11 +128,11 @@ class Adm
                 return;
             }
 
-            $faq = new Faq(
-                $_GET["id"],
-                $data["question"],
-                $data["answer"]
-            );
+            $faq = new Faq();
+
+            $faq->setId($_GET['id']);
+            $faq->setQuestion($data["question"]);
+            $faq->setAnswer($data["answer"]);
 
             $faq->update();
 
@@ -149,7 +196,7 @@ class Adm
         $faq->setId($_GET['id']);
         $faq->delete();
 
-        header("Location:http://www.localhost/trabalho-pwii/admin");
+        header("Location:http://www.localhost/trabalho-pwii/admin/faqs");
     }
 
     public function registerAdm(array $data) {
@@ -216,5 +263,37 @@ class Adm
         }
 
         echo $this->view->render("registerAdm");
+    }
+
+    public function repositories() {
+        $repository = new Repository();
+        $dataRepository = $repository->selectAll();
+        $repositories = $this->getResponseRepositories($dataRepository);
+
+        echo $this->view->render("repositories", [
+            "repositories" => $repositories
+        ]);
+    }
+
+    public function filterRepositories(array $data) {
+        $repository = new Repository();
+        $repository->setIdLanguage($data["idLanguage"]);
+        $dataRepositories = $repository->findByIdLanguage();
+
+        if($dataRepositories != null) {
+            $repositories = $this->getResponseRepositories($dataRepositories);
+        }
+
+        echo $this->view->render("filterRepositories", [
+            "repositories" => $repositories
+        ]);
+    }
+
+    public function users() {
+        $person = new Person();
+        echo $this->view->render("users",
+        [
+            "users" => $person->selectAll()
+        ]);
     }
 }

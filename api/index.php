@@ -28,8 +28,8 @@ $route->get("/repositoriesByPerson", "Api:getRepositoriesByPerson");
 
 $route->get("/repositories", "Api:getRepositories");
 
-$route->get("/getRepo", "ApiTest:getRepositories");
-$route->get("/getRepository/{idRepository}", "ApiTest:getRepository");
+//$route->get("/getRepo", "ApiTest:getRepositories");
+//$route->get("/getRepository/{idRepository}", "ApiTest:getRepository");
 
 $route->get("/getLanguage/{idLanguage}", "Api:getLanguage");
 

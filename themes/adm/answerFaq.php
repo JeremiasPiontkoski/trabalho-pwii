@@ -1,28 +1,49 @@
 <?php
-var_dump($faq);
+// var_dump($faq);
 ?>
 
 <!doctype html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <link rel="stylesheet" href="<?= url("assets/adm/style/style.css") ?>">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&family=Montserrat&display=swap');
+    </style>
+    <title>Resposta</title>
 </head>
 <body>
-    <form action="post" id="form">
-        <p>Nome do usuário: <?= $faq->userName?></p>
-        <p>Email do usuário: <?= $faq->userEmail?></p>
-        <label for="answer">Resposta:</label>
-        <input type="text" name="answer" placeholder="Resposta" value="<?= $faq->answer?>">
+    <section class="container">
+        <div class="content">
+            <header><h1>RESPONDER FAQ</h1></header>
+            <form id="form">
+                <div class="line">
+                    <label for="question">Pergunta</label>
+                    <input type="text" name="question" placeholder="Pergunta" value="<?= $faq->question?>">
+                </div>
 
-        <button type="submit">Enviar</button>
-    </form>
+                <div class="line">
+                    <label for="answer">Resposta</label>
+                    <input type="text" name="answer" <?= $faq->answer?>>
+                </div>
+
+                <button>Login</button>
+
+                <div class="data-error">
+                    <p id="message">
+                    </p>
+                </div>
+            </form>
+        </div>
+    </section>
+    
 
     <script type="text/javascript" async>
         const form = document.querySelector("#form");
+        const message = document.querySelector("#message");
         form.addEventListener("submit", async (e) => {
             e.preventDefault();
             const dataUser = new FormData(form);
@@ -32,6 +53,14 @@ var_dump($faq);
             });
             const faq = await data.json();
             console.log(faq);
+            if(faq.type == "success") {
+                window.location.href = "<?= url("admin/faqs"); ?>";
+                }else {
+                    message.innerHTML = faq.message;
+                    message.classList.remove("warning", "error");
+                    message.classList.add("message");
+                    message.classList.add(`${faq.type}`);
+                }
         });
     </script>
 </body>

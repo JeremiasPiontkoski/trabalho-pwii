@@ -12,7 +12,7 @@ $this->layout("_theme");
     <link rel="stylesheet" href="<?= url("assets/app/") ?>css/style-repositories.css">
 <?php $this->end(); ?>
 
-    <div class="nav-links">
+    <!-- <div class="nav-links">
         <div class="nav-links-inside">
             <ul>
                 <?php
@@ -26,15 +26,55 @@ $this->layout("_theme");
                 </li>
             </ul>
         </div>
-    </div> 
+    </div>  -->
 
-    <?php
+    <section class="container-repositories">
+        <div class="head">
+            <p>Filtrar por:</p>
+                <ul>
+                        <?php
+                            foreach($languages as $language) {
+                        ?>
+                            <li>
+                                <a href="<?= url("app/repositorios/{$language->id}"); ?>">
+                                <?= $language->language; ?>
+                                </a>
+                            </li>
+                        <?php
+                            }
+                        ?>
+                </ul>
+        </div>
+
+        <?php
+            foreach($repositories as $repository) {?>
+                <a href="<?= url("app/repositorio/id?id=" . $repository["id"])?>" class="data">
+                    <div class="user-data">
+                        <div class="user-photo">
+
+                        </div>
+                        <p>Proprietário: <?= $repository["user"]["name"]?></p>
+                    </div>
+
+                    <div class="repository-data">
+                        <p><?= $repository["name"]?></p>
+                        <p>Linguagem: <?= $repository["language"]?></p>
+                    </div>
+                </a>
+            <?php
+                }
+             ?>
+    </section>
+
+   
+
+    <!-- <?php
         foreach($repositories as $repository) { ?>
 
             <p><?= $repository["language"]; ?></p>
     <?php
         }
-    ?>
+    ?> -->
 
     <!-- <section class="box-container">
     <?php

@@ -6,13 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To Solve</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
-    <!-- <link rel='stylesheet' type='text/css' media='screen' href='assets/app/css/styles.css'> -->
-    <link rel="stylesheet" href="<?= url("assets/app/") ?>css/style.css">
-    <?php
-    if ($this->section("css")) {
-        echo $this->section("css");
-    }
-    ?>
+    <link rel="stylesheet" href="<?= url("assets/adm/style/style.css") ?>">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&family=Montserrat&display=swap');
     </style>
@@ -45,14 +39,7 @@
                                 </a>
                             </span>
                     </li>
-
-                    <li class="nav-item">
-                            <span data-bs-dismiss="offcanvas">
-                                <a class="nav-link" href="#contact">
-                                    FAQ
-                                </a>
-                            </span>
-                    </li>
+                    
                     <li class="nav-item">
                             <span data-bs-dismiss="offcanvas">
                                 <a class="nav-link" href="<?= url("app/sair") ?>">

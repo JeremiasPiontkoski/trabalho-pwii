@@ -1,84 +1,149 @@
 section.container-repositories {
-    div.repositories {
-        width: 100%;
-        height: auto;
+    a.data {
+        width: 30rem;
+        margin-bottom: 1.2rem;
+        text-decoration: none;
 
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
+        border-radius: .8rem;
 
-        margin-block: 1.6rem;
+        div.user-data {
+            width: 100%;
+            min-height: 10rem;
+            background-color: $secundary-color;
+    
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+    
+            padding-inline: .8rem;
+            padding-block: 1.2rem;
+    
+            div.user-photo {
+                width: 20rem;
+                height: 20rem;
+                background-color: white;
+    
+                border-radius: 100%;
 
-        .line {
-            text-decoration: none;
-            width: 90%;
-            height: auto;
-
-            margin-bottom: 1.6rem;
-
-            background-color: $text-color-light;
-
-            border-radius: 5px;
-
-            p#first {
-                background-color: $text-color-medium;
-                color: $text-color-medium;
-
-                font-size: map-get($font-sizes, $key: normal);
-                font-weight: map-get($font-weights, medium);
-
-                padding: .8rem 1.2rem;
-
-                text-align: center;
-
-                span {
-                    color: $text-color-light;
-                    font-weight: map-get($font-weights, bold);
+                img {
+                    width: 100%;
+                    height: 100%;
+                    background-repeat: no-repeat;
+                    background-size: cover;
                 }
             }
-
-            .data {
-                width: 100%;
-                height: 100%;
-
-                background-color: $text-color-medium;
-
-                display: flex;
-                justify-content: space-around;
-                align-items: center;
-                flex-direction: row;
-
-                p {
-                    font-size: map-get($font-sizes, $key: small);
-                    font-weight: map-get($font-weights, medium);
-
-                    color: $text-color-light;
-
-                    padding: .4rem .8rem;
-                }
+    
+            p {
+                color: white;
+                font-size: map-get($font-sizes, normal);
+                font-weight: map-get($font-weights, medium); 
+    
+                padding-top: 1.2rem;
             }
+        }
 
-            p#last {
-                text-align: center;
+        div.repository-data {
+            width: 100%;
+            min-height: 10rem;
 
-                font-size: map-get($font-sizes, $key: small);
-                font-weight: map-get($font-weights, medium);
+            background-color: $gray-300;
 
-                color: $text-color-medium;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
 
-                padding: .4rem .8rem;
+            p {
+                font-size: map-get($font-sizes, normal);
+                font-weight: map-get($font-weights, medium); 
+                color: $text-color-light;
             }
         }
     }
 }
 
-@media(min-width: 500px) {
-    section.container-repositories {
-        div.repositories {
-            .line {
-                width: 45rem;
-            }
-        }
-    }
-}
+// section.container-repositories {
+//     div.repositories {
+//         width: 100%;
+//         height: auto;
+
+//         display: flex;
+//         justify-content: center;
+//         align-items: center;
+//         flex-direction: column;
+
+//         margin-block: 1.6rem;
+
+//         .line {
+//             text-decoration: none;
+//             width: 90%;
+//             height: auto;
+
+//             margin-bottom: 1.6rem;
+
+//             background-color: $text-color-light;
+
+//             border-radius: 5px;
+
+//             p#first {
+//                 background-color: $text-color-medium;
+//                 color: $text-color-medium;
+
+//                 font-size: map-get($font-sizes, $key: normal);
+//                 font-weight: map-get($font-weights, medium);
+
+//                 padding: .8rem 1.2rem;
+
+//                 text-align: center;
+
+//                 span {
+//                     color: $text-color-light;
+//                     font-weight: map-get($font-weights, bold);
+//                 }
+//             }
+
+//             .data {
+//                 width: 100%;
+//                 height: 100%;
+
+//                 background-color: $text-color-medium;
+
+//                 display: flex;
+//                 justify-content: space-around;
+//                 align-items: center;
+//                 flex-direction: row;
+
+//                 p {
+//                     font-size: map-get($font-sizes, $key: small);
+//                     font-weight: map-get($font-weights, medium);
+
+//                     color: $text-color-light;
+
+//                     padding: .4rem .8rem;
+//                 }
+//             }
+
+//             p#last {
+//                 text-align: center;
+
+//                 font-size: map-get($font-sizes, $key: small);
+//                 font-weight: map-get($font-weights, medium);
+
+//                 color: $text-color-medium;
+
+//                 padding: .4rem .8rem;
+//             }
+//         }
+//     }
+// }
+
+// @media(min-width: 500px) {
+//     section.container-repositories {
+//         div.repositories {
+//             .line {
+//                 width: 45rem;
+//             }
+//         }
+//     }
+// }

@@ -269,7 +269,8 @@ class Api
                             "id" => $dataUser->id,
                             "name" => $dataUser->name,
                             "email" => $dataUser->email,
-                            "description" => $dataUser->description
+                            "description" => $dataUser->description,
+                            "photo" => $dataUser->profilePicture
                         ]
                 ];
 

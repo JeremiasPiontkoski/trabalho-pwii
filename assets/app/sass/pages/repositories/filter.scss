@@ -7,16 +7,62 @@ section.container-repositories {
     .head {
         width: 100%;
         min-height: 6rem;
-        display: flex;
-        background-color: orange;
-        justify-content: center;
-        align-items: center;
-        flex-direction: row;
-        gap: 1.2rem;
+        flex-direction: column;
 
-        .options {
-            width: 100%;
-            height: auto;
+        margin-block: 1.4rem;
+
+        p {
+            font-size: map-get($font-sizes, $key: large);
+            font-weight: map-get($font-weights, medium);
+
+            color: black;
+
+        }
+
+        ul{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+
+            gap: .8rem;
+
+            li {
+                list-style: none;
+
+                a {
+                    text-decoration: none;
+                    color: $text-color-medium;
+                    font-size: map-get($font-sizes, $key: normal);
+                    transition: .3s ease;
+                }
+            }
+        }
+    }
+}
+
+@media(min-width: 992px) {
+    section.container-repositories {
+        .head {
+            ul {
+                flex-direction: row;
+                gap: 5.6rem;
+
+                li {
+    
+                    a {
+                        font-size: map-get($font-sizes, $key: large);
+
+                        &:hover {
+                            background-color: transparent;
+                            border-bottom: 1px solid $text-color-medium;
+                            font-weight: map-get($font-weights, bold);
+                            color: $gray-300;
+                            overflow: hidden;
+                        }
+                    }
+                }
+            }
         }
     }
 }

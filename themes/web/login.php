@@ -68,12 +68,12 @@
                                 }else if (user.type == "admin") {
                                     window.location.href = "<?= url("admin"); ?>";
                                 }
-                                // else {
-                                //    message.classList.add("message");
-                                //    message.classList.remove("success", "warning", "error");
-                                //    message.classList.add(`${user.type}`);
-                                //    message.innerHTML = user.message;
-                                //}
+                                else {
+                                   message.classList.add("message");
+                                   message.classList.remove("success", "warning", "error");
+                                   message.classList.add(`${user.type}`);
+                                   message.innerHTML = user.message;
+                                }
                             });
                         </script>
 
