@@ -60,21 +60,6 @@
 
                         <li class="nav-item">
                             <span data-bs-dismiss="offcanvas">
-                                <a class="nav-link" href="<?= url("app/projetos") ?>">
-                                    Projetos
-                                </a>
-                            </span>
-                        </li>
-
-                        <li class="nav-item">
-                            <span data-bs-dismiss="offcanvas">
-                                <a class="nav-link" href="#contact">
-                                    Contato
-                                </a>
-                            </span>
-                        </li>
-                        <li class="nav-item">
-                            <span data-bs-dismiss="offcanvas">
                                 <a class="nav-link" href="<?= url("app/sair") ?>">
                                 Logout
                                 </a>

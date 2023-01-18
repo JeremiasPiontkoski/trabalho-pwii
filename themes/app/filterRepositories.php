@@ -51,7 +51,13 @@ $this->layout("_theme");
                 <a href="<?= url("app/repositorio/id?id=" . $repository["id"])?>" class="data">
                     <div class="user-data">
                         <div class="user-photo">
-
+                            <?php
+                            if(!empty($repository["user"]["photo"])):
+                                ?>
+                                <img src="<?= url($repository["user"]["photo"]); ?>" id="imgUser">
+                            <?php
+                            endif;
+                            ?>
                         </div>
                         <p>Proprietário: <?= $repository["user"]["name"]?></p>
                     </div>

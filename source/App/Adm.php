@@ -296,4 +296,22 @@ class Adm
             "users" => $person->selectAll()
         ]);
     }
+
+    public function usersPdf() {
+        $person = new Person();
+        echo $this->view->render("usersPdf",
+            [
+                "users" => $person->selectAll()
+            ]);
+    }
+
+    public function repositoriesPdf() {
+        $repository = new Repository();
+        $dataRepository = $repository->selectAll();
+        $repositories = $this->getResponseRepositories($dataRepository);
+        echo $this->view->render("repositoriesPdf",
+        [
+            "repositories" => $repositories
+        ]);
+    }
 }

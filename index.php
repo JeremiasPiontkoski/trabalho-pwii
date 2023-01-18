@@ -27,9 +27,7 @@ $route->get("/registro", "Web:register");
 /* REGISTER FAQ */
 $route->post("/registroFaq", "Web:registerFaq");
 
-/* RANDOM */
-$route->get("/contato","Web:contact");
-$route->post("/contato","Web:contact");
+
 
 /********************************
  * App Routes                   *
@@ -97,6 +95,9 @@ $route->get("/repositorios", "Adm:repositories");
 $route->get("/repositorios/{idLanguage}", "Adm:filterRepositories");
 
 $route->get("/usuarios", "Adm:users");
+
+$route->get("/relatorioUsuarios", "Adm:usersPdf");
+$route->get("/relatorioRepositorios", "Adm:repositoriesPdf");
 
 $route->group(null);
 

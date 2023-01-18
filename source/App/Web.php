@@ -2,6 +2,7 @@
 
 namespace Source\App;
 
+use Dompdf\Dompdf;
 use JsonException;
 use LDAP\Result;
 use League\Plates\Engine;

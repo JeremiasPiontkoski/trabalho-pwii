@@ -65,5 +65,17 @@ $this->layout("_theme");
         </div>
     </section>
 
+    <section class="grid-items">
+        <h1>RELATÓRIOS</h1>
+        <div class="content">
+            <a href="<?= url("admin/relatorioUsuarios")?>" class="card">
+                <h1>Usuários</h1>
+            </a>
+
+            <a href="<?= url("admin/relatorioRepositorios")?>" class="card">
+                <h1>Repositórios</h1>
+            </a>
+        </div>
+    </section>
 </body>
 </html>
